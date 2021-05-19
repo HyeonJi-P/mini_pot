@@ -8,8 +8,8 @@ except socket.error as e :
     print("***** 소켓 생성 에러발생 *****")
     print("원인 : " + e)
 
-HOST = 'localhost'
-PORT = 9999  # 1~65535
+HOST = 15.165.203.96
+PORT = 8282
 client_s.connect((HOST,PORT))  # 호스트,포트로  서버에 연결
 
 while 1:
