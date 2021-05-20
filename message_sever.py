@@ -3,9 +3,8 @@ import socket
 try:
     server_s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  # ipv4, tcp 형식 사용
     print("소켓 생성")
-
 except socket.error as e :
-    print("***** 소켓 생성 에러발생 *****")
+    print("***** 서버 소켓 생성 에러발생 *****")
     print("원인 : " + e)
 
 HOST = 'ec2-15-165-203-96.ap-northeast-2.compute.amazonaws.com'
