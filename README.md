@@ -16,3 +16,10 @@ abcde
 <stdio.h>
 int a= 1
 ```
+
+## git upload
+git add .
+git commit -m "주석"
+git push -u origin main
+
+git pull
