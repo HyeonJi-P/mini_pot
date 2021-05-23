@@ -2,8 +2,8 @@ import RPi.GPIO as GPIO
 import spidev
 import time
 
-from message_client import *
-from sql_client import *
+#from message_client import *
+#from sql_client import *
 
 GPIO.setmode(GPIO.BCM)
 
