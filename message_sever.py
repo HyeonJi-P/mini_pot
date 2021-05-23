@@ -30,7 +30,7 @@ while 1:
 
     print("데이터 수신완료 : ", address, decode_message)
 
-    client_s.enddall(client_message)
+    client_s.sendall(client_message)
 
     #server_s.sendall("서버가 클라이언트 에게 hello".encode('utf-8'))
 
