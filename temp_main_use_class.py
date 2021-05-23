@@ -12,7 +12,7 @@ GPIO.setup(ACT, GPIO.OUT)
 
 try:
     while 1:
-       GPIO.output(ACT, GPIO.HIGH)
+       GPIO.output(ACT, GPIO.HIGH)  # False , True
        time.sleep(1)
        GPIO.output(ACT, GPIO.LOW)
        time.sleep(1)
