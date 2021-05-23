@@ -41,7 +41,7 @@ while 1:
                 data = client_s.recv(1024) # 1024바이트를 받아온다
         except Exception as ex:
             print(ex)
-    print('파일 %s 받기 완료. 전송량 %d' %(client_filename, data_transferred))
+    print('파일 %s 받기 완료. 전송량 %d' %(client_filename, data))
 
 
 client_s.close()
