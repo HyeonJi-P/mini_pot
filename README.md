@@ -17,7 +17,8 @@ abcde
 int a= 1
 ```
 
-## git upload
+## git 
+cd C:\Users\dhkzh\Desktop\EndingProject\Git\mini_pot
 git add .
 git commit -m "주석"
 git push -u origin main

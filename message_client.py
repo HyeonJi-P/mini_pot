@@ -7,7 +7,8 @@ except socket.error as e :
     print("***** 클라이언트 소켓 생성 에러발생 *****")
     print("원인 : " + e)
 
-HOST = 'ec2-15-165-203-96.ap-northeast-2.compute.amazonaws.com'
+HOST = 'ec2-52-79-233-24.ap-northeast-2.compute.amazonaws.com'
+#'ec2-15-165-203-96.ap-northeast-2.compute.amazonaws.com'
 PORT = 8282
 client_s.connect((HOST,PORT))  # 호스트,포트로  서버에 연결
 
@@ -21,7 +22,7 @@ while 1:
     server_receive = client_s.recv(1024)  # 
     
     # 데이터 수신
-    server_message = repr(server_receive.decode('utf-8')
+    server_message = repr(server_receive.decode('utf-8'))
 
     print("수신 문자 : ", server_message)
 
