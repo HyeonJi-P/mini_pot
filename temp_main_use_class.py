@@ -13,9 +13,9 @@ GPIO.setup(ACT, GPIO.OUT)
 try:
     while 1:
        GPIO.output(ACT, GPIO.HIGH)
-       time.sleep(2)
+       time.sleep(1)
        GPIO.output(ACT, GPIO.LOW)
-       time.sleep(2)
+       time.sleep(1)
 
 except KeyboardInterrupt:
     print("keyboard out")
