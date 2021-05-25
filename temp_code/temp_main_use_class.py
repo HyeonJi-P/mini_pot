@@ -1,3 +1,5 @@
+# 나중에 쓰일수 있는 계륵같은 코드
+
 import RPi.GPIO as GPIO
 import spidev
 import time
