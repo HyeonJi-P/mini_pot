@@ -9,6 +9,7 @@ However the following packages replace it:
   mariadb-server-10.0
 
 E: Package 'mysql-server' has no installation candidate
+==> 마리아디비로 갈아탐
 
 #2. 라즈베리파이 업데이트 에러
  *** Raspberry Pi firmware updater by Hexxeh, enhanced by AndrewS and Dom
@@ -193,3 +194,11 @@ Collecting pymysql
 
     ----------------------------------------
 Command "python setup.py egg_info" failed with error code 1 in /tmp/pip-install-VGosRe/pymysql/
+==> 앞부분에 python3 -m 추가
+
+#8. 파이썬 논 아스키코드
+File "now_test.py", line 3
+SyntaxError: Non-ASCII character '\xed' in file now_test.py on line 3, but no encoding declared; see http://python.org/dev/peps/pep-0263/ for details
+==> # -*- coding: utf-8 -*- or 파이썬 3사용
+
+#9. 
