@@ -3,7 +3,7 @@ import pymysql
 class sql_client:
     def test():
         db = pymysql.connect(host='localhost', user='root', password='password',
-        db = 'mydb', charset='utf8')  # 포트 : 디폴트 3306
+        db = 'mydb', charset='utf8')
         cur = db.cursor()
 
         cur.execute("SELECT*FROM mytable")
@@ -38,3 +38,4 @@ class sql_client:
 
 
 
+sql_client.first()
