@@ -18,9 +18,9 @@ int a= 1
 ```
 
 ## git 
-cd C:\Users\dhkzh\Desktop\EndingProject\Git\mini_pot
-git add .
-git commit -m "주석"
-git push -u origin main
-
+cd C:\Users\dhkzh\Desktop\EndingProject\Git\mini_pot  
+git add .  
+git commit -m "주석"  
+git push -u origin main  
+  
 git pull
