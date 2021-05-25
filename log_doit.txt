@@ -106,4 +106,335 @@ hostname 다시 확인
 sudo hostnamectl set-hostname ec2-minipot 뭔가 안되서 공식홈페이지 코드 또 실행했더니 됨
 
 
+- - - - - < 디비 > - - - - -
+1. 디비 존재확인
+mysql --version 
 
+2. mysql 서버 설치 
+sudo apt-get install mysql-server
+sudo apt-get install mysql-client
+
+2-E. 에러발생
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+Package mysql-server is not available, but is referred to by another package.
+This may mean that the package is missing, has been obsoleted, or
+is only available from another source
+However the following packages replace it:
+  mariadb-server-10.0
+
+E: Package 'mysql-server' has no installation candidate
+
+2-S. 해결 방안 => 실패 
+sudo apt-get update
+sudo apt-get upgrade
+sudo rpi-update
+
+2-S-E. 실패코드
+ *** Raspberry Pi firmware updater by Hexxeh, enhanced by AndrewS and Dom
+ *** Performing self-update
+ !!! Failed to download update for rpi-update!
+ !!! Make sure you have ca-certificates installed and that the time is set correctly
+
+3. 마리아디비로 설정
+sudo apt-get install mariadb-server
+sudo apt-get install mariadb-client
+
+4. 마리아 디비에 접속
+sudo mysql -uroot
+
+5. 디비 생성
+create database mydb collate utf8_general_ci; 
+
+5+. 팁: 마리아디비 사용시 system을 앞에 붙이면 리눅스 명령어 사용가능
+system ls
+
+6. 생성한 디비에 접속
+use mydb
+
+7. 테이블 생성
+CREATE TABLE ""
+(
+id VARCHAR(20) NOT NULL,
+pwd VARCHAR(20) NOT NULL,
+num2 CHAR(6) NULL,
+job VARCHAR(30) NULL
+);
+
+8. 테이블 생성 확인
+show tables;
+
+9. 테이블 속성 확인
+desc "";
+
+10. 파이썬으로 pymysql 설치
+python3 -m pip install PyMySQL
+
+11. 파이썬과 마리아 연결
+update user set plugin='';
+FLUSH PRIVILEGES;
+
+12. 마리아 설정
+update user set password=password('password') where user='root';
+FLUSH PRIVILEGES;
+
+3-E. log 
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+The following packages were automatically installed and are no longer required:
+  gconf-service gconf2-common libexiv2-14 libgconf-2-4 libgfortran3
+  libgmime-2.6-0 libncurses5 libssl1.0.2 rpi-eeprom-images uuid-dev
+Use 'sudo apt autoremove' to remove them.
+The following additional packages will be installed:
+  galera-3 gawk libcgi-fast-perl libcgi-pm-perl libconfig-inifiles-perl
+  libdbd-mysql-perl libdbi-perl libencode-locale-perl libfcgi-perl
+  libhtml-parser-perl libhtml-tagset-perl libhtml-template-perl
+  libhttp-date-perl libhttp-message-perl libio-html-perl
+  liblwp-mediatypes-perl libmariadb3 libreadline5 libsigsegv2
+  libterm-readkey-perl libtimedate-perl liburi-perl mariadb-client-10.3
+  mariadb-client-core-10.3 mariadb-common mariadb-server-10.3
+  mariadb-server-core-10.3 mysql-common socat
+Suggested packages:
+  gawk-doc libclone-perl libmldbm-perl libnet-daemon-perl
+  libsql-statement-perl libdata-dump-perl libipc-sharedcache-perl libwww-perl
+  mailx mariadb-test tinyca
+The following NEW packages will be installed:
+  galera-3 gawk libcgi-fast-perl libcgi-pm-perl libconfig-inifiles-perl
+  libdbd-mysql-perl libdbi-perl libencode-locale-perl libfcgi-perl
+  libhtml-parser-perl libhtml-tagset-perl libhtml-template-perl
+  libhttp-date-perl libhttp-message-perl libio-html-perl
+  liblwp-mediatypes-perl libmariadb3 libreadline5 libsigsegv2
+  libterm-readkey-perl libtimedate-perl liburi-perl mariadb-client-10.3
+  mariadb-client-core-10.3 mariadb-common mariadb-server mariadb-server-10.3
+  mariadb-server-core-10.3 mysql-common socat
+0 upgraded, 30 newly installed, 0 to remove and 1 not upgraded.
+Need to get 18.2 MB of archives.
+After this operation, 151 MB of additional disk space will be used.
+Do you want to continue? [Y/n] y
+Err:1 http://raspbian.raspberrypi.org/raspbian buster/main armhf libsigsegv2 armhf 2.12-2
+  Temporary failure resolving 'raspbian.raspberrypi.org'
+Err:2 http://raspbian.raspberrypi.org/raspbian buster/main armhf gawk armhf 1:4.2.1+dfsg-1
+  Temporary failure resolving 'raspbian.raspberrypi.org'
+Err:3 http://raspbian.raspberrypi.org/raspbian buster/main armhf mysql-common all 5.8+1.0.5
+  Temporary failure resolving 'raspbian.raspberrypi.org'
+Err:4 http://raspbian.raspberrypi.org/raspbian buster/main armhf mariadb-common all 1:10.3.27-0+deb10u1
+  Temporary failure resolving 'raspbian.raspberrypi.org'
+Err:5 http://raspbian.raspberrypi.org/raspbian buster/main armhf galera-3 armhf 25.3.25-2
+  Temporary failure resolving 'raspbian.raspberrypi.org'
+Err:6 http://raspbian.raspberrypi.org/raspbian buster/main armhf libdbi-perl armhf 1.642-1+deb10u2
+  Temporary failure resolving 'raspbian.raspberrypi.org'
+Err:7 http://raspbian.raspberrypi.org/raspbian buster/main armhf libconfig-inifiles-perl all 3.000001-1
+  Temporary failure resolving 'raspbian.raspberrypi.org'
+Err:8 http://raspbian.raspberrypi.org/raspbian buster/main armhf libreadline5 armhf 5.2+dfsg-3
+  Temporary failure resolving 'raspbian.raspberrypi.org'
+Err:9 http://raspbian.raspberrypi.org/raspbian buster/main armhf mariadb-client-core-10.3 armhf 1:10.3.27-0+deb10u1
+  Temporary failure resolving 'raspbian.raspberrypi.org'
+Err:10 http://raspbian.raspberrypi.org/raspbian buster/main armhf mariadb-client-10.3 armhf 1:10.3.27-0+deb10u1
+  Temporary failure resolving 'raspbian.raspberrypi.org'
+Err:11 http://raspbian.raspberrypi.org/raspbian buster/main armhf mariadb-server-core-10.3 armhf 1:10.3.27-0+deb10u1
+  Temporary failure resolving 'raspbian.raspberrypi.org'
+Err:12 http://raspbian.raspberrypi.org/raspbian buster/main armhf socat armhf 1.7.3.2-2
+  Temporary failure resolving 'raspbian.raspberrypi.org'
+Err:13 http://raspbian.raspberrypi.org/raspbian buster/main armhf mariadb-server-10.3 armhf 1:10.3.27-0+deb10u1
+  Temporary failure resolving 'raspbian.raspberrypi.org'
+Err:14 http://raspbian.raspberrypi.org/raspbian buster/main armhf libhtml-tagset-perl all 3.20-3
+  Temporary failure resolving 'raspbian.raspberrypi.org'
+Err:15 http://raspbian.raspberrypi.org/raspbian buster/main armhf liburi-perl all 1.76-1
+  Temporary failure resolving 'raspbian.raspberrypi.org'
+Err:16 http://raspbian.raspberrypi.org/raspbian buster/main armhf libhtml-parser-perl armhf 3.72-3+b2
+  Temporary failure resolving 'raspbian.raspberrypi.org'
+Err:17 http://raspbian.raspberrypi.org/raspbian buster/main armhf libcgi-pm-perl all 4.40-1
+  Temporary failure resolving 'raspbian.raspberrypi.org'
+Err:18 http://raspbian.raspberrypi.org/raspbian buster/main armhf libfcgi-perl armhf 0.78-2+b2
+  Temporary failure resolving 'raspbian.raspberrypi.org'
+Err:19 http://raspbian.raspberrypi.org/raspbian buster/main armhf libcgi-fast-perl all 1:2.13-1
+  Temporary failure resolving 'raspbian.raspberrypi.org'
+Err:20 http://raspbian.raspberrypi.org/raspbian buster/main armhf libmariadb3 armhf 1:10.3.27-0+deb10u1
+  Temporary failure resolving 'raspbian.raspberrypi.org'
+Err:21 http://raspbian.raspberrypi.org/raspbian buster/main armhf libdbd-mysql-perl armhf 4.050-2
+  Temporary failure resolving 'raspbian.raspberrypi.org'
+Err:22 http://raspbian.raspberrypi.org/raspbian buster/main armhf libencode-locale-perl all 1.05-1
+  Temporary failure resolving 'raspbian.raspberrypi.org'
+Err:23 http://raspbian.raspberrypi.org/raspbian buster/main armhf libhtml-template-perl all 2.97-1
+  Temporary failure resolving 'raspbian.raspberrypi.org'
+Err:24 http://raspbian.raspberrypi.org/raspbian buster/main armhf libtimedate-perl all 2.3000-2+deb10u1
+  Temporary failure resolving 'raspbian.raspberrypi.org'
+Err:25 http://raspbian.raspberrypi.org/raspbian buster/main armhf libhttp-date-perl all 6.02-1
+  Temporary failure resolving 'raspbian.raspberrypi.org'
+Err:26 http://raspbian.raspberrypi.org/raspbian buster/main armhf libio-html-perl all 1.001-1
+  Temporary failure resolving 'raspbian.raspberrypi.org'
+Err:27 http://raspbian.raspberrypi.org/raspbian buster/main armhf liblwp-mediatypes-perl all 6.02-1
+  Temporary failure resolving 'raspbian.raspberrypi.org'
+Err:28 http://raspbian.raspberrypi.org/raspbian buster/main armhf libhttp-message-perl all 6.18-1
+  Temporary failure resolving 'raspbian.raspberrypi.org'
+Err:29 http://raspbian.raspberrypi.org/raspbian buster/main armhf libterm-readkey-perl armhf 2.38-1
+  Temporary failure resolving 'raspbian.raspberrypi.org'
+Err:30 http://raspbian.raspberrypi.org/raspbian buster/main armhf mariadb-server all 1:10.3.27-0+deb10u1
+  Temporary failure resolving 'raspbian.raspberrypi.org'
+E: Failed to fetch http://raspbian.raspberrypi.org/raspbian/pool/main/libs/libsigsegv/libsigsegv2_2.12-2_armhf.deb  Temporary failure resolving 'raspbian.raspberrypi.org'
+E: Failed to fetch http://raspbian.raspberrypi.org/raspbian/pool/main/g/gawk/gawk_4.2.1+dfsg-1_armhf.deb  Temporary failure resolving 'raspbian.raspberrypi.org'
+E: Failed to fetch http://raspbian.raspberrypi.org/raspbian/pool/main/m/mysql-defaults/mysql-common_5.8+1.0.5_all.deb  Temporary failure resolving 'raspbian.raspberrypi.org'
+E: Failed to fetch http://raspbian.raspberrypi.org/raspbian/pool/main/m/mariadb-10.3/mariadb-common_10.3.27-0+deb10u1_all.deb  Temporary failure resolving 'raspbian.raspberrypi.org'
+E: Failed to fetch http://raspbian.raspberrypi.org/raspbian/pool/main/g/galera-3/galera-3_25.3.25-2_armhf.deb  Temporary failure resolving 'raspbian.raspberrypi.org'
+E: Failed to fetch http://raspbian.raspberrypi.org/raspbian/pool/main/libd/libdbi-perl/libdbi-perl_1.642-1+deb10u2_armhf.deb  Temporary failure resolving 'raspbian.raspberrypi.org'
+E: Failed to fetch http://raspbian.raspberrypi.org/raspbian/pool/main/libc/libconfig-inifiles-perl/libconfig-inifiles-perl_3.000001-1_all.deb  Temporary failure resolving 'raspbian.raspberrypi.org'
+E: Failed to fetch http://raspbian.raspberrypi.org/raspbian/pool/main/r/readline5/libreadline5_5.2+dfsg-3_armhf.deb  Temporary failure resolving 'raspbian.raspberrypi.org'
+E: Failed to fetch http://raspbian.raspberrypi.org/raspbian/pool/main/m/mariadb-10.3/mariadb-client-core-10.3_10.3.27-0+deb10u1_armhf.deb  Temporary failure resolving 'raspbian.raspberrypi.org'
+E: Failed to fetch http://raspbian.raspberrypi.org/raspbian/pool/main/m/mariadb-10.3/mariadb-client-10.3_10.3.27-0+deb10u1_armhf.deb  Temporary failure resolving 'raspbian.raspberrypi.org'
+E: Failed to fetch http://raspbian.raspberrypi.org/raspbian/pool/main/m/mariadb-10.3/mariadb-server-core-10.3_10.3.27-0+deb10u1_armhf.deb  Temporary failure resolving 'raspbian.raspberrypi.org'
+E: Failed to fetch http://raspbian.raspberrypi.org/raspbian/pool/main/s/socat/socat_1.7.3.2-2_armhf.deb  Temporary failure resolving 'raspbian.raspberrypi.org'
+E: Failed to fetch http://raspbian.raspberrypi.org/raspbian/pool/main/m/mariadb-10.3/mariadb-server-10.3_10.3.27-0+deb10u1_armhf.deb  Temporary failure resolving 'raspbian.raspberrypi.org'
+E: Failed to fetch http://raspbian.raspberrypi.org/raspbian/pool/main/libh/libhtml-tagset-perl/libhtml-tagset-perl_3.20-3_all.deb  Temporary failure resolving 'raspbian.raspberrypi.org'
+E: Failed to fetch http://raspbian.raspberrypi.org/raspbian/pool/main/libu/liburi-perl/liburi-perl_1.76-1_all.deb  Temporary failure resolving 'raspbian.raspberrypi.org'
+E: Failed to fetch http://raspbian.raspberrypi.org/raspbian/pool/main/libh/libhtml-parser-perl/libhtml-parser-perl_3.72-3+b2_armhf.deb  Temporary failure resolving 'raspbian.raspberrypi.org'
+E: Failed to fetch http://raspbian.raspberrypi.org/raspbian/pool/main/libc/libcgi-pm-perl/libcgi-pm-perl_4.40-1_all.deb  Temporary failure resolving 'raspbian.raspberrypi.org'
+E: Failed to fetch http://raspbian.raspberrypi.org/raspbian/pool/main/libf/libfcgi-perl/libfcgi-perl_0.78-2+b2_armhf.deb  Temporary failure resolving 'raspbian.raspberrypi.org'
+E: Failed to fetch http://raspbian.raspberrypi.org/raspbian/pool/main/libc/libcgi-fast-perl/libcgi-fast-perl_2.13-1_all.deb  Temporary failure resolving 'raspbian.raspberrypi.org'
+E: Failed to fetch http://raspbian.raspberrypi.org/raspbian/pool/main/m/mariadb-10.3/libmariadb3_10.3.27-0+deb10u1_armhf.deb  Temporary failure resolving 'raspbian.raspberrypi.org'
+E: Failed to fetch http://raspbian.raspberrypi.org/raspbian/pool/main/libd/libdbd-mysql-perl/libdbd-mysql-perl_4.050-2_armhf.deb  Temporary failure resolving 'raspbian.raspberrypi.org'
+E: Failed to fetch http://raspbian.raspberrypi.org/raspbian/pool/main/libe/libencode-locale-perl/libencode-locale-perl_1.05-1_all.deb  Temporary failure resolving 'raspbian.raspberrypi.org'
+E: Failed to fetch http://raspbian.raspberrypi.org/raspbian/pool/main/libh/libhtml-template-perl/libhtml-template-perl_2.97-1_all.deb  Temporary failure resolving 'raspbian.raspberrypi.org'
+E: Failed to fetch http://raspbian.raspberrypi.org/raspbian/pool/main/libt/libtimedate-perl/libtimedate-perl_2.3000-2+deb10u1_all.deb  Temporary failure resolving 'raspbian.raspberrypi.org'
+E: Failed to fetch http://raspbian.raspberrypi.org/raspbian/pool/main/libh/libhttp-date-perl/libhttp-date-perl_6.02-1_all.deb  Temporary failure resolving 'raspbian.raspberrypi.org'
+E: Failed to fetch http://raspbian.raspberrypi.org/raspbian/pool/main/libi/libio-html-perl/libio-html-perl_1.001-1_all.deb  Temporary failure resolving 'raspbian.raspberrypi.org'
+E: Failed to fetch http://raspbian.raspberrypi.org/raspbian/pool/main/libl/liblwp-mediatypes-perl/liblwp-mediatypes-perl_6.02-1_all.deb  Temporary failure resolving 'raspbian.raspberrypi.org'
+E: Failed to fetch http://raspbian.raspberrypi.org/raspbian/pool/main/libh/libhttp-message-perl/libhttp-message-perl_6.18-1_all.deb  Temporary failure resolving 'raspbian.raspberrypi.org'
+E: Failed to fetch http://raspbian.raspberrypi.org/raspbian/pool/main/libt/libterm-readkey-perl/libterm-readkey-perl_2.38-1_armhf.deb  Temporary failure resolving 'raspbian.raspberrypi.org'
+E: Failed to fetch http://raspbian.raspberrypi.org/raspbian/pool/main/m/mariadb-10.3/mariadb-server_10.3.27-0+deb10u1_all.deb  Temporary failure resolving 'raspbian.raspberrypi.org'
+E: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?
+
+3-E. 에러확인
+sudo apt-get update --fix-missing
+
+3-E. log
+Err:1 http://raspbian.raspberrypi.org/raspbian buster InRelease
+  Temporary failure resolving 'raspbian.raspberrypi.org'
+Err:2 http://archive.raspberrypi.org/debian buster InRelease
+  Temporary failure resolving 'archive.raspberrypi.org'
+Reading package lists... Done
+W: Failed to fetch http://raspbian.raspberrypi.org/raspbian/dists/buster/InRelease  Temporary failure resolving 'raspbian.raspberrypi.org'
+W: Failed to fetch http://archive.raspberrypi.org/debian/dists/buster/InRelease  Temporary failure resolving 'archive.raspberrypi.org'
+W: Some index files failed to download. They have been ignored, or old ones used instead.
+
+3-E. 시간대 문제?
+date
+sudo dpkg-reconfigure tzdata
+아시아-서울 확인(gui 화면)
+date
+(업데이트까지 시간좀 걸리는거 같음)
+sudo cat /etc/timezone 
+
+3-E. 시간대 추가?
+sudo apt-get install rdate
+sudo /usr/bin/rdate -s time.bora.net
+sudo nano /etc/rc.local
+추가
+rdate -s time.bora.net
+date
+
+3-E. 또 에러
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+The following packages were automatically installed and are no longer required:
+  gconf-service gconf2-common libexiv2-14 libgconf-2-4 libgfortran3
+  libgmime-2.6-0 libncurses5 libssl1.0.2 rpi-eeprom-images uuid-dev
+Use 'sudo apt autoremove' to remove them.
+The following NEW packages will be installed:
+  rdate
+0 upgraded, 1 newly installed, 0 to remove and 1 not upgraded.
+Need to get 15.6 kB of archives.
+After this operation, 28.7 kB of additional disk space will be used.
+Err:1 http://raspbian.raspberrypi.org/raspbian buster/main armhf rdate armhf 1:1.2-6
+  Temporary failure resolving 'raspbian.raspberrypi.org'
+E: Failed to fetch http://raspbian.raspberrypi.org/raspbian/pool/main/r/rdate/rdate_1.2-6_armhf.deb  Temporary failure resolving 'raspbian.raspberrypi.org'
+E: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?
+
+3-E. 저장공간?
+df -h
+
+3-E. 연결?
+ping google.com로 확인
+cat /etc/resolv.conf
+sudo nano /etc/resolv.conf
+
+# Generated by resolvconf
+nameserver 192.168.0.1
+nameserver 8.8.8.8
+nameserver fd51:42f8:caae:d92e::1
+에서 변경
+192.168.31.19 
+fe80::fee5:f0be:6086:6ec5 
+
+nameserver 8.8.8.8
+nameserver 8.8.4.4
+search 8.8.4.4
+nameserver 2001:4860:4860::8888
+nameserver 2001:4860:4860::8844
+
+sudo nano /etc/network/interface
+sudo nano /etc/dhcpcd.conf
+sudo nano /etc/resolv.conf
+
+sudo /etc/init.d/networking restart
+
+
+4. 라즈베리파이 집어 던지고 일단 콘솔로 진행
+
+5. 파이썬에서 sql 가능하게 설치
+pip install PyMySQL
+
+6. 콘솔도 오류...
+
+7. 다시 라즈베리 파이로 복귀...
+
+8. 문제점 재분석
+고정 ip? => 해결안됨 다음
+dns? => 해결안됨 다음ㅁ
+timezone? => 아나 다 안되ㄶㄹㄴㄹㄸㄹㅊㄴ
+
+sudo date 0525231421.00
+tracert 8.8.8.8 -d
+
+PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.
+From 192.168.31.19 icmp_seq=1 Destination Host Unreachable
+From 192.168.31.19 icmp_seq=2 Destination Host Unreachable
+From 192.168.31.19 icmp_seq=3 Destination Host Unreachable
+From 192.168.31.19 icmp_seq=4 Destination Host Unreachable
+From 192.168.31.19 icmp_seq=5 Destination Host Unreachable
+From 192.168.31.19 icmp_seq=8 Destination Host Unreachable
+From 192.168.31.19 icmp_seq=9 Destination Host Unreachable
+From 192.168.31.19 icmp_seq=10 Destination Host Unreachable
+From 192.168.31.19 icmp_seq=11 Destination Host Unreachable
+From 192.168.31.19 icmp_seq=12 Destination Host Unreachable
+
+sudo apt-get update
+Err:1 http://raspbian.raspberrypi.org/raspbian buster InRelease
+  Temporary failure resolving 'raspbian.raspberrypi.org'
+Err:2 http://archive.raspberrypi.org/debian buster InRelease
+  Temporary failure resolving 'archive.raspberrypi.org'
+Reading package lists... Done
+W: Failed to fetch http://raspbian.raspberrypi.org/raspbian/dists/buster/InRelease  Temporary failure resolving 'raspbian.raspberrypi.org'
+W: Failed to fetch http://archive.raspberrypi.org/debian/dists/buster/InRelease  Temporary failure resolving 'archive.raspberrypi.org'
+W: Some index files failed to download. They have been ignored, or old ones used instead.
+
+ip addr
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host
+       valid_lft forever preferred_lft forever
+2: eth0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc pfifo_fast state DOWN group default qlen 1000
+    link/ether b8:27:eb:1c:97:af brd ff:ff:ff:ff:ff:ff
+3: wlan0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether b8:27:eb:49:c2:fa brd ff:ff:ff:ff:ff:ff
+    inet 192.168.31.19/24 brd 192.168.31.255 scope global noprefixroute wlan0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::fee5:f0be:6086:6ec5/64 scope link
+       valid_lft forever preferred_lft forever
+
+
+raspberrypi

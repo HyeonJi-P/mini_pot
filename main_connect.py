@@ -23,7 +23,9 @@ try:
         #### 2-2. 멀티 쓰레딩 준비하기
         ## 3. 했던거 이 코드로 불러와서 전체 테스트하기 
 
-        # 씻고 밥먹고 계속 ~
+        sql_client.first()
+
+
 
 except KeyboardInterrupt:
     print("keyboard out")
