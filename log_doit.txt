@@ -154,22 +154,26 @@ show databases;
 use mydb
 use mysql
 select user, host, password from user;
+update user set password=password('password') where user = 'root';
 
-
-5+. 팁: 마리아디비 사용시 system을 앞에 붙이면 리눅스 명령어 사용가능
++ 팁: 마리아디비 사용시 system을 앞에 붙이면 리눅스 명령어 사용가능
 system ls
 
-
+6. 비밀번호 unix_socket형에서 mysql_native_password형으로 바꿔주기
+SELECT User, Host, plugin FROM mysql.user;
+update user set plugin='mysql_native_password' where user='root';
+flush privileges;
+sudo mysql -u root -p로 접속
 
 7. 테이블 생성
 CREATE TABLE mytable(
-            time DATETIME NOT NULL,
-            plant varchar(20) NULL,
-            temperature int NULL,
-            humidity int NULL,
-            illuminance float NULL
-            PRIMARY KEY (time)
-            );
+    time DATETIME NOT NULL,
+    plant varchar(20) NULL,
+    temperature int NULL,
+    humidity int NULL,
+    illuminance float NULL,
+    PRIMARY KEY (time)
+    );
 
 8. 테이블 생성 확인
 show tables;
@@ -178,11 +182,11 @@ show tables;
 desc mytable;
 
 
+
+
+
+
 11. 파이썬과 마리아 연결
 update user set plugin='';
-FLUSH PRIVILEGES;
 
-12. 마리아 설정
-update user set password=password('password') where user='root';
-FLUSH PRIVILEGES;
 

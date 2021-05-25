@@ -1,24 +1,26 @@
 import pymysql
 
-# 포트 : 디폴트 3306 # *6CC6A1C22CFFA93B23769CAE343636557E024D12
-conn = pymysql.connect(host='localhost', user='root', password='*6CC6A1C22CFFA93B23769CAE343636557E024D12',
+conn = pymysql.connect(host='localhost', port=3306, user='root', password='*6CC6A1C22CFFA93B23769CAE343636557E024D12',
 db = 'mysql', charset='utf8')
-cur = conn.cursor()
 
-sql = '''CREATE TABLE mytable(
-    time DATETIME NOT NULL,
-    plant varchar(20) NULL,
-    temperature int NULL,
-    humidity int NULL,
-    illuminance float NULL
-    PRIMARY KEY (time)
-    );
-    '''
-cur.execute(sql)
-conn.commit()
+try:
+    # cur = conn.cursor()
+    with conn.cursor() as cur:
+        
+        # 이거이제 dict형으로 변환해줘야함.. 일단자고일ㄷ어나서
+        sql = "INSERT INTO mytable(time,plant,temperature,humidity,illuminance) VALUSE (111, '222', 333, 444, 55.5)"
+        cur.execute(sql)
+        conn.commit()
 
-cur.execute("SELECT* FROM mytable")
-rows = cur.fetchall()
-print(rows)
+        time DATETIME NOT NULL,
+        plant varchar(20) NULL,
+        temperature int NULL,
+        humidity int NULL,
+        illuminance float NULL,
 
-conn.close()
+        cur.execute("SELECT* FROM mytable")
+        rows = cur.fetchall()
+        print(rows)
+
+finally:
+    conn.close()
