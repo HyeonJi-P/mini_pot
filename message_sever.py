@@ -14,25 +14,27 @@ PORT = 8282
 server_s.bind((HOST,PORT))  # 소켓을 호스트와 포트에 연결
 server_s.listen(2)  # 클라이언트에게 들을 준비 완료 (동시접속 2허용)
 
-client_s, address = server_s.accept()  # accept에서 대기하다 client 나타나면 새로운 소켓 리턴
+# accept에서 대기하다 client 나타나면 새로운 소켓 리턴
+client_s, address = server_s.accept()
 
 print("연결 완료 : ", address)
 
 while 1:
 
-    # 클라이언트 메세지 수신 대기 
+    # 수신, 디코드, dict화
     client_message = client_s.recv(1024)  # 1024byte
-
     decode_message = client_message.decode('utf-8')
-
-    if decode_message == 'halt':
-        break
+    dict_message = json.loads(decode_message)
+    
+    # db에 저장
+    #sql_sever.insert(dict_message)
 
     print("데이터 수신완료 : ", address, decode_message)
-
     client_s.sendall(client_message)
 
     #server_s.sendall("서버가 클라이언트 에게 hello".encode('utf-8'))
+    # 지금은 한번만 실행
+    break
 
 server_s.close()
 client_s.close()

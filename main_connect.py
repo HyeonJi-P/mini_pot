@@ -34,10 +34,10 @@ try:
         sql_client.insert(result_data)
 
         # 전송을 위한 파이썬 호출 
-        json_insert_data = json.dumps(result_data)
-        message_client(json_insert_data)
+        message_client.send(result_data)
 
-        
+
+
 
         # 현제 해야할일
         ## 1. 각각 장치에 mysql설치후 테이블 생성, 갱신작업하는 코드 생성
