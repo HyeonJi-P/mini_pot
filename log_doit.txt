@@ -120,6 +120,12 @@ sudo reboot 으로 리붓해주고
 hostname 다시 확인
 sudo hostnamectl set-hostname ec2-minipot 뭔가 안되서 공식홈페이지 코드 또 실행했더니 됨
 
+9. pip다운
+sudo yum install python-pip
+
+10. pymysql다운
+pip install pymysql
+
 
 - - - - - < 라즈베리 디비 > - - - - -
 1. 디비 존재확인
