@@ -21,7 +21,7 @@ while 1:
     client_s.sendall(client_filename.encode('utf-8'))
 
     # 수신 대기 
-    data = client_s.recv(8096)  # 
+    data = client_s.recv(1024)  # 
     data_transferred = 0
     # 데이터 수신
     #server_message = repr(server_receive.decode('utf-8'))
@@ -38,7 +38,7 @@ while 1:
             while data: #데이터가 있을 때 까지
                 f.write(data)
                 #data_transferred += len(data)
-                data = client_s.recv(8096) # 1024바이트를 받아온다
+                data = client_s.recv(1024) # 1024바이트를 받아온다
         except Exception as ex:
             print(ex)
     print('파일 %s 받기 완료. ' %(client_filename))

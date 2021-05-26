@@ -24,7 +24,7 @@ while 1:
 
     print(str(address),'에서 접속')
     # 클라이언트 메세지 수신 대기 
-    filename = client_s.recv(8096)  # 1024byte
+    filename = client_s.recv(1024)  # 1024byte
     print('요청받은 데이터: ', filename.decode('utf-8'))
     data_transferred = 0
 
@@ -35,16 +35,13 @@ while 1:
     print("파일 전송 시작")
     with open(filename, 'rb') as f:
         try :
-            data = f.read(8096)
+            data = f.read(1024)
             while data:
-                data_transferred += client_s.send(data)
-                data = f.read(8096)
+                #data_transferred += client_s.send(data)
+                data = f.read(1024)
         except Exception as ex:
             print(ex)
     print("전송완료")
-
-
-    
 
     #server_s.sendall("서버가 클라이언트 에게 hello".encode('utf-8'))
 
