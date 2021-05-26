@@ -20,8 +20,6 @@ print("연결 완료 : ", address)
 while 1:
     print("while문 시작")
 
-
-
     print(str(address),'에서 접속')
     # 클라이언트 메세지 수신 대기 
     filename = client_s.recv(8096)  
@@ -30,24 +28,22 @@ while 1:
 
     if not exists(filename):
         print('no file')
-        #break
-    else:
-        print("파일 전송 시작")
-        with open(filename, 'rb') as f:
-            try :
-                data = f.read(8096)
-                #while data:
-                client_s.sendall(data)
-                data = f.read(8096)
-                print("전송중")
-            except Exception as ex:
-                print(ex)
-        #file_end = "END"
-        #client_s.sendall(file_end.encode('utf-8'))
-        print("전송완료")
+        continue
+    
+    print("파일 전송 시작")
+    with open(filename, 'rb') as f:
+        try :
+            data = f.read(8096)
+            #while data:
+            client_s.sendall(data)
+            data = f.read(8096)
+            print("전송중")
+        except Exception as ex:
+            print(ex)
+    #file_end = "END"
+    #client_s.sendall(file_end.encode('utf-8'))
+    print("전송완료")
 
-
-        #server_s.sendall("서버가 클라이언트 에게 hello".encode('utf-8'))
 
     client_s.close()
 server_s.close()
