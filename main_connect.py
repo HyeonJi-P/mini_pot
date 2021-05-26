@@ -26,22 +26,18 @@ try:
         result_data['humidity'] = 24
         result_data['illuminance'] = 25.2
 
-
         # dict 시간 입력 제대로 됬는지 확인
         if result_data['time'] == '1111-22-33 44:55:66':
             print("현제시간 dict입력 실패!")
 
-        # 저장을 위한 파이썬 호출
-        sql_client.first(result_data)
+        # 저장을 위한 파이썬 호출 ==> 나중에 서버에도 해야함
+        sql_client.insert(result_data)
+
+        # 전송을 위한 파이썬 호출 
+        json_insert_data = json.dumps(result_data)
+        message_client(json_insert_data)
 
         
-
-
-
-        # message_client 호출해서 데이터 보내기, 받기
-        # 보내기는 일방적으로 보낸다고 치고
-        # 갱신을 위한 데이터를 받는거는? 주기적으로 message_client호출해서 확인?
-        # 아니면 음 일단
 
         # 현제 해야할일
         ## 1. 각각 장치에 mysql설치후 테이블 생성, 갱신작업하는 코드 생성
