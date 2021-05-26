@@ -201,4 +201,37 @@ File "now_test.py", line 3
 SyntaxError: Non-ASCII character '\xed' in file now_test.py on line 3, but no encoding declared; see http://python.org/dev/peps/pep-0263/ for details
 ==> # -*- coding: utf-8 -*- or 파이썬 3사용
 
-#9. 
+#9. ec2-마리아디비 설치
+Loaded plugins: extras_suggestions, langpacks, priorities, update-motd
+amzn2-core                                               | 3.7 kB     00:00
+No package MariaDB-server available.
+  * Maybe you meant: mariadb-server
+Error: Nothing to do
+
+#10. 마리아디비 repo 설치
+[error] Could not identify OS type or version.
+[error] The MariaDB Repository supports these Linux OSs, on x86_64 only:
+    * RHEL/CentOS 7 & 8 (rhel)
+    * Ubuntu 16.04 LTS (xenial), 18.04 LTS (bionic), & 20.04 LTS (focal)
+    * Debian 9 (stretch) & 10 (buster)
+    * SLES 12 & 15 (sles)
+
+#11. 마리아디비 설치중 오류
+Transaction check error:
+  file /etc/my.cnf from install of MariaDB-common-5.5.68-1.el6.x86_64 conflicts with file from package mariadb-libs-1:5.5.68-1.amzn2.x86_64
+Error Summary
+  file /etc/my.cnf from install of MariaDB-common-5.5.68-1.el6.x86_64 conflicts with file from package mariadb-libs-1:5.5.68-1.amzn2.x86_64
+Error Summary
+Transaction check error:
+  file /etc/my.cnf from install of MariaDB-common-5.5.68-1.el6.x86_64 conflicts with file from package mariadb-libs-1:5.5.68-1.amzn2.x86_64
+
+==>rpm -qa | grep mariadb-libs
+mariadb-libs-5.5.68-1.amzn2.x86_64
+rpm -ev --nodeps mariadb-libs-5.5.68-1.amzn2.x86_64
+
+#12. 마리아디비 서버만 깔았는데 클라이언트는 이미 깔려있다함 뭐지
+Loaded plugins: extras_suggestions, langpacks, priorities, update-motd
+1 packages excluded due to repository priority protections
+Package MariaDB-client-5.5.68-1.el6.x86_64 already installed and latest version
+Nothing to do
+

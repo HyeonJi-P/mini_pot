@@ -121,7 +121,7 @@ hostname 다시 확인
 sudo hostnamectl set-hostname ec2-minipot 뭔가 안되서 공식홈페이지 코드 또 실행했더니 됨
 
 
-- - - - - < 디비 > - - - - -
+- - - - - < 라즈베리 디비 > - - - - -
 1. 디비 존재확인
 mysql --version 
 
@@ -184,10 +184,34 @@ desc mytable;
 10. json사용하기 위해서 다운
 ==> 파이썬에 내장되있었음
 
-
-
-
 11. 파이썬과 마리아 연결
 update user set plugin='';
 
+- - - - - < 서버 디비 > - - - - -
+1. 마리아디비 설치
+sudo yum install MariaDB-server
+sudo yum install MariaDB-client 
 
+2. repo부터 설치
+curl -sS https://downloads.mariadb.com/MariaDB/mariadb_repo_setup | sudo bash
+
+3. 다르게
+sudo nano /etc/yum.repos.d/MariaDB.repo
+[mariadb]
+name = MariaDB
+baseurl = http://yum.mariadb.org/5.5/centos6-amd64
+gpgkey=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
+gpgcheck=1
+
+4. 1재실행
+yum install MariaDB-server MariaDB-client
+
+5. log_error참조 (#9. 부터)
+
+6. 초기설정
+service mysql start
+/usr/bin/mysql_secure_installation 
+
+7. 인스턴스 시작-중지
+/etc/init.d/mysql start
+/etc/init.d/mysql stop

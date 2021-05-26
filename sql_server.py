@@ -2,7 +2,7 @@ import pymysql
 
 class sql_server:
     def insert(insert_data):
-        conn = pymysql.connect(host='localhost', port=3306, user='root', password='-----', 
+        conn = pymysql.connect(host='localhost', port=3306, user='root', password='*6CC6A1C22CFFA93B23769CAE343636557E024D12', 
         db = 'mysql', charset='utf8')
 
         try:
