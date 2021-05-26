@@ -49,8 +49,10 @@ try:
         ###1. 센서 데이터 일정시간마다 돌아감 
         ###2. 센싱 데이터 sql에 저장 
         #####2-2. 일단 sql에 저장하는것 보다 바로 전달하는 쪽으로
-        ###3. 
+        ###3.
 
+        # 지금은 한번만
+        break
 
 except KeyboardInterrupt:
     print("keyboard out")
