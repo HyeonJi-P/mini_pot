@@ -9,7 +9,7 @@ except socket.error as e :
     print("***** 클라이언트 소켓 생성 에러발생 *****")
     print("원인 : " + e)
 
-HOST = 'ec2-52-79-233-24.ap-northeast-2.compute.amazonaws.com'
+HOST = 'ec2-52-79-235-57.ap-northeast-2.compute.amazonaws.com'
 #'ec2-15-165-203-96.ap-northeast-2.compute.amazonaws.com'
 PORT = 8282
 client_s.connect((HOST,PORT))  # 호스트,포트로  서버에 연결
