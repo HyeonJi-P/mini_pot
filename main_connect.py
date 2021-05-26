@@ -31,7 +31,7 @@ try:
             print("현제시간 dict입력 실패!")
 
         # 저장을 위한 파이썬 호출 ==> 나중에 서버에도 해야함
-        sql_client.insert(result_data)
+        #sql_client.insert(result_data)
 
         # 전송을 위한 파이썬 호출 
         message_client.send(result_data)
