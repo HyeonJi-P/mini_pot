@@ -235,3 +235,28 @@ Loaded plugins: extras_suggestions, langpacks, priorities, update-motd
 Package MariaDB-client-5.5.68-1.el6.x86_64 already installed and latest version
 Nothing to do
 
+#13. pymysql안깔림
+sudo yum install pymysql
+Loaded plugins: extras_suggestions, langpacks, priorities, update-motd
+amzn2-core                                               | 3.7 kB     00:00
+1 packages excluded due to repository priority protections
+No package pymysql available.
+Error: Nothing to do
+==> pip깔고 진행했더니 됨
+
+#14. pymysql을 못참음?
+File "/home/ec2-user/github/mini_pot/sql_server.py", line 1, in <module>
+    import pymysql
+ModuleNotFoundError: No module named 'pymysql'
+==> pip3 install --upgrade pymysql
+
+#15. 14해결안됨
+WARNING: Running pip install with root privileges is generally not a good idea. Try `pip3 install --user` instead.
+Collecting pymysql
+  Downloading https://files.pythonhosted.org/packages/4f/52/a115fe175028b058df353c5a3d5290b71514a83f67078a6482cff24d6137/PyMySQL-1.0.2-py3-none-any.whl (43kB)
+    100% |████████████████████████████████| 51kB 1.5MB/s
+Installing collected packages: pymysql
+Successfully installed pymysql-1.0.2
+==> pip3 install pymysql로 하니까 됨? 아까는 안됬자나 왜되는건대
+
+#16. 

@@ -125,6 +125,8 @@ sudo yum install python-pip
 
 10. pymysql다운
 pip install pymysql
+pip3 install pymysql
+
 
 
 - - - - - < 라즈베리 디비 > - - - - -
