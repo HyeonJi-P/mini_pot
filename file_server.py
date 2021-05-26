@@ -15,11 +15,11 @@ HOST = 'ec2-52-79-235-57.ap-northeast-2.compute.amazonaws.com'
 PORT = 8282
 server_s.bind((HOST,PORT))  # 소켓을 호스트와 포트에 연결
 server_s.listen(2)  # 클라이언트에게 들을 준비 완료 (동시접속 2허용)
+client_s, address = server_s.accept()  # accept에서 대기하다 client 나타나면 새로운 소켓 리턴
+print("연결 완료 : ", address)
 while 1:
     print("while문 시작")
-    client_s, address = server_s.accept()  # accept에서 대기하다 client 나타나면 새로운 소켓 리턴
 
-    print("연결 완료 : ", address)
 
 
     print(str(address),'에서 접속')
@@ -31,23 +31,23 @@ while 1:
     if not exists(filename):
         print('no file')
         #break
+    else:
+        print("파일 전송 시작")
+        with open(filename, 'rb') as f:
+            try :
+                data = f.read(8096)
+                #while data:
+                client_s.sendall(data)
+                data = f.read(8096)
+                print("전송중")
+            except Exception as ex:
+                print(ex)
+        #file_end = "END"
+        #client_s.sendall(file_end.encode('utf-8'))
+        print("전송완료")
 
-    print("파일 전송 시작")
-    with open(filename, 'rb') as f:
-        try :
-            data = f.read(8096)
-            #while data:
-            client_s.sendall(data)
-            data = f.read(8096)
-            print("전송중")
-        except Exception as ex:
-            print(ex)
-    #file_end = "END"
-    #client_s.sendall(file_end.encode('utf-8'))
-    print("전송완료")
 
-
-    #server_s.sendall("서버가 클라이언트 에게 hello".encode('utf-8'))
+        #server_s.sendall("서버가 클라이언트 에게 hello".encode('utf-8'))
 
     client_s.close()
 server_s.close()

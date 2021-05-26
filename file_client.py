@@ -15,23 +15,23 @@ PORT = 8282
 client_s.connect((HOST,PORT))  # 호스트,포트로  서버에 연결
 
 # 처음 수신 확인 진행 
-while 1:
-    client_filename = input("전송할 파일 이름을 입력해 주세요 : ")
+#while 1:
+client_filename = input("전송할 파일 이름을 입력해 주세요 : ")
 
-    client_s.sendall(client_filename.encode('utf-8'))
+client_s.sendall(client_filename.encode('utf-8'))
 
-    # 수신 대기 
-    data = client_s.recv(8096)  # 
-    data_transferred = 0
-    # 데이터 수신
-    #server_message = repr(server_receive.decode('utf-8'))
+# 수신 대기 
+data = client_s.recv(8096)  # 
+data_transferred = 0
+# 데이터 수신
+#server_message = repr(server_receive.decode('utf-8'))
 
-    #print("수신 문자 : ", server_message)
+#print("수신 문자 : ", server_message)
 
-    if not data :
-        print('파일 %s가 서버에 존재하지않음' %client_filename)
-        break
-
+if not data :
+    print('파일 %s가 서버에 존재하지않음' %client_filename)
+    #break
+else:
     nowdir = os.getcwd()
     with open(nowdir+"\\"+client_filename,'wb') as f: #현재 dir에 filename으로 파일을 받는다
         try:
@@ -41,7 +41,7 @@ while 1:
                 f.write(data)
                 data = client_s.recv(8096)
                 
-                 
+                    
                 
         except Exception as ex:
             print(ex)
