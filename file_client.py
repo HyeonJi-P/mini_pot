@@ -38,10 +38,10 @@ while 1:
             print("try문")
             while data: #데이터가 있을 때 까지
                 print("while문")
-                data = client_s.recv(8096)
                 f.write(data)
-                if data.decode('utf-8') == "END":
-                    break
+                data = client_s.recv(8096)
+                #if data.decode('utf-8') == "END":
+                #    break
                 #data_transferred += len(data)
                  
                 

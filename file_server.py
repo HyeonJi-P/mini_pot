@@ -43,8 +43,8 @@ with open(filename, 'rb') as f:
     except Exception as ex:
         print(ex)
     f.close()
-file_end = "END"
-client_s.sendall(file_end.encode('utf-8'))
+#file_end = "END"
+#client_s.sendall(file_end.encode('utf-8'))
 print("전송완료")
 
 
