@@ -40,9 +40,7 @@ while 1:
                 print("while문")
                 f.write(data)
                 data = client_s.recv(8096)
-                #if data.decode('utf-8') == "END":
-                #    break
-                #data_transferred += len(data)
+                
                  
                 
         except Exception as ex:

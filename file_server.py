@@ -36,10 +36,10 @@ print("파일 전송 시작")
 with open(filename, 'rb') as f:
     try :
         data = f.read(8096)
-        while data:
-            client_s.send(data)
-            data = f.read(8096)
-            print("전송중")
+        #while data:
+        client_s.sendall(data)
+        data = f.read(8096)
+        print("전송중")
     except Exception as ex:
         print(ex)
     f.close()
