@@ -43,7 +43,10 @@ while 1:
         except Exception as ex:
             print(ex)
         f.close()
+    file_end = "END"
+    client_s.sendall(file_end.encode('utf-8'))
     print("전송완료")
+
 
     #server_s.sendall("서버가 클라이언트 에게 hello".encode('utf-8'))
 

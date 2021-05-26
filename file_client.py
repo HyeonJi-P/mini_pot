@@ -35,13 +35,18 @@ while 1:
     nowdir = os.getcwd()
     with open(nowdir+"\\"+client_filename,'wb') as f: #현재 dir에 filename으로 파일을 받는다
         try:
+            print("try문")
             while data: #데이터가 있을 때 까지
+                print("while문")
                 f.write(data)
                 #data_transferred += len(data)
                 data = client_s.recv(8096) 
+                if data == "END":
+                    break
         except Exception as ex:
             print(ex)
-    print('파일 %s 받기 완료. ' %(client_filename))
+        f.close()
+        print('파일 %s 받기 완료. ' %(client_filename))
 
 
 client_s.close()
