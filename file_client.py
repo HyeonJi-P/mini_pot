@@ -38,7 +38,7 @@ while 1:
             while data: #데이터가 있을 때 까지
                 f.write(data)
                 #data_transferred += len(data)
-                data = client_s.recv(8096) # 1024바이트를 받아온다
+                data = client_s.recv(8096) 
         except Exception as ex:
             print(ex)
     print('파일 %s 받기 완료. ' %(client_filename))

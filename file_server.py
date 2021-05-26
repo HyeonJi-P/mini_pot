@@ -37,7 +37,7 @@ while 1:
         try :
             data = f.read(8096)
             while data:
-                #data_transferred += client_s.send(data)
+                client_s.send(data)
                 data = f.read(8096)
         except Exception as ex:
             print(ex)
