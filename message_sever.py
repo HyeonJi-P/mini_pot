@@ -1,5 +1,6 @@
 import socket
 import json
+from sql_server import *
 
 try:
     server_s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  # ipv4, tcp 형식 사용
