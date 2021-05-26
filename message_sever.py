@@ -1,6 +1,6 @@
 import socket
 import json
-from sql_server import sql_server
+#from sql_server import sql_server
 import pymysql
 
 try:
