@@ -30,7 +30,7 @@ while 1:
     dict_message = json.loads(decode_message)
     
     # db에 저장
-    sql_server.insert(dict_message)
+    #sql_server.insert(dict_message)
 
     print("데이터 수신완료 : ", address, decode_message)
     client_s.sendall(client_message)

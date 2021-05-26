@@ -124,7 +124,6 @@ sudo hostnamectl set-hostname ec2-minipot 뭔가 안되서 공식홈페이지 �
 sudo yum install python-pip
 
 10. pymysql다운
-pip install pymysql
 pip3 install pymysql
 
 
@@ -172,6 +171,8 @@ SELECT User, Host, plugin FROM mysql.user;
 update user set plugin='mysql_native_password' where user='root';
 flush privileges;
 sudo mysql -u root -p로 접속
+
+UPDATE user SET password='' WHERE user='root';
 
 7. 테이블 생성
 CREATE TABLE mytable(

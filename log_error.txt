@@ -261,3 +261,22 @@ Successfully installed pymysql-1.0.2
 
 #16. 서버디비 인설트 오류?
 pymysql.err.OperationalError: (1045, "Access denied for user 'root'@'localhost' (using password: YES)")
+==> UPDATE mysql.user SET password='*6CC6A1C22CFFA93B23769CAE343636557E024D12' WHERE user='root';
+
+#17. 이제는 로그인도 안되?
+ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
+
+#18. 리셋이다아아
+yum remove mysql mysql-server
+sudo rm -f -r /var/lib/mysql
+
+#19. 리셋해도 안대...?
+[ec2-user@ec2-minipot ~]$ service mysql start
+Failed to stop mysql.service: The name org.freedesktop.PolicyKit1 was not provided by any .service files
+See system logs and 'systemctl status mysql.service' for details.
+Starting MariaDB.210527 04:16:19 mysqld_safe Logging to '/var/lib/mysql/ec2-minipot.err'.
+210527 04:16:19 mysqld_safe Starting mysqld daemon with databases from /var/lib/mysql
+/usr/bin/mysqld_safe_helper: Can't create/write to file '/var/lib/mysql/ec2-minipot.err' (Errcode: 13)
+/etc/init.d/mysql: line 265: kill: (4749) - No such process
+ ERROR!
+
