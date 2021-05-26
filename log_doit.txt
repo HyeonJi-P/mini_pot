@@ -181,7 +181,8 @@ show tables;
 9. 테이블 속성 확인
 desc mytable;
 
-
+10. json사용하기 위해서 다운
+==> 파이썬에 내장되있었음
 
 
 
