@@ -39,9 +39,10 @@ while 1:
             while data:
                 client_s.send(data)
                 data = f.read(8096)
+                print("전송중")
         except Exception as ex:
             print(ex)
-    f.close()
+        f.close()
     print("전송완료")
 
     #server_s.sendall("서버가 클라이언트 에게 hello".encode('utf-8'))
