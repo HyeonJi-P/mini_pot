@@ -49,5 +49,5 @@ while 1:
 
     #server_s.sendall("서버가 클라이언트 에게 hello".encode('utf-8'))
 
-    server_s.close()
     client_s.close()
+server_s.close()
