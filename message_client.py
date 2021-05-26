@@ -18,7 +18,8 @@ class message_client:
         #'ec2-15-165-203-96.ap-northeast-2.compute.amazonaws.com' -k
         PORT = 8282
         client_s.connect((HOST,PORT))  # 호스트,포트로  서버에 연결
-
+        print("호스트, 포트 : 서버 연결완료")
+        
         # 데이터 송수신
         while 1:
             
