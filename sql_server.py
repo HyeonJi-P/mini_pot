@@ -9,9 +9,9 @@ class sql_server:
             # cur = conn.cursor()
             with conn.cursor() as cur:
 
-                col = insert_data.keys()
-                val = insert_data.values()
-                sql = "INSERT INTO mytable(%s) VALUSE(%s)" %(.join(col), .join(val))
+                col = ','.join(insert_data.keys())
+                val = ','.join(insert_data.values())
+                sql = "INSERT INTO mytable(%s) VALUSE(%s);" %(col, val)
                 cur.execute(sql, insert_data.values())
                 conn.commit()
 
