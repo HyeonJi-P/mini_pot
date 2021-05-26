@@ -1,32 +1,19 @@
 import pymysql
 
 class sql_client:
-    
-    def first():
-        # 포트 : 디폴트 3306
-        conn = pymysql.connect(host='localhost', user='root', password='password',
+    def insert(insert_data):
+        conn = pymysql.connect(host='localhost', port=3306, user='root', password='*6CC6A1C22CFFA93B23769CAE343636557E024D12', 
         db = 'mysql', charset='utf8')
-        cur = conn.cursor()
 
-        sql = "CREATE DATABASE mydb"
-        cur.execute(sql)
-        conn.commit()
+        try:
+            # cur = conn.cursor()
+            with conn.cursor() as cur:
 
-        sql = '''CREATE TABLE mytable(
-            time DATETIME NOT NULL,
-            plant varchar(20) NULL,
-            temperature int NULL,
-            humidity int NULL,
-            illuminance float NULL
-            PRIMARY KEY (time)
-            );
-            '''
-        cur.execute(sql)
-        conn.commit()
+                col = insert_data.keys()
+                val = insert_data.values()
+                sql = "INSERT INTO mytable(%s) VALUSE(%s)" %(.join(col), .join(val))
+                cur.execute(sql, insert_data.values())
+                conn.commit()
 
-
-        conn.close()
-
-
-
-sql_client.first()
+        finally:
+            conn.close()
