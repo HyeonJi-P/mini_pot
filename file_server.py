@@ -28,6 +28,7 @@ while 1:
 
     if not exists(filename):
         print('no file')
+        client_s.close()
         continue
     
     print("파일 전송 시작")
