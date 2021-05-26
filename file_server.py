@@ -14,8 +14,8 @@ HOST = 'ec2-52-79-235-57.ap-northeast-2.compute.amazonaws.com'
 
 PORT = 8282
 server_s.bind((HOST,PORT))  # 소켓을 호스트와 포트에 연결
+server_s.listen(2)  # 클라이언트에게 들을 준비 완료 (동시접속 2허용)
 while 1:
-    server_s.listen(2)  # 클라이언트에게 들을 준비 완료 (동시접속 2허용)
 
     client_s, address = server_s.accept()  # accept에서 대기하다 client 나타나면 새로운 소켓 리턴
 
