@@ -152,7 +152,7 @@ python3 -m pip install PyMySQL
 sudo mysql -u root
 
 5. 디비 생성
-CREATE DATABASE mydb DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+CREATE DATABASE mysql DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
 6. 확인
 show databases;
@@ -171,7 +171,7 @@ SELECT User, Host, plugin FROM mysql.user;
 update user set plugin='mysql_native_password' where user='root';
 flush privileges;
 sudo mysql -u root -p로 접속
-
+service mysqld start 
 UPDATE user SET password='' WHERE user='root';
 
 7. 테이블 생성
@@ -227,3 +227,7 @@ service mysql start
 /etc/init.d/mysql stop
 
 8. 서버 디비 삭제하기
+
+9. 사용자추가
+create user auint@localhost identified by '비밀번호';
+grant all privileges on *.* to 'auint'@'localhost' identified by '비밀번호';
