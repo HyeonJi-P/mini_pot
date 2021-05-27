@@ -267,7 +267,7 @@ pymysql.err.OperationalError: (1045, "Access denied for user 'root'@'localhost' 
 ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
 
 #18. 리셋이다아아
-yum remove mysql mysql-server
+sudo yum remove mysql mysql-server
 sudo rm -f -r /var/lib/mysql
 
 #19. 리셋해도 안대...?
@@ -313,3 +313,49 @@ sudo /usr/bin/mysqld_safe --skip-grant &
 
 #26. 
 ERROR 1044 (42000): Access denied for user ''@'localhost' to database 'mysql'
+
+#27. 재삭제
+sudo yum remove Maria*
+sudo rm -rf /etc/my.cnf*
+sudo rm -rf /var/log/mysql  
+sudo rm -rf /var/lib/mysql 
+
+
+ERROR 2002 (HY000): Can't connect to local MySQL server through socket '/var/lib/mysql/mysql.sock' (2)
+service mysqld status
+
+Redirecting to /bin/systemctl start mysqld.service
+Failed to start mysqld.service: The name org.freedesktop.PolicyKit1 was not provided by any .service files
+See system logs and 'systemctl status mysqld.service' for details.
+
+#28. 재설치
+확인
+sudo  amazon-linux-extras | grep mariadb
+수정
+sudo nano /etc/yum.repos.d/MariaDB.repo
+[mariadb]
+name = MariaDB
+baseurl = http://yum.mariadb.org/10.5/centos7-amd64
+gpgkey=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
+gpgcheck=1
+업데이트
+sudo yum makecache
+sudo yum repolist 
+설치
+sudo yum install MariaDB-server MariaDB-client
+디비구동
+sudo systemctl enable --now mariadb
+systemctl status mariadb
+sudo mysql_secure_installation 
+mysql -u root -p
+
+sudo service mysql start
+sudo mysqladmin -uroot -p '패스워드'
+sudo service mysqld stop
+
+grep 'temporary password' /var/log/mysqld.log
+
+UPDATE mysql.user SET password=PASSWORD('패스워드') WHERE user='root'; 
+FLUSH PRIVILEGES; 
+quit
+
