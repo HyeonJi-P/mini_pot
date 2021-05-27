@@ -280,3 +280,36 @@ Starting MariaDB.210527 04:16:19 mysqld_safe Logging to '/var/lib/mysql/ec2-mini
 /etc/init.d/mysql: line 265: kill: (4749) - No such process
  ERROR!
 
+#20. ec2인스턴스 중지후 재시작
+
+#21. 뭐지 왜 되는거지
+ERROR 1044 (42000): Access denied for user ''@'localhost' to database 'mysql'
+mysqld --skip-grant-tables
+
+#22. 왜 또 안되는거지
+[client]
+socket = /var/lib/mysql/mysql.sock
+[mysqld]
+socket = /var/lib/mysql/mysql.sock
+
+ln -s /tmp/mysql.sock /var/lib/mysql/mysql.sock
+
+#22. ???
+service mysqld status
+
+#23. 새로운 오류는 언제나 환영이야^^
+Redirecting to /bin/systemctl status mysqld.service
+Unit mysqld.service could not be found.
+
+#24. ㅇ
+Redirecting to /bin/systemctl start mysqld.service
+Failed to start mysqld.service: The name org.freedesktop.PolicyKit1 was not provided by any .service files
+See system logs and 'systemctl status mysqld.service' for details.
+
+#25. ㅇ
+sudo /usr/bin/mysqld_safe --skip-grant &
+[root@localhost ~]# 190530 21:30:25 mysqld_safe Logging to '/var/lib/mysql/localhost.localdomain.err'.
+190530 21:30:25 mysqld_safe Starting mysqld daemon with databases from /var/lib/mysql
+
+#26. 
+ERROR 1044 (42000): Access denied for user ''@'localhost' to database 'mysql'

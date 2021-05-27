@@ -225,3 +225,5 @@ service mysql start
 7. 인스턴스 시작-중지
 /etc/init.d/mysql start
 /etc/init.d/mysql stop
+
+8. 서버 디비 삭제하기
