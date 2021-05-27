@@ -359,3 +359,25 @@ UPDATE mysql.user SET password=PASSWORD('패스워드') WHERE user='root';
 FLUSH PRIVILEGES; 
 quit
 
+#29. 되돌아왔당
+pymysql.err.OperationalError: (1045, "Access denied for user 'auint'@'localhost' (using password: YES)")
+
+#30. utf-8 설정 확인
+show variables like 'c%';
+
+sudo nano /etc/my.cnf.d/client.cnf
+[client]
+default-character-set=utf8
+
+
+sudo nano /etc/my.cnf.d/mysql-clients.cnf
+[mysql]
+default-character-set=utf8
+[mysqldump]
+default-character-set=utf8
+
+sudo nano /etc/my.cnf.d/server.cnf
+[mysqld]
+collation-server = utf8_unicode_ci
+init-connect='SET NAMES utf8'
+character-set-server = utf8
