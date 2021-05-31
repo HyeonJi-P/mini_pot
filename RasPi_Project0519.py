@@ -34,9 +34,10 @@ TDS_sensor=True
 BH1750_sensor=True
 wLevel_sensor=True
 
-######조건들##################
 RPI_REST = 100 #초단위, 프로그램이 한번 돌아가고 다음 시간까지 휴식..?
 Senser_interver=1.0 #센서 읽는주기
+
+######조건들##################
 Max_Hum = 50.0 #습도
 Min_Hum = 10.0
 Max_Temp = 30.0 #온도
@@ -55,8 +56,8 @@ DHT11=Adafruit_DHT.DHT11
 GPIO.setmode(GPIO.BCM)
 
 FAN1_1 = 17 #팬1
-FAN1_2 = 18 #팬1
-FAN2_1 = 27 #팬2
+FAN1_2 = 18 #팬1 #################################
+FAN2_1 = 27 #팬2 ###############################
 FAN2_2 = 22 #팬2
 
 WATER_PUMP = 20 #워터펌프2
@@ -339,8 +340,8 @@ while True: #실행
                     #팬 가동
                     print("Fan ON")
                     GPIO.output(FAN1_1,GPIO.HIGH)
-                    GPIO.output(FAN1_2,GPIO.LOW)
-                    GPIO.output(FAN2_1, GPIO.HIGH)
+                    GPIO.output(FAN1_1,GPIO.LOW)
+                    GPIO.output(FAN2_2, GPIO.HIGH)
                     GPIO.output(FAN2_2, GPIO.LOW)
 
         elif stResult[1]==0 and stResult[0]==0 and stResult[2]==0: #정상          
