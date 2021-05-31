@@ -1,6 +1,7 @@
 import socket
 import json
-from sql_server import *
+from sql_server import sql_server
+import pymysql
 
 try:
     server_s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  # ipv4, tcp 형식 사용
@@ -9,7 +10,7 @@ except socket.error as e :
     print("***** 서버 소켓 생성 에러발생 *****")
     print("원인 : " + e)
 
-HOST = 'ec2-13-209-69-205.ap-northeast-2.compute.amazonaws.com'
+HOST = 'ec2-3-35-233-185.ap-northeast-2.compute.amazonaws.com'
 #'ec2-52-79-233-24.ap-northeast-2.compute.amazonaws.com' -p
 #'ec2-15-165-203-96.ap-northeast-2.compute.amazonaws.com' -k
 PORT = 8282
@@ -29,7 +30,7 @@ while 1:
     dict_message = json.loads(decode_message)
     
     # db에 저장
-    sql_sever.insert(dict_message)
+    sql_server.insert(dict_message)
 
     print("데이터 수신완료 : ", address, decode_message)
     client_s.sendall(client_message)

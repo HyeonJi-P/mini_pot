@@ -13,7 +13,7 @@ class message_client:
             print("***** 클라이언트 소켓 생성 에러발생 *****")
             print("원인 : " + e)
 
-        HOST = 'ec2-13-209-69-205.ap-northeast-2.compute.amazonaws.com'
+        HOST = 'ec2-3-35-233-185.ap-northeast-2.compute.amazonaws.com'
         #'ec2-52-79-233-24.ap-northeast-2.compute.amazonaws.com' -p
         #'ec2-15-165-203-96.ap-northeast-2.compute.amazonaws.com' -k
         PORT = 8282
