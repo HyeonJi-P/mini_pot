@@ -38,7 +38,7 @@ class ledTest:
         time.sleep(3)
 
     @classmethod
-    def control(control_data):
+    def control(self, control_data):
         LED_R = control_data['LED_R']
         LED_G = control_data['LED_G']
         LED_B = control_data['LED_B']
