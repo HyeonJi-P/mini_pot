@@ -5,19 +5,20 @@ import RPi.GPIO as GPIO
 
 '''
 LED색
-R+G=노랑
 R+G+B=흰색
+R+G=노랑
 G+B=청록
 R+B=마젠타
 '''
 
 class ledTest:
+
     RGB_LED_R=5 #RGB LED
     RGB_LED_G=6
     RGB_LED_B=13
 
     @classmethod
-    def on:
+    def on():
         GPIO.setup(RGB_LED_R,GPIO.OUT, initial = GPIO.LOW) #출력으로 설정, 시작값 low(꺼짐)
         GPIO.setup(RGB_LED_G,GPIO.OUT, initial = GPIO.LOW)
         GPIO.setup(RGB_LED_B,GPIO.OUT, initial = GPIO.LOW)
@@ -33,7 +34,7 @@ class ledTest:
         time.sleep(3)
 
     @classmethod
-    def status:
+    def status():
         time.sleep(3)
 
     @classmethod
