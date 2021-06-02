@@ -40,8 +40,8 @@ try:
         # 저장을 위한 파이썬 호출 ==> 나중에 서버에도 해야함
         #sql_client.insert(result_data)
 
-        # 전송을 위한 파이썬 호출 
-        message_client.send(result_data)
+        # 전송을 위한 파이썬 호출 # 아래 테스팅 위해서 잠시 주석처리
+        #message_client.send(result_data)
 
         # 테스팅 
         control_data = message_client.send(result_data)
