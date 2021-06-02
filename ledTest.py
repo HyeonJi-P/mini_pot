@@ -62,3 +62,5 @@ class ledTest:
             GPIO.output(self.RGB_LED_B,GPIO.LOW)
 
         time.sleep(3)
+
+        #GPIO.cleanup()

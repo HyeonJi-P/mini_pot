@@ -69,3 +69,5 @@ except KeyboardInterrupt:
     print("keyboard out")
     #GPIO.output(ACT, GPIO.LOW)
     GPIO.cleanup()
+    
+GPIO.cleanup()
