@@ -3,6 +3,8 @@ import json
 from sql_server import sql_server
 import pymysql
 
+# 현제 이 소스는 recv() 형태 
+
 try:
     server_s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  # ipv4, tcp 형식 사용
     print("소켓 생성")
@@ -24,18 +26,46 @@ print("연결 완료 : ", address)
 
 while 1:
 
-    # 수신, 디코드, dict화
-    client_message = client_s.recv(1024)  # 1024byte
-    decode_message = client_message.decode('utf-8')
-    dict_message = json.loads(decode_message)
+    # 데이터 수신
+    client_message = client_s.recv(1024)  # 1024byte 데이터 수신
+    decode_message = client_message.decode('utf-8')  # 수신 데이터 decode
+    dict_message = json.loads(decode_message)  # 받은 json데이터를 dict형으로 변환
     
     # db에 저장
-    sql_server.insert(dict_message)
+    #sql_server.insert(dict_message)
 
-    print("데이터 수신완료 : ", address, decode_message)
-    client_s.sendall(client_message)
+    # 일련의 과정 테스트를 위한 데이터 가공 # 임시용 원래는 다른 실행 파일 호출해야함 ------------
+    LED_R = dict_message['LED_R']
+    LED_G = dict_message['LED_G']
+    LED_B = dict_message['LED_B']
+    
+    if LED_R > 0.1:
+        LED_R = 0.1
+    else: 
+        LED_R = 0.9
+    if LED_G > 0.1:
+        LED_G = 0.1
+    else: 
+        LED_G = 0.9
+    if LED_B > 0.1:
+        LED_B = 0.1
+    else: 
+        LED_B = 0.9
 
-    #server_s.sendall("서버가 클라이언트 에게 hello".encode('utf-8'))
+    dict_message['LED_R'] = LED_R
+    dict_message['LED_G'] = LED_G
+    dict_message['LED_B'] = LED_B
+
+    server_message = json.dumps(dict_message)  # dict를 다시 json으로 변환
+    # -------------------------------------------------------------------------------------
+
+    # 데이터 수신 확인을 위한 재전송 # 지금은 조금 변형해서 주는 1회성 UDP 방식으로 
+    print("데이터 수신완료 : ", address, client_message)
+    #client_s.sendall(client_message)
+    client_s.sendall(server_message)  # <<-
+
+
+
     # 지금은 한번만 실행
     break
 

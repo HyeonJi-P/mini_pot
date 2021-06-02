@@ -27,20 +27,20 @@ class message_client:
             client_message = json_insert_data
             client_s.sendall(client_message.encode('utf-8'))
 
-            # 데이터 수신 대기 
+            # 확인 데이터 수신, 디코드
             server_receive = client_s.recv(1024)
-            # 데이터 수신
             server_message = repr(server_receive.decode('utf-8'))
 
             # 송신데이터와 수신데이터를 비교해서 차이점이 있다면 다시 실행해야함
             ## 하지만 일단 수신 udp라 치고 그냥 진행
-            print("수신 문자 : ", server_message)
+            print("송신했던 데이터 재수신 : ", server_message)
             '''
             # 지금은 halt를 전송하면 서버랑, 클라이언트랑 동시 종료
             # # 앞으로는 들어가야할 정보가 모두 전송되면 클라이언트는 연결해제 서버는 계속 동작
             if server_message == 'halt':
                 break
             '''
+
             # 일단 한번만돌고 나가는걸로 
             break
 

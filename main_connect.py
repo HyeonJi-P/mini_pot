@@ -21,10 +21,13 @@ try:
         ###
 
         # 결과 저장시 방법 : 현제는 임시 데이터
-        result_data['plant'] = 'test_plant2'
-        result_data['temperature'] = 23
-        result_data['humidity'] = 24
-        result_data['illuminance'] = 25.2
+        result_data['plant'] = 'test_plant1'
+        result_data['temperature'] = 12
+        result_data['humidity'] = 13
+        result_data['illuminance'] = 14.5
+        result_data['LED_R'] = 0.1
+        result_data['LED_G'] = 0.9
+        result_data['LED_B'] = 0.9
 
         # dict 시간 입력 제대로 됬는지 확인
         if result_data['time'] == '1111-22-33 44:55:66':
