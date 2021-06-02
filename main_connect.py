@@ -1,12 +1,13 @@
-#import RPi.GPIO as GPIO
-#import spidev
+import RPi.GPIO as GPIO
+import spidev
 import time
 import json
 
 from message_client import *
 from sql_client import *
+from ledTest import *
 
-#GPIO.setmode(GPIO.BCM)
+GPIO.setmode(GPIO.BCM)
 #ACT = 47  # onboard led
 #GPIO.setup(ACT, GPIO.OUT)
 
@@ -19,15 +20,18 @@ try:
 
         # 여기에 소켓 프로그래밍 
         ###
+        ledTest.on()
+
+        #ledTest.status()
 
         # 결과 저장시 방법 : 현제는 임시 데이터
         result_data['plant'] = 'test_plant1'
         result_data['temperature'] = 12
         result_data['humidity'] = 13
         result_data['illuminance'] = 14.5
-        result_data['LED_R'] = 0.1
-        result_data['LED_G'] = 0.9
-        result_data['LED_B'] = 0.9
+        result_data['LED_R'] = 1
+        result_data['LED_G'] = 0
+        result_data['LED_B'] = 0
 
         # dict 시간 입력 제대로 됬는지 확인
         if result_data['time'] == '1111-22-33 44:55:66':
@@ -37,8 +41,14 @@ try:
         #sql_client.insert(result_data)
 
         # 전송을 위한 파이썬 호출 
-        message_client.send(result_data)
+        #message_client.send(result_data)
 
+        # 테스팅 
+        control_data = message_client.send(result_data)
+        control_data = control_data.decode('utf-8')
+        control_data = json.loads(control_data)
+        
+        ledTest.control(control_data)
 
 
 
@@ -59,7 +69,5 @@ try:
 
 except KeyboardInterrupt:
     print("keyboard out")
-    '''
-    GPIO.output(ACT, GPIO.LOW)
+    #GPIO.output(ACT, GPIO.LOW)
     GPIO.cleanup()
-    '''

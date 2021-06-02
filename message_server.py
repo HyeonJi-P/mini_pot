@@ -34,23 +34,25 @@ while 1:
     # db에 저장
     #sql_server.insert(dict_message)
 
-    # 일련의 과정 테스트를 위한 데이터 가공 # 임시용 원래는 다른 실행 파일 호출해야함 ------------
+    # 일련의 과정 테스트를 위한 데이터 가공 # 임kbvgvgvgvgvgvgvgvgvg시용 원래는 다른 실행 파일 호출해야함 ------------
     LED_R = dict_message['LED_R']
     LED_G = dict_message['LED_G']
     LED_B = dict_message['LED_B']
     
-    if LED_R > 0.1:
-        LED_R = 0.1
+    if LED_R == 1:
+        LED_R = 0
     else: 
-        LED_R = 0.9
-    if LED_G > 0.1:
-        LED_G = 0.1
+        LED_R = 1
+
+    if LED_G == 1:
+        LED_G = 0
     else: 
-        LED_G = 0.9
-    if LED_B > 0.1:
-        LED_B = 0.1
+        LED_G = 1
+        
+    if LED_B == 1:
+        LED_B = 0
     else: 
-        LED_B = 0.9
+        LED_B = 1
 
     dict_message['LED_R'] = LED_R
     dict_message['LED_G'] = LED_G
