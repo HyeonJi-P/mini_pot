@@ -37,11 +37,8 @@ GPIO.setup(RGB_LED_R,GPIO.OUT, initial = GPIO.LOW) #출력으로 설정, 시작�
 GPIO.setup(RGB_LED_G,GPIO.OUT, initial = GPIO.LOW)
 GPIO.setup(RGB_LED_B,GPIO.OUT, initial = GPIO.LOW)
 
-GPIO.output(RGB_LED_R,GPIO.LOW) #초기화 
-GPIO.output(RGB_LED_G,GPIO.LOW)
-GPIO.output(RGB_LED_B,GPIO.LOW)
-time.sleep(1)
-
+LedRGB(0, 0, 0)
+time.sleep(3)
 
 LedRGB(1, 0, 0)
 time.sleep(3)
@@ -52,16 +49,16 @@ time.sleep(3)
 LedRGB(0, 0, 1)
 time.sleep(3)
 
-LedRGB(1, 1, 0)
-time.sleep(3)
+#LedRGB(1, 1, 0)
+#time.sleep(3)
 
-LedRGB(1, 0, 1)
-time.sleep(3)
+#LedRGB(1, 0, 1)
+#time.sleep(3)
 
-LedRGB(0, 1, 1)
-time.sleep(3)
+#LedRGB(0, 1, 1)
+#time.sleep(3)
 
-LedRGB(1, 1, 1)
-time.sleep(3)
+#LedRGB(1, 1, 1)
+#time.sleep(3)
 
 GPIO.cleanup()
