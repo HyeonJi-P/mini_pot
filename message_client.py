@@ -42,7 +42,7 @@ class message_client:
             '''
 
             #----------------------------------------------------
-            server_message = json.loads(server_message)  # 받은 json 데이터를 dict형으로 변환
+            server_message = json.loads(server_receivedecode('utf-8'))  # 받은 json 데이터를 dict형으로 변환
 
             # dict를 다시 센서에 줘서 컨트롤 헤야하는데
             # 다시 전달하는 방법은??? 
