@@ -45,8 +45,6 @@ try:
 
         # 테스팅 
         control_data = message_client.send(result_data)
-        control_data = control_data.decode('utf-8')
-        control_data = json.loads(control_data)
 
         ledTest.control(control_data)
 
