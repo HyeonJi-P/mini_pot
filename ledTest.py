@@ -1,6 +1,6 @@
 import time
 import smbus
-import RPi_I2C_driver
+#import RPi_I2C_driver
 import RPi.GPIO as GPIO
 
 '''
