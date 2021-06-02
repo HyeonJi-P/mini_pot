@@ -3,8 +3,17 @@ import smbus
 import RPi_I2C_driver
 import RPi.GPIO as GPIO
 
-#사용하는 핀 번호들(BCM)
+'''
+LED색
+R+G=노랑
+R+G+B=흰색
+G+B=청록
+R+B=마젠타
+'''
 
+
+
+#사용하는 핀 번호들(BCM)
 GPIO.setmode(GPIO.BCM) #GPIO 핀에 gpio 1등 이런식으로 쓰인곳기준(아마도)
 
 RGB_LED_R=5 #RGB LED
