@@ -44,18 +44,18 @@ class ledTest:
         LED_B = control_data['LED_B']
 
         if LED_R == 1:
-            GPIO.output(RGB_LED_R,GPIO.HIGH)
+            GPIO.output(self.RGB_LED_R,GPIO.HIGH)
         else:
-            GPIO.output(RGB_LED_R,GPIO.LOW)
+            GPIO.output(self.RGB_LED_R,GPIO.LOW)
 
         if LED_G == 1:
-            GPIO.output(RGB_LED_G,GPIO.HIGH)
+            GPIO.output(self.RGB_LED_G,GPIO.HIGH)
         else:
-            GPIO.output(RGB_LED_G,GPIO.LOW)
+            GPIO.output(self.RGB_LED_G,GPIO.LOW)
         
         if LED_B == 1:
-            GPIO.output(RGB_LED_B,GPIO.HIGH)
+            GPIO.output(self.RGB_LED_B,GPIO.HIGH)
         else:
-            GPIO.output(RGB_LED_B,GPIO.LOW)
+            GPIO.output(self.RGB_LED_B,GPIO.LOW)
 
         time.sleep(3)
