@@ -41,13 +41,13 @@ try:
         #sql_client.insert(result_data)
 
         # 전송을 위한 파이썬 호출 
-        #message_client.send(result_data)
+        message_client.send(result_data)
 
         # 테스팅 
         control_data = message_client.send(result_data)
         control_data = control_data.decode('utf-8')
         control_data = json.loads(control_data)
-        
+
         ledTest.control(control_data)
 
 
