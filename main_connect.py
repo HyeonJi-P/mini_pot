@@ -20,7 +20,7 @@ try:
 
         # 여기에 소켓 프로그래밍 
         ###
-        ledTest.on()
+        ledTest.on
 
         #ledTest.status()
 
