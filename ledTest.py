@@ -11,27 +11,29 @@ G+B=청록
 R+B=마젠타
 '''
 GPIO.setmode(GPIO.BCM)
+GPIO.setwarnings(False)
 
 class ledTest:
 
     RGB_LED_R=5 #RGB LED
     RGB_LED_G=6
     RGB_LED_B=13
+    
 
     @classmethod
-    def on():
-        GPIO.setup(RGB_LED_R,GPIO.OUT, initial = GPIO.LOW) #출력으로 설정, 시작값 low(꺼짐)
-        GPIO.setup(RGB_LED_G,GPIO.OUT, initial = GPIO.LOW)
-        GPIO.setup(RGB_LED_B,GPIO.OUT, initial = GPIO.LOW)
+    def on(self):
+        GPIO.setup(self.RGB_LED_R,GPIO.OUT, initial = GPIO.LOW) #출력으로 설정, 시작값 low(꺼짐)
+        GPIO.setup(self.RGB_LED_G,GPIO.OUT, initial = GPIO.LOW)
+        GPIO.setup(self.RGB_LED_B,GPIO.OUT, initial = GPIO.LOW)
 
-        GPIO.output(RGB_LED_R,GPIO.LOW) #초기화 
-        GPIO.output(RGB_LED_G,GPIO.LOW)
-        GPIO.output(RGB_LED_B,GPIO.LOW)
+        GPIO.output(self.RGB_LED_R,GPIO.LOW) #초기화 
+        GPIO.output(self.RGB_LED_G,GPIO.LOW)
+        GPIO.output(self.RGB_LED_B,GPIO.LOW)
         time.sleep(1)
 
-        GPIO.output(RGB_LED_R,GPIO.HIGH) #빨강불
-        GPIO.output(RGB_LED_G,GPIO.LOW)
-        GPIO.output(RGB_LED_B,GPIO.LOW)
+        GPIO.output(self.RGB_LED_R,GPIO.HIGH) #빨강불
+        GPIO.output(self.RGB_LED_G,GPIO.LOW)
+        GPIO.output(self.RGB_LED_B,GPIO.LOW)
         time.sleep(3)
 
     @classmethod
