@@ -10,6 +10,7 @@ R+G=노랑
 G+B=청록
 R+B=마젠타
 '''
+GPIO.setmode(GPIO.BCM)
 
 class ledTest:
 
