@@ -23,7 +23,7 @@ class message_client:
         # 데이터 송수신
         while 1:
             
-            # 데이터 송신
+            # 데이터 인코드, 송신
             client_message = json_insert_data
             client_s.sendall(client_message.encode('utf-8'))
 
@@ -40,6 +40,14 @@ class message_client:
             if server_message == 'halt':
                 break
             '''
+
+            #----------------------------------------------------
+            server_message = json.loads(server_message)  # 받은 json 데이터를 dict형으로 변환
+
+            # dict를 다시 센서에 줘서 컨트롤 헤야하는데
+            # 다시 전달하는 방법은???
+
+            #----------------------------------------------------
 
             # 일단 한번만돌고 나가는걸로 
             break

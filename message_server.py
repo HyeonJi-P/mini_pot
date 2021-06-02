@@ -56,7 +56,8 @@ while 1:
     dict_message['LED_G'] = LED_G
     dict_message['LED_B'] = LED_B
 
-    server_message = json.dumps(dict_message)  # dict를 다시 json으로 변환
+    server_message_json = json.dumps(dict_message)  # dict를 다시 json으로 변환
+    server_message = server_message_json.encode('utf-8')
     # -------------------------------------------------------------------------------------
 
     # 데이터 수신 확인을 위한 재전송 # 지금은 조금 변형해서 주는 1회성 UDP 방식으로 
