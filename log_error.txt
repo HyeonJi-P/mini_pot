@@ -387,6 +387,16 @@ character-set-server = utf8
 #31. 아마존 인스턴스 종료(삭제) 후 재 설치하고 다시 시도
 pymysql을 통한 디비 접근 시도 오류발생
 pymysql.err.OperationalError: (1045, "Access denied for user 'auint'@'localhost' (using password: YES)")
-==> pw 타입 mysql로 변경 
+==> 비밀번호 unix_socket형에서 mysql_native_password형으로 바꿔주기
+SELECT User, Host, plugin FROM mysql.user;
+update user set plugin='mysql_native_password' where user='auint';
+flush privileges;
 ==> 비밀번호 재설정 
-==> 현제 진행중
+XX. 사용자 삭제 후 재생성
+drop user 'auint'@'localhost';
+create user auint@localhost identified by '비밀번호';
+grant all privileges on *.* to 'auint'@'localhost' identified by '비밀번호';
+==> 정리 : 비밀번호 형태 바꿔주고 그냥 다시한번 덮어 씌우기 (센트에서는 해도 안됬는대 우분투에서는 이렇게하니까 됨 ㅇㅅㅇ)
+
+#32. ㅇㅅㅇ
+ㄱㄱ

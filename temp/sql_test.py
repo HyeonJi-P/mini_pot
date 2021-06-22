@@ -5,17 +5,17 @@ def test():
     db = 'mysql', charset='utf8')
     cur = conn.cursor()
 
-    sql = "SELECT*FROM mytable"
-    cur.execute(sql)
+    query = "SELECT * FROM mytable;"
+    cur.execute(query)
     conn.commit()
 
-    sql = "INSERT INTO mytable(time, plant, temperature, humidity, illuminance) VALUES('2021-06-22 14:48:11.003', 'temp_plan', 6, 7, 8.88);"
-    cur.execute(sql)
+    print()
+
+
+
+    query = "INSERT INTO mytable(time, plant, temperature, humidity, illuminance) VALUES('2021-06-22 16:31:11.003', 'temp_plan', 6, 7, 8.88);"
+    cur.execute(query)
     conn.commit()
-
-    rows = cur.fetchall()
-    print(rows)
-
 
     conn.close()
 
