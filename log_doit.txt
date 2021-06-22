@@ -1,5 +1,3 @@
-# 주로 했던일 정리 (설정?등)
-
 - - - - - < 라즈베리파이 > - - - - -
 
 1. 라즈베리파이 디스크 굽기
@@ -11,50 +9,18 @@ cd /boot 에서 config.txt 마지막에 display_rotate=1추가후 리부팅
 3. 업데이트
 sudo apt-get update와 sudo apt-get upgrade 진행 + sudo rpi-update
 
-4. 버전확인
+4. 파이썬 버전확인
 python3 -V으로 버전 확인 => 3.7.3
 
-5. 깃 설치
-sudo apt-get install git
+5. 메인 컴퓨터에 putty 설치
 
-6. 메인 컴퓨터에 putty 설치
-
-7. 라즈베리파이 주소 확인
+6. 라즈베리파이 주소 확인
 hostname -I (대문자 i) 로 라즈베리파이 ip주소 확인 (ifconfig도 가능)
 
-8. 라즈베리파이 전원공급 확인 (255 정상, 0부족)
+7. 라즈베리파이 전원공급 확인 (255 정상, 0부족)
 cat /sys/devices/platform/leds/leds/led1/brightness
 
-9. ip 고정?
-라즈베리파이 putty 고정 ip => 다음에 안되면 ㄱ
-
-10. 라즈베리파이에 ssh key생성 
-home(~) 에서 ssh-keygen 으로 공개,개인키 생성
-cd ~/.ssh 로가서 ls로 생성확인
-cat id_rsa.pub 해서 내용 전부 복사
-git에 공개키 등록
-
-11. git의 ssh주소 복사
-
-12. cd ~에서 github 폴더 생성후 진입
-
-13. git clone git@github.com:Auint/mini_pot.git 해서 연결 성공
-
-14. python3 TESTZONE.py 로 싱행 확인
-
-15. 라즈베리 계정 생성후 커밋과 풀 테스트 완료
-git config --global user.email "temp@temp"
-git config --global user.name "RPi_su"
-
-16. sudo reboot로 재시작 후 한번더 테스트
-
-17. sudo halt로 종료
-
-18. 오류생겨서 삭제후 재연결
-rm -rf mini_pot
-(error : ssh could not resolve hostname github.com)
-
-19. 고정 ip화 
+8. ip 고정
 sudo nano /etc/dhcpcd.conf
 파일중 이 부분 주석 해제
 # Example static IP configuration:
@@ -63,10 +29,10 @@ static ip_address="원하는ip"/24
 static routers="라우터ip"
 static domain_name_servers="라우터ip"
 
-20. 네트워크 재부팅 + 라즈베리 재부팅
+9. 네트워크 재부팅 + 라즈베리 재부팅
 sudo /etc/init.d/networking restart
 
-21. 시간대 설정
+10. 시간대 설정
 date
 sudo dpkg-reconfigure tzdata
 아시아-서울 확인(gui 화면)
@@ -74,13 +40,38 @@ date
 (업데이트까지 시간좀 걸리는거 같음)
 sudo cat /etc/timezone 
 
-++ 시간대 추가?
-sudo apt-get install rdate
-sudo /usr/bin/rdate -s time.bora.net
-sudo nano /etc/rc.local
-추가
-rdate -s time.bora.net
-date
+< git >
+
+11. 깃 설치
+sudo apt-get install git
+
+12. 라즈베리파이에 ssh key생성 
+home(~) 에서 ssh-keygen 으로 공개,개인키 생성
+cd ~/.ssh 로가서 ls로 생성확인
+cat id_rsa.pub 해서 내용 전부 복사
+git에 공개키 등록
+
+13. git의 ssh주소 복사
+
+14. cd ~에서 github 폴더 생성후 진입
+
+15. git clone git@github.com:Auint/mini_pot.git 해서 연결 성공
+
+16. 깃-파이썬 동작 확인
+python3 TESTZONE.py 로 실행 확인
+
+17. 라즈베리 계정 생성후 커밋과 풀 테스트 완료
+git config --global user.email "temp@temp"
+git config --global user.name "RPi_su"
+
+18. sudo reboot로 재시작 후 한번더 테스트
+
+19. sudo halt로 종료
+
+20. 오류생겨서 삭제후 재연결
+rm -rf mini_pot
+(error : ssh could not resolve hostname github.com)
+
 
 
 - - - - - < 서버 > - - - - -
@@ -237,61 +228,3 @@ grant all privileges on *.* to 'auint'@'localhost' identified by '비밀번호';
 10. 사용자 삭제
 drop user 'auint'@'localhost';
 
-- - - - - < ERD 설계 > - - - - -
-
-1. HW - RPi - server - User
-
-2. RPi
-    - control(sensor)
-        - 사용 데이터 : 온도, 습도, 조도, 수위, TDS...
-
-        - HW로 부터 데이터 읽기 (현제 상황데이터)
-        - HW에서 send, save로 데이터 보내기 
-
-        - recv에서 데이터 받아와서 (생장조건)
-        - HW에 적용 
-
-    - save
-        - 사용 데이터 : id, pw, // 온도, 습도, 조도, 수위, TDS...
-
-        - control에서 받은 데이터를
-        - RPi db에 저장
-
-        - recv에서 갱신요청을 받으면
-        - 일정 구간의 데이터를 조회하고 가공하여
-        - send로 보냄
-
-    - send
-        - 사용 데이터 : id, pw // 온도, 습도, 조도, 수위, TDS...
-
-        - control에서 받은 데이터를
-        - server로 송신
-
-        - save에서 받은 데이터를 (갱신요청에 대한 답변)
-        - server로 송신
-
-    - recv
-        - 사용 데이터 : id, pw, 갱신요청 // 온도, 습도, 조도, 수위, TDS...
-
-        - server로 부터 갱신요청이 왔다면
-        - save에 데이터 요청
-
-        - server로 부터 생장조건이 왔다면
-        - control로 전달 
-
-3. server
-    - save
-        - recv에서 받은 데이터를 저장
-            - 받은게 일정주기마다 받는 데이터면 단순 저장
-            - 받은게 갱신요청에 대한 데이터면 가공후 저장
-
-    - send
-
-    - recv
-        - RPi-send에서 받은 데이터를
-        - save에 전달 
-
-    - report
-        - 일정 주기가 된다면 save에서 데이터를 읽어와서 생성
-
-        - 갱신 요청이 있었다면 save에서 데이터를 읽어와서 생성

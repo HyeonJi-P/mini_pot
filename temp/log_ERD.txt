@@ -1,0 +1,43 @@
+- - - - - < ERD 설계 > - - - - -
+
+1. HW - RPi - server - User
+
+2. RPi
+    - control(sensor)
+        - 사용 데이터 : 온도, 습도, 조도, 수위, TDS...
+        - HW로 부터 데이터 읽기 (현제 상황데이터)
+        - HW에서 send, save로 데이터 보내기 
+        - recv에서 데이터 받아와서 (생장조건)
+        - HW에 적용 
+    - save
+        - 사용 데이터 : id, pw, // 온도, 습도, 조도, 수위, TDS...
+        - control에서 받은 데이터를
+        - RPi db에 저장
+        - recv에서 갱신요청을 받으면
+        - 일정 구간의 데이터를 조회하고 가공하여
+        - send로 보냄
+    - send
+        - 사용 데이터 : id, pw // 온도, 습도, 조도, 수위, TDS...
+        - control에서 받은 데이터를
+        - server로 송신
+        - save에서 받은 데이터를 (갱신요청에 대한 답변)
+        - server로 송신
+    - recv
+        - 사용 데이터 : id, pw, 갱신요청 // 온도, 습도, 조도, 수위, TDS...
+        - server로 부터 갱신요청이 왔다면
+        - save에 데이터 요청
+        - server로 부터 생장조건이 왔다면
+        - control로 전달 
+
+3. server
+    - save
+        - recv에서 받은 데이터를 저장
+            - 받은게 일정주기마다 받는 데이터면 단순 저장
+            - 받은게 갱신요청에 대한 데이터면 가공후 저장
+    - send
+    - recv
+        - RPi-send에서 받은 데이터를
+        - save에 전달 
+    - report
+        - 일정 주기가 된다면 save에서 데이터를 읽어와서 생성
+        - 갱신 요청이 있었다면 save에서 데이터를 읽어와서 생성

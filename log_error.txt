@@ -170,6 +170,7 @@ Err:1 http://raspbian.raspberrypi.org/raspbian buster/main armhf rdate armhf 1:1
   Temporary failure resolving 'raspbian.raspberrypi.org'
 E: Failed to fetch http://raspbian.raspberrypi.org/raspbian/pool/main/r/rdate/rdate_1.2-6_armhf.deb  Temporary failure resolving 'raspbian.raspberrypi.org'
 E: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?
+==> 시간대 강제 설정
 
 #6. apt업데이트 오류
 Err:1 http://raspbian.raspberrypi.org/raspbian buster InRelease
@@ -234,6 +235,7 @@ Loaded plugins: extras_suggestions, langpacks, priorities, update-motd
 1 packages excluded due to repository priority protections
 Package MariaDB-client-5.5.68-1.el6.x86_64 already installed and latest version
 Nothing to do
+==> 서버만 깔면 자동인거 같음
 
 #13. pymysql안깔림
 sudo yum install pymysql
@@ -381,3 +383,6 @@ sudo nano /etc/my.cnf.d/server.cnf
 collation-server = utf8_unicode_ci
 init-connect='SET NAMES utf8'
 character-set-server = utf8
+
+#31. 아마존 인스턴스 종료(삭제) 후 재 설치하고 다시 시도
+ㄱ
