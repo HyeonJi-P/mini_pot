@@ -81,15 +81,14 @@ rm -rf mini_pot
 프리티어 = 아마존 = t2
 
 2. 인바운드 규칙 
-ssh 내 ip접속 허용, https, http 위치무관 접근 허용
+ssh 내 ip접속 허용 (https, http 위치무관 접근 허용)
 socket통신을 위해 tcp포트 8282 설정
 
-3. putty key gen에서 인스턴스 시작시 받았던 key로 동일한 이름의 ppk생성
+3. 키 (아마존-my)
+putty key gen에서 인스턴스 시작시 받았던 key로 동일한 이름의 ppk생성
 
-4. 라즈베리파이랑 동일하게 git 설치 진행
-sudo yum install git -y
-git config --global user.email "temp@temp"
-git config --global user.name "AWS_su"
+4. 접속
+id : ubuntu (ex. ec2-user)
 
 5. 서버 초기 설정 
 
@@ -98,25 +97,33 @@ sudo rm /etc/localtime
 sudo ln -s /usr/share/zoneinfo/Asia/Seoul /etc/localtime
 date
 
-7. 루트 비밀번호 아직 미설정
+7. 루트 비밀번호 설정
+i-7
+sudo passwd root temp<< 아직 미설정
 
 8. 호스트 이름 설정
-sudo vim /etc/hosts 에 들어가서 마지막 줄에
-127.0.0.1	ec2-minipot 추가
+sudo hostnamectl set-hostname server-mini_pot
 
-sudo vim /etc/sysconfig/network 에 들어가서 마지막줄에
-HOSTNAME=ec2-minipot 추가
+sudo nano /etc/cloud/cloud.cfg
+preserve_hostname : false => true로 변경
+hostname
 
-sudo reboot 으로 리붓해주고 
-hostname 다시 확인
-sudo hostnamectl set-hostname ec2-minipot 뭔가 안되서 공식홈페이지 코드 또 실행했더니 됨
+9. 라즈베리파이랑 동일하게 git 설치 진행
+git config --global user.email "EC2@server"
+git config --global user.name "server_su"
 
-9. pip다운
+10. 업데이트
+sudo apt-get update
+sudo apt-get upgrade
+
+
+---
+10. pip다운
 sudo yum install python-pip
 
-10. pymysql다운
+11. pymysql다운
 pip3 install pymysql
-
+---
 
 
 - - - - - < 라즈베리 디비 > - - - - -

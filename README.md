@@ -23,4 +23,8 @@ git add .
 git commit -m "주석"  
 git push -u origin main  
   
-git pull
+git pull  
+  
+
+if: LF or CRLF  
+git config core.autocrlf true  
