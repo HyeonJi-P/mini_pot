@@ -1,42 +1,26 @@
 import pymysql
 
 def test():
-    db = pymysql.connect(host='localhost', user='root', password='password',
-    db = 'mydb', charset='utf8')  # 포트 : 디폴트 3306
-    cur = db.cursor()
-
-    cur.execute("SELECT*FROM mytable")
-    rows = cur.fetchall()
-    print(rows)
-    db.close()
-
-# 가장 처음에만 실행 => 디비 생성
-def first():
-    # 포트 : 디폴트 3306
-    conn = pymysql.connect(host='localhost', user='root', password='password', charset='utf8')
+    conn = pymysql.connect(host='localhost', port=3306, user='auint', password='*6CC6A1C22CFFA93B23769CAE343636557E024D12',
+    db = 'mysql', charset='utf8')
     cur = conn.cursor()
 
-    sql = "CREATE DATABASE mydb"
+    sql = "SELECT*FROM mytable"
     cur.execute(sql)
     conn.commit()
 
-    sql = '''CREATE TABLE mytable(
-        time DATETIME NOT NULL,
-        plant varchar(20) NULL,
-        temperature int NULL,
-        humidity int NULL,
-        illuminance float NULL
-        PRIMARY KEY (time)
-        );
-        '''
+    sql = "INSERT INTO mytable(time, plant, temperature, humidity, illuminance) VALUES("2021-06-22 14:48:11.003", "temp_plan", 6, 7, 8.88);"
     cur.execute(sql)
     conn.commit()
+
+    rows = cur.fetchall()
+    print(rows)
 
 
     conn.close()
 
 
-first()
+test()
 
 
 

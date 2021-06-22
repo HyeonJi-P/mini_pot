@@ -40,3 +40,42 @@ sudo yum install python-pip
 
 10. pymysql다운
 pip3 install pymysql
+
+- - - - - < 서버 디비 > - - - - -
+1. 마리아디비 설치
+sudo yum install MariaDB-server
+sudo yum install MariaDB-client 
+
+2. repo부터 설치
+curl -sS https://downloads.mariadb.com/MariaDB/mariadb_repo_setup | sudo bash
+
+3. 다르게
+sudo nano /etc/yum.repos.d/MariaDB.repo
+[mariadb]
+name = MariaDB
+baseurl = http://yum.mariadb.org/5.5/centos6-amd64
+gpgkey=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
+gpgcheck=1
+
+4. 1재실행
+yum install MariaDB-server MariaDB-client
+
+5. log_error참조 (#9. 부터)
+
+6. 초기설정
+service mysql start
+/usr/bin/mysql_secure_installation 
+
+7. 인스턴스 시작-중지
+/etc/init.d/mysql start
+/etc/init.d/mysql stop
+
+8. 서버 디비 삭제하기
+
+9. 사용자 추가
+create user auint@localhost identified by '비밀번호';
+grant all privileges on *.* to 'auint'@'localhost' identified by '비밀번호';
+
+10. 사용자 삭제
+drop user 'auint'@'localhost';
+

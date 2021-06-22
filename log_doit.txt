@@ -116,6 +116,56 @@ git config --global user.name "server_su"
 sudo apt-get update
 sudo apt-get upgrade
 
+< 서버 디비 >
+1. 디비 존재확인
+mysql --version 
+
+2. 마리아디비로 설치
+sudo apt-get install mariadb-server
+sudo apt-get install mariadb-client
+
+4. 디비 접속
+sudo mysql -u root
+
+5. 디비존재 확인
+show databases;
+
+6. mysql databases에 접근
+use mysql
+
+7. 사용자 확인
+select user, host, password from user;
+
+8. 사용자 추가
+create user auint@localhost identified by '비밀번호';
+grant all privileges on *.* to 'auint'@'localhost' identified by '비밀번호';
+
++ 팁: 마리아디비 사용시 system을 앞에 붙이면 리눅스 명령어 사용가능
+system ls
+
+9. 테이블 생성
+CREATE TABLE mytable(
+    time DATETIME NOT NULL,
+    plant varchar(20) NULL,
+    temperature int NULL,
+    humidity int NULL,
+    illuminance float NULL,
+    PRIMARY KEY (time)
+    );
+
+10. 테이블 생성 확인
+show tables;
+#drop tables mytable;
+
+11. 테이블 속성 확인
+desc mytable;
+SELECT * FROM mytable; << 현제 방금 만들어서 NULL
+
+12. 테스트 데이터 삽입
+INSERT INTO mytable(time, plant, temperature, humidity, illuminance) VALUES("2021-06-22 14:36:11.003", "temp_plan", 6, 7, 8.88);
+2021-06-22 14:22:11.003 // 000,003,007 단위로 반올림?
+
+13. 
 
 ---
 10. pip다운
@@ -132,7 +182,7 @@ mysql --version
 
 2. mysql 서버 설치 
 sudo apt-get install mysql-server
-sudo apt-get install mysql-client
+#sudo apt-get install mysql-client 
 
 2. 디비 설치 에러발생 log_error참조
 
@@ -197,41 +247,7 @@ SELECT * FROM mytable;
 11. 파이썬과 마리아 연결
 update user set plugin='';
 
-- - - - - < 서버 디비 > - - - - -
-1. 마리아디비 설치
-sudo yum install MariaDB-server
-sudo yum install MariaDB-client 
 
-2. repo부터 설치
-curl -sS https://downloads.mariadb.com/MariaDB/mariadb_repo_setup | sudo bash
 
-3. 다르게
-sudo nano /etc/yum.repos.d/MariaDB.repo
-[mariadb]
-name = MariaDB
-baseurl = http://yum.mariadb.org/5.5/centos6-amd64
-gpgkey=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
-gpgcheck=1
 
-4. 1재실행
-yum install MariaDB-server MariaDB-client
-
-5. log_error참조 (#9. 부터)
-
-6. 초기설정
-service mysql start
-/usr/bin/mysql_secure_installation 
-
-7. 인스턴스 시작-중지
-/etc/init.d/mysql start
-/etc/init.d/mysql stop
-
-8. 서버 디비 삭제하기
-
-9. 사용자 추가
-create user auint@localhost identified by '비밀번호';
-grant all privileges on *.* to 'auint'@'localhost' identified by '비밀번호';
-
-10. 사용자 삭제
-drop user 'auint'@'localhost';
 
