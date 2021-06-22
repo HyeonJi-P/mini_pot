@@ -182,7 +182,7 @@ sudo mysql -u auint -p로 접속
 //UPDATE user SET password='*6CC6A1C22CFFA93B23769CAE343636557E024D12' WHERE user='auint';
 UPDATE mysql.user SET password='*6CC6A1C22CFFA93B23769CAE343636557E024D12' WHERE user='auint';
 
-XX. 사용자 삭제
+XX. 사용자 삭제 후 재생성
 drop user 'auint'@'localhost';
 
 create user auint@localhost identified by '비밀번호';
