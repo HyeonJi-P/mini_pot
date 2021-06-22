@@ -385,4 +385,8 @@ init-connect='SET NAMES utf8'
 character-set-server = utf8
 
 #31. 아마존 인스턴스 종료(삭제) 후 재 설치하고 다시 시도
-ㄱ
+pymysql을 통한 디비 접근 시도 오류발생
+pymysql.err.OperationalError: (1045, "Access denied for user 'auint'@'localhost' (using password: YES)")
+==> pw 타입 mysql로 변경 
+==> 비밀번호 재설정 
+==> 현제 진행중
