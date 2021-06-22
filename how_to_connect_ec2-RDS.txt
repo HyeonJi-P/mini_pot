@@ -1,0 +1,15 @@
+DB생성은 8번에서야 하니 미리생성x
+
+EC2의 보안그룹 확인, vpc확인
+DB용 보안그룹 생성, 인바운드는 유형:mysql 소스:EC2의 보안그룹 이름(ex: ~~wizard...-1) (EC2에서만 DB접근가능)
+보안그룹 생성완료
+RDS의 서브넷그룹 생성(VPC는 EC2와 같은 것으로), 설정에서 서브넷추가 후 생성완료
+파라미터그룹 생성- 파라미터패밀리:mysql, 설정 (char으로 검색해서 모든값 utf8로 변경,collation검색해서 utf8_general_ci로 변경 )- 변경사항 저장
+드디어 DB생성, 프리티어잘보고 선택, 퍼블릭엑세스x하면 EC2에서만 접근가능
+(생각보다 DB침입하는 경우가 많다고함 ex:테이블 드랍 ,권한 다 넘겨버리기, sql문 잘라먹기..?)
+접속: (ubuntu환경, 이름부분은 변경해서 사용, --host뒤에는 DB의 엔드포인트 참고해서 복붙,
+ mysql -u hyunjiPark -p --host mysql-plant-db1.cmcgszmfu2ka.ap-northeast-2.rds.amazonaws.com
+ERROR 1045 (28000): Access denied for user 와 같은 오류 떴었는데 걍 패스워드 바꾸고 유저 이름부분 다시 제대로 하면 해결
+
+ DB생성시 암호로 가능하게 해놓았다면 이 다음 패스워드 입력)
+ (만약 패스워드 기억안나면.... DB설정에서 다시 바꿀수있다.)
