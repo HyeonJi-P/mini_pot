@@ -13,7 +13,11 @@ def test():
     conn.commit()
 
     print(type(result))
+    print(len(result))
     print(result)
+
+    for i in range(0, len(result)):
+        print(result[i])
 
     '''
     query = "SELECT * FROM mytable;"
