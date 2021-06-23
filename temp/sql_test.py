@@ -18,6 +18,9 @@ def test():
         for j in range(0, len(result[i])):
             print("%d줄의 %d번째 "%(i, j), result[i][j])
 
+            if (i == 0) and (j == 0):
+                print("date time 나누기", result[i][j].year, result[i][j].month, result[i][j].day, result[i][j].hour, result[i][j].minute, result[i][j].second, result[i][j].microsecond)
+
 
 
     ''' 데이터 삽입 완료
