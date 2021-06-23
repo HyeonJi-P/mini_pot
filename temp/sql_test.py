@@ -30,12 +30,12 @@ def test():
     conn.commit()
 
     print(df)
-    print(df[0])
-    print(df[1])
-    print(type(df[1][1]))
-    print(df[1][1])
-    print(type(df[3][3]))
-    print(df[3][3])
+    print(df.iloc[0])
+    print(df.iloc[1])
+    print(type(df.iloc[1][1]))
+    print(df.iloc[1][1])
+    print(type(df.iloc[3][3]))
+    print(df.iloc[3][3])
 
     '''
                  time      plant  temperature  humidity  illuminance
