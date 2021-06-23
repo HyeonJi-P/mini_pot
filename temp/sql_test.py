@@ -31,7 +31,7 @@ def test():
 
     print(df)
 
-    df.to_dict('list')
+    df = df.to_dict('list')
     print(df)
 
     '''
