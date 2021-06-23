@@ -34,6 +34,10 @@ def test():
     #df = df.to_dict('list')  # time [1,2...], plant[1,2,...]
     df = df.to_dict('records')  # 0[time, plant..], 2[time, plant...]
     print(df)
+    print(df[1])
+    print(df[2])
+    print(df[1][1])
+    print(df[3][3])
 
     '''
                     time      plant  temperature  humidity  illuminance
@@ -43,6 +47,12 @@ def test():
     3 2021-06-22 16:31:11  temp_plan            6         7         8.88
     4 2021-06-23 10:53:11        hub            9        10        11.11
 
+[
+    {'time': Timestamp('2021-06-22 14:25:11'), 'plant': 'temp_plan', 'temperature': 6, 'humidity': 7, 'illuminance': 8.88},
+    {'time': Timestamp('2021-06-22 14:36:11'), 'plant': 'temp_plan', 'temperature': 6, 'humidity': 7, 'illuminance': 8.88},
+    {'time': Timestamp('2021-06-22 14:48:11'), 'plant': 'temp_plan', 'temperature': 6, 'humidity': 7, 'illuminance': 8.88},
+    {'time': Timestamp('2021-06-22 16:31:11'), 'plant': 'temp_plan', 'temperature': 6, 'humidity': 7, 'illuminance': 8.88},
+    {'time': Timestamp('2021-06-23 10:53:11'), 'plant': 'hub', 'temperature': 9, 'humidity': 10, 'illuminance': 11.11}]
 
     '''
 
