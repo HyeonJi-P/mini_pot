@@ -31,7 +31,8 @@ def test():
 
     print(df)
 
-    df = df.to_dict('list')
+    #df = df.to_dict('list')  # time [1,2...], plant[1,2,...]
+    df = df.to_dict('records')  # 0[time, plant..], 2[time, plant...]
     print(df)
 
     '''
@@ -41,6 +42,8 @@ def test():
     2 2021-06-22 14:48:11  temp_plan            6         7         8.88
     3 2021-06-22 16:31:11  temp_plan            6         7         8.88
     4 2021-06-23 10:53:11        hub            9        10        11.11
+
+
     '''
 
     '''
