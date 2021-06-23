@@ -10,7 +10,6 @@ def test():
     query = "SELECT column_name FROM information_schema.columns WHERE table_schema='mysql' AND table_name='mytable';"
     cur.execute(query)
     result = list(cur.fetchall())
-    result = cur.fetchall()
     conn.commit()
 
     print(type(result))
@@ -20,7 +19,8 @@ def test():
     for i in range(0, len(result)):
         a = result[i]
         print(a)
-
+    print("end")
+    
     '''
     query = "SELECT * FROM mytable;"
     cur.execute(query)
