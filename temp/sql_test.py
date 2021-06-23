@@ -7,27 +7,28 @@ def test():
     cur = conn.cursor()
 
     '''데이터 추출 하는중'''
+    # 모든 col이름 받아오기 
     query = "SELECT column_name FROM information_schema.columns WHERE table_schema='mysql' AND table_name='mytable';"
     cur.execute(query)
-    result = list(cur.fetchall())
+    col = list(cur.fetchall())
     conn.commit()
 
-    print(type(result))
-    print(len(result))
-    print(result)
-
-    for i in range(0, len(result)):
-        a = result[i]
-        print(a)
-    print("end")
+    clear_str = "()',"  # (tuple - list, tuple - str)변환과정에서 생기는 찌꺼기 처리하기 
+    for i in range(0, len(col)):
+        col[i] = str(a[i])
+        col[i] = ''.join(_ for _ in col[i] if _ not in clear_str)
     
-    '''
+    print(col)  # test용
+
+    
     query = "SELECT * FROM mytable;"
     cur.execute(query)
     result = list(cur.fetchall())  # 튜플 타입으로 반환해줌 수정가능하게 list로 변환
     conn.commit()
-    
 
+    print(result)
+    
+    '''
     for i in range(0, len(result)):  # row수 만큼 ex) [0 ... n] (time, plant, temperature, humidity, illuminance)
         print("%d번째줄 "%(i), result[i])
 
