@@ -35,7 +35,7 @@ def test():
     df = df.to_dict('records')  # 0[time, plant..], 2[time, plant...]
     print(df)
 
-    df = pd.DataFrame([df])
+    df = pd.DataFrame(df)
     print(df)
 
 
