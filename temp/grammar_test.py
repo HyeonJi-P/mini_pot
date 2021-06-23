@@ -32,7 +32,7 @@ print(dict3)
 '''
 
 # 리스트 문자열 삭제하기
-''''''
+'''
 import re
 a = (('time',), ('plant',), ('temperature',), ('humidity',), ('illuminance',))
 a = list(a)
@@ -50,6 +50,22 @@ print(a)
 
 print(type(a[0]))
 print(a[0])
+'''
+
+# sql문 받은 데이터 변환하기
+''''''
+import datetime
+
+col = ['time', 'plant', 'temperature', 'humidity', 'illuminance']
+
+result = [(datetime.datetime(2021, 6, 22, 14, 25, 11), 'temp_plan', 6, 7, 8.88),
+(datetime.datetime(2021, 6, 22, 14, 36, 11), 'temp_plan', 6, 7, 8.88),
+(datetime.datetime(2021, 6, 22, 14, 48, 11), 'temp_plan', 6, 7, 8.88),
+(datetime.datetime(2021, 6, 22, 16, 31, 11), 'temp_plan', 6, 7, 8.88),
+(datetime.datetime(2021, 6, 23, 10, 53, 11), 'hub', 9, 10, 11.11)]
+
+print(col)
+print(result)
 
 
 

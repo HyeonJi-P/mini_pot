@@ -1,5 +1,6 @@
 import pymysql
 import json
+import pandas as pd
 
 def test():
     conn = pymysql.connect(host='localhost', port=3306, user='auint', password='pwpw',
@@ -10,7 +11,7 @@ def test():
     # 모든 col이름 받아오기 
     query = "SELECT column_name FROM information_schema.columns WHERE table_schema='mysql' AND table_name='mytable';"
     cur.execute(query)
-    col = list(cur.fetchall())
+    col = list(cur.fetchall())  # 튜플 타입으로 반환해줌 수정가능하게 list로 변환
     conn.commit()
 
     clear_str = "()',"  # (tuple - list, tuple - str)변환과정에서 생기는 찌꺼기 처리하기 
@@ -22,11 +23,14 @@ def test():
 
     
     query = "SELECT * FROM mytable;"
-    cur.execute(query)
-    result = list(cur.fetchall())  # 튜플 타입으로 반환해줌 수정가능하게 list로 변환
+    #cur.execute(query)
+    #result = list(cur.fetchall())
+    df = pd.read_sql("SELECT * FROM mytable;", con = conn)
+
+
     conn.commit()
 
-    print(result)
+    print(df)
 
     '''
     for i in range(0, len(result)):  # row수 만큼 ex) [0 ... n] (time, plant, temperature, humidity, illuminance)
@@ -79,6 +83,16 @@ list타입
 (datetime.datetime(2021, 6, 22, 14, 48, 11), 'temp_plan', 6, 7, 8.88),
 (datetime.datetime(2021, 6, 22, 16, 31, 11), 'temp_plan', 6, 7, 8.88)
 ]
+
+
+['time', 'plant', 'temperature', 'humidity', 'illuminance']
+
+[(datetime.datetime(2021, 6, 22, 14, 25, 11), 'temp_plan', 6, 7, 8.88),
+(datetime.datetime(2021, 6, 22, 14, 36, 11), 'temp_plan', 6, 7, 8.88),
+(datetime.datetime(2021, 6, 22, 14, 48, 11), 'temp_plan', 6, 7, 8.88),
+(datetime.datetime(2021, 6, 22, 16, 31, 11), 'temp_plan', 6, 7, 8.88),
+(datetime.datetime(2021, 6, 23, 10, 53, 11), 'hub', 9, 10, 11.11)]
+
 '''
 
 
