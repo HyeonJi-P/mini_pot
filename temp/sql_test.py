@@ -9,7 +9,8 @@ def test():
     '''데이터 추출 하는중'''
     query = "SELECT column_name FROM information_schema.columns WHERE table_schema='mysql' AND table_name='mytable';"
     cur.execute(query)
-    result = list(cur.fetchall()) 
+    #result = list(cur.fetchall())
+    result = cur.fetchall()
     conn.commit()
 
     print(type(result))
