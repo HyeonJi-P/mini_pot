@@ -32,7 +32,7 @@ def test():
     print(df)
 
     #df = df.to_dict('list')  # time [1,2...], plant[1,2,...]
-    df = df.to_dict('records')  # 0[time, plant..], 2[time, plant...]
+    df = df.to_dict('index')  # 0[time, plant..], 2[time, plant...]
     print(df)
     print(df[1])
     print(df[2])
