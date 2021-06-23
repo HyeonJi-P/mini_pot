@@ -28,13 +28,15 @@ def test():
     #result = list(cur.fetchall())
     df = pd.read_sql("SELECT * FROM mytable;", con = conn)
     conn.commit()
-
     print(df)
 
+    # dataframe -> dict
     #df = df.to_dict('list')  # time [1,2...], plant[1,2,...]
-    df = df.to_dict('records')  # 0[time, plant..], 2[time, plant...]
+    df = df.to_dict('records')  # {time, plant..}, {time, plant...}
     print(df)
 
+
+    # dict -> dataframe
     df = pd.DataFrame(df)
     print(df)
 

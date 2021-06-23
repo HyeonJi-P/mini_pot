@@ -1,6 +1,9 @@
 import pymysql
+import json
+import pandas as pd
 
 class sql_server:
+
     @staticmethod
     def insert(insert_data):
         conn = pymysql.connect(host='localhost', port=3306, user='auint', password='*6CC6A1C22CFFA93B23769CAE343636557E024D12', 
@@ -18,3 +21,7 @@ class sql_server:
 
         finally:
             conn.close()
+
+    @staticmethod
+    def select():
+        conn = 1
