@@ -15,7 +15,7 @@ def test():
     #print(len(result))  # 현제 4 == row 수만큼 나옴
 
     print("dict 타입의 자료형")
-    print(dict(map(reversed, t)))
+    print(dict(map(reversed, result)))
 
 
     ''' 데이터 삽입 완료
