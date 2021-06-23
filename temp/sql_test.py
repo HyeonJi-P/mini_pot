@@ -9,13 +9,15 @@ def test():
     '''데이터 추출 하는중'''
     query = "SELECT * FROM mytable;"
     cur.execute(query)
-    result = cur.fetchall()  # 튜플 타입으로 반환해줌 
+    result = list(cur.fetchall())  # 튜플 타입으로 반환해줌 수정가능하게 list로 변환
     conn.commit()
 
-    #print(len(result))  # 현제 4 == row 수만큼 나옴
+    for i into range(0, len(result)):  # len(result) == row수 만큼
+        print("%d번째줄 "%(i), result[i])
 
-    print("dict 타입의 자료형")
-    print(dict(map(reversed, result)))
+        for j into range(0, len(result[i])):
+            print("%d줄의 %d번째 "%(i, j), result[i][j])
+
 
 
     ''' 데이터 삽입 완료
