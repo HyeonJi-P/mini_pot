@@ -15,7 +15,7 @@ def test():
 
     clear_str = "()',"  # (tuple - list, tuple - str)변환과정에서 생기는 찌꺼기 처리하기 
     for i in range(0, len(col)):
-        col[i] = str(a[i])
+        col[i] = str(col[i])
         col[i] = ''.join(_ for _ in col[i] if _ not in clear_str)
     
     print(col)  # test용
@@ -27,7 +27,7 @@ def test():
     conn.commit()
 
     print(result)
-    
+
     '''
     for i in range(0, len(result)):  # row수 만큼 ex) [0 ... n] (time, plant, temperature, humidity, illuminance)
         print("%d번째줄 "%(i), result[i])
