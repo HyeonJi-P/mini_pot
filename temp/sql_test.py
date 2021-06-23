@@ -34,10 +34,10 @@ def test():
     #df = df.to_dict('list')  # time [1,2...], plant[1,2,...]
     df = df.to_dict('index')  # 0[time, plant..], 2[time, plant...]
     print(df)
-    print(df[1])
-    print(df[2])
-    print(df[1][1])
-    print(df[3][3])
+
+    df = pd.DataFrame([df])
+    print(df)
+
 
     '''
                     time      plant  temperature  humidity  illuminance
