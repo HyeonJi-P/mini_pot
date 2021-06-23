@@ -20,6 +20,12 @@ def test():
     for i in range(0, len(result)):
         print(result[i])
 
+    query = "desc mytable"
+    cur.execute(query)
+    result = cur.fetchall()
+    conn.commit()
+    print(result[0])
+
     '''
     query = "SELECT * FROM mytable;"
     cur.execute(query)
