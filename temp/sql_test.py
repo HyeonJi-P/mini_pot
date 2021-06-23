@@ -12,17 +12,10 @@ def test():
     result = cur.fetchall()  # 튜플 타입으로 반환해줌 
     conn.commit()
 
-    print(type(result)) 
-    print(result)
-
-    print("result의 len")
-    print(len(result))
-
-    print("list 타입의 자료형")
-    print(list(result))
+    #print(len(result))  # 현제 4 == row 수만큼 나옴
 
     print("dict 타입의 자료형")
-    print(dict(result))
+    print(dict(map(reversed, t)))
 
 
     ''' 데이터 삽입 완료
@@ -43,6 +36,15 @@ test()
 (datetime.datetime(2021, 6, 22, 14, 48, 11), 'temp_plan', 6, 7, 8.88),
 (datetime.datetime(2021, 6, 22, 16, 31, 11), 'temp_plan', 6, 7, 8.88)
 )
+
+
+list타입
+[
+(datetime.datetime(2021, 6, 22, 14, 25, 11), 'temp_plan', 6, 7, 8.88),
+(datetime.datetime(2021, 6, 22, 14, 36, 11), 'temp_plan', 6, 7, 8.88),
+(datetime.datetime(2021, 6, 22, 14, 48, 11), 'temp_plan', 6, 7, 8.88),
+(datetime.datetime(2021, 6, 22, 16, 31, 11), 'temp_plan', 6, 7, 8.88)
+]
 '''
 
 
