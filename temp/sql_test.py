@@ -7,7 +7,7 @@ def test():
     db = 'mysql', charset='utf8')
     cur = conn.cursor()
 
-    '''데이터 추출 하는중'''
+    
     # 모든 col이름 받아오기 
     query = "SELECT column_name FROM information_schema.columns WHERE table_schema='mysql' AND table_name='mytable';"
     cur.execute(query)
@@ -21,7 +21,7 @@ def test():
     
     print(col)  # test용
 
-
+    '''데이터 추출 하는중'''
     # 데이터 가져오기 
     query = "SELECT * FROM mytable;"
     #cur.execute(query)
@@ -30,21 +30,17 @@ def test():
     conn.commit()
 
     print(df)
-    print(df.iloc[0])
-    print(df.iloc[1])
-    print(type(df.iloc[1][1]))
-    print(df.iloc[1][1])
-    print(type(df.iloc[3][3]))
-    print(df.iloc[3][3])
+
+    df.to_dict('list')
+    print(df)
 
     '''
-                 time      plant  temperature  humidity  illuminance
-0 2021-06-22 14:25:11  temp_plan            6         7         8.88
-1 2021-06-22 14:36:11  temp_plan            6         7         8.88
-2 2021-06-22 14:48:11  temp_plan            6         7         8.88
-3 2021-06-22 16:31:11  temp_plan            6         7         8.88
-4 2021-06-23 10:53:11        hub            9        10        11.11
-
+                    time      plant  temperature  humidity  illuminance
+    0 2021-06-22 14:25:11  temp_plan            6         7         8.88
+    1 2021-06-22 14:36:11  temp_plan            6         7         8.88
+    2 2021-06-22 14:48:11  temp_plan            6         7         8.88
+    3 2021-06-22 16:31:11  temp_plan            6         7         8.88
+    4 2021-06-23 10:53:11        hub            9        10        11.11
     '''
 
     '''
@@ -69,7 +65,7 @@ def test():
     
 
 
-    ''' 데이터 삽입 완료
+    ''' 데이터 삽입 // 완료
     query = "INSERT INTO mytable(time, plant, temperature, humidity, illuminance) VALUES('2021-06-22 16:31:11.003', 'temp_plan', 6, 7, 8.88);"
     cur.execute(query)
     conn.commit()
