@@ -21,16 +21,31 @@ def test():
     
     print(col)  # test용
 
-    
+
+    # 데이터 가져오기 
     query = "SELECT * FROM mytable;"
     #cur.execute(query)
     #result = list(cur.fetchall())
     df = pd.read_sql("SELECT * FROM mytable;", con = conn)
-
-
     conn.commit()
 
     print(df)
+    print(df[0])
+    print(df[1])
+    print(type(df[1][1]))
+    print(df[1][1])
+    print(type(df[3][3]))
+    print(df[3][3])
+
+    '''
+                 time      plant  temperature  humidity  illuminance
+0 2021-06-22 14:25:11  temp_plan            6         7         8.88
+1 2021-06-22 14:36:11  temp_plan            6         7         8.88
+2 2021-06-22 14:48:11  temp_plan            6         7         8.88
+3 2021-06-22 16:31:11  temp_plan            6         7         8.88
+4 2021-06-23 10:53:11        hub            9        10        11.11
+
+    '''
 
     '''
     for i in range(0, len(result)):  # row수 만큼 ex) [0 ... n] (time, plant, temperature, humidity, illuminance)
