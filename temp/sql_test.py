@@ -12,10 +12,10 @@ def test():
     result = list(cur.fetchall())  # 튜플 타입으로 반환해줌 수정가능하게 list로 변환
     conn.commit()
 
-    for i into range(0, len(result)):  # len(result) == row수 만큼
+    for i in range(0, len(result)):  # len(result) == row수 만큼
         print("%d번째줄 "%(i), result[i])
 
-        for j into range(0, len(result[i])):
+        for j in range(0, len(result[i])):
             print("%d줄의 %d번째 "%(i, j), result[i][j])
 
 
