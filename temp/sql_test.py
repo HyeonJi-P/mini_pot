@@ -11,6 +11,7 @@ def test():
     result = cur.fetchall()
     conn.commit()
 
+    print(type(result))
     print(result)
 
     ''' 데이터 삽입 완료
@@ -23,6 +24,13 @@ def test():
 
 
 test()
+
+''' result 결과
+((datetime.datetime(2021, 6, 22, 14, 25, 11), 'temp_plan', 6, 7, 8.88),
+(datetime.datetime(2021, 6, 22, 14, 36, 11), 'temp_plan', 6, 7, 8.88),
+(datetime.datetime(2021, 6, 22, 14, 48, 11), 'temp_plan', 6, 7, 8.88),
+(datetime.datetime(2021, 6, 22, 16, 31, 11), 'temp_plan', 6, 7, 8.88))
+'''
 
 
 
