@@ -72,7 +72,7 @@ col = ', '.join(data.keys())
 val = ', '.join(map(str, data.values()))
 query = "INSERT INTO mytable(%s) VALUSE(%s);" %(col, val)
 
-print(type(col))
+
 print(col)
 print(val)
 print(query)
