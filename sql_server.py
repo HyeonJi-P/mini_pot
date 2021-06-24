@@ -15,7 +15,7 @@ class sql_server:
 
                 # DB에 쿼리로 데이터 추가
                 col = ','.join(insert_data.keys())
-                val = ','.join(insert_data.values())
+                val = ','.join(map(str, insert_data.values()))
                 query = "INSERT INTO mytable(%s) VALUSE(%s);" %(col, val)
                 cur.execute(query, insert_data.values())
 
@@ -102,16 +102,21 @@ dict_message = {
 }
 
 sql_server.insert(dict_message)
+print("----------1")
 
 sql_server.select(None)
+print("----------2")
 
-'''
 sql_server.select()
+print("----------3")
 
 sql_server.select("")
+print("----------4")
 
-sql_server.select("")
-'''
+tempp = "plant = 'hub'"
+sql_server.select(tempp)
+print("----------5")
+
 
 
 

@@ -54,13 +54,8 @@ print(a[0])
 
 # sql 쿼리 문자열 처리하기
 ''''''
-class a:
-    @staticmethod
-    def insert(insert_data):
-        print(insert_data)
 
-
-dict_message = {
+data = {
     'time' : '1111-22-33 44:55:66',
     'plant' : 'baechu',
     'temperature': 21,
@@ -68,7 +63,19 @@ dict_message = {
     'illuminance': 24.13
 }
 
-a.insert(dict_message)
+
+col = ', '.join(data.keys())
+#val = list(data.values())
+#val = ', '.join(val)
+
+#val = ', '.join(data.values())
+val = ', '.join(map(str, data.values()))
+query = "INSERT INTO mytable(%s) VALUSE(%s);" %(col, val)
+
+print(type(col))
+print(col)
+print(val)
+print(query)
 
 
 
