@@ -17,7 +17,7 @@ class sql_server:
                 col = ','.join(insert_data.keys())
                 val = ','.join(map(str, insert_data.values()))
                 query = "INSERT INTO mytable(%s) VALUSE(%s);" %(col, val)
-                cur.execute(query, insert_data.values())
+                cur.execute(query)  # cur.execute(query, insert_data.values())
 
                 conn.commit()
         finally:
