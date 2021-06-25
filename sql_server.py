@@ -46,7 +46,7 @@ class sql_server:
 
                 # 들어오는 명렁어 추가 해서 검색하기 
                 add_query = ""
-                if where_data is not None:
+                if (where_data is not None) and (where_data != "all"):
                     add_query = " WHERE "
                     add_query += where_data
 
@@ -55,16 +55,25 @@ class sql_server:
                 result_query = pd.read_sql(query, con = conn)
                 
                 # 전송을 위해 dataframe -> dict으로 변환
-                df = df.to_dict('records')  # 형식: {time, plant..}, {time, plant...}
+                result_query = result_query.to_dict('records')  # 형식: {time, plant..}, {time, plant...}
                 # 받고나서 다시 dict -> dataframe로 변환 [df = pd.DataFrame(df)]
 
-                print(df)  # 테스트
+                print(result_query)  # 테스트
 
                 ''' ex) WHERE
                 plant='hub' // 식물이 허븬거 찾기
                 plant LIKE 'temp%' // temp*인거 모두 ex) temp_plan, temp_abcdf...
                 time BETWEEN '2021-06-22 14:00:00' AND '2021-06-22 14:40:00' // ~부터 ~까지 
                 temperature < 7
+
+
+                Traceback (most recent call last):
+                File "sql_server.py", line 120, in <module>
+                    sql_server.select(None)
+                File "sql_server.py", line 58, in select
+                    df = df.to_dict('records')  # 형식: {time, plant..}, {time, plant...}
+                UnboundLocalError: local variable 'df' referenced before assignment
+
                 '''
 
                 conn.commit()
@@ -79,10 +88,6 @@ class sql_server:
         try:
             with conn.cursor() as cur:
 
-                
-
-
-
                 conn.commit()
         finally:
             conn.close()
@@ -95,17 +100,13 @@ class sql_server:
         try:
             with conn.cursor() as cur:
 
-                
-
-
-
                 conn.commit()
         finally:
             conn.close()
 
 
+#------------------------------------
 # now test
-
 dict_message = {
     'time' : '2000-11-22 11:22:33',
     'plant' : 'baechu',
@@ -114,13 +115,13 @@ dict_message = {
     'illuminance': 24.13
 }
 
-sql_server.insert(dict_message)
-print("----------1")
+#sql_server.insert(dict_message)
+#print("----------1")
 
 sql_server.select(None)
 print("----------2")
 
-sql_server.select()
+sql_server.select("all")
 print("----------3")
 
 sql_server.select("")

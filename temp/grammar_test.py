@@ -54,6 +54,18 @@ print(a[0])
 
 # sql 쿼리 문자열 처리하기
 ''''''
+class sql_server:
+
+    @staticmethod
+    def select(where_data):
+        print(type(where_data))
+        print(where_data)
+
+        if (where_data == None) or (where_data == "all"):
+            print("is None if all")
+
+
+
 
 data = {
     'time' : '1111-22-33 44:55:66',
@@ -63,36 +75,15 @@ data = {
     'illuminance': 24.13
 }
 
+sql_server.select(None)
+print("----------1")
 
-col_list = list(data.keys())
-col = ', '.join(col_list)
+sql_server.select("all")
+print("----------2")
 
-#str은 ''로 감싸져야 하는데 없음
-#val = ', '.join(map(str, data.values()))
-
-#data[col[1]]
-
-
-val = ""
-for i in col_list:
-    col_data = data[i]
-    if str(type(col_data)) == "<class 'str'>":
-        val += "'"
-    val += str(col_data)
-    if str(type(col_data)) == "<class 'str'>":
-        val += "'"
-    val += ", "
-
-print(val)
-
-val = val[0:-2]
-print(val)
-
-query = "INSERT INTO mytable(%s) VALUSE(%s);" %(col, val)
-
-print(col)
-print(val)
-print(query)
+tempp = "plant = 'hub'"
+sql_server.select(tempp)
+print("----------3")
 
 
 
