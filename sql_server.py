@@ -92,6 +92,7 @@ class sql_server:
                 query = "DELETE FROM mytable WHERE " + add_query + ";"
                 cur.execute(query)
 
+                print(query)
 
                 conn.commit()
         finally:
@@ -139,5 +140,5 @@ print("----------4")
 #select min(time) from mytable;
 #select count(*) as cnt from mytable; 카운트 
 
-a = "time in(SELECT min(time)+1 FROM mytable);"
+a = "time in(SELECT min(time)+1 FROM mytable)"
 sql_server.delete(a)
