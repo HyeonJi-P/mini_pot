@@ -29,7 +29,7 @@ class sql_server:
                     val += ", "
                 val = val[0:-2]
 
-                query = "INSERT INTO mytable(%s) VALUSE(%s);" %(col, val)
+                query = "INSERT INTO mytable(%s) VALUES(%s);" %(col, val)
                 cur.execute(query)  # cur.execute(query, insert_data.values())
 
                 conn.commit()
@@ -107,7 +107,7 @@ class sql_server:
 # now test
 
 dict_message = {
-    'time' : '1111-22-33 44:55:66',
+    'time' : '2000-11-22 11:22:33',
     'plant' : 'baechu',
     'temperature': 21,
     'humidity': 6,
