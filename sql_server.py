@@ -53,6 +53,8 @@ class sql_server:
                 # 검색, 결과도출 
                 query = "SELECT * FROM mytable" + add_query + ";"
                 result_query = pd.read_sql(query, con = conn)
+
+                print(result_query)  # 테스트
                 
                 # 전송을 위해 dataframe -> dict으로 변환
                 result_query = result_query.to_dict('records')  # 형식: {time, plant..}, {time, plant...}
@@ -65,15 +67,6 @@ class sql_server:
                 plant LIKE 'temp%' // temp*인거 모두 ex) temp_plan, temp_abcdf...
                 time BETWEEN '2021-06-22 14:00:00' AND '2021-06-22 14:40:00' // ~부터 ~까지 
                 temperature < 7
-
-
-                Traceback (most recent call last):
-                File "sql_server.py", line 120, in <module>
-                    sql_server.select(None)
-                File "sql_server.py", line 58, in select
-                    df = df.to_dict('records')  # 형식: {time, plant..}, {time, plant...}
-                UnboundLocalError: local variable 'df' referenced before assignment
-
                 '''
 
                 conn.commit()
@@ -118,18 +111,15 @@ dict_message = {
 #sql_server.insert(dict_message)
 #print("----------1")
 
-sql_server.select(None)
-print("----------2")
+#sql_server.select(None)
+#print("----------2")
 
-sql_server.select("all")
-print("----------3")
-
-sql_server.select("")
-print("----------4")
+#sql_server.select("all")
+#print("----------3")
 
 tempp = "plant = 'hub'"
 sql_server.select(tempp)
-print("----------5")
+print("----------4")
 
 
 
