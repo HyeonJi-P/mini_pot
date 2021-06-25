@@ -116,7 +116,7 @@ class sql_server:
         try:
             with conn.cursor() as cur:
 
-                quear = "select count(*) as cnt from mytable;"
+                query = "select count(*) as cnt from mytable;"
                 cur.execute(query)
                 conn.commit()
 
