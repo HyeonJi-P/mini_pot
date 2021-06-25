@@ -53,14 +53,10 @@ class sql_server:
                 # 검색, 결과도출 
                 query = "SELECT * FROM mytable" + add_query + ";"
                 result_query = pd.read_sql(query, con = conn)
-
-                print(result_query)  # 테스트
                 
                 # 전송을 위해 dataframe -> dict으로 변환
                 result_query = result_query.to_dict('records')  # 형식: {time, plant..}, {time, plant...}
                 # 받고나서 다시 dict -> dataframe로 변환 [df = pd.DataFrame(df)]
-
-                print(result_query)  # 테스트
 
                 ''' ex) WHERE
                 plant='hub' // 식물이 허븬거 찾기
@@ -100,6 +96,7 @@ class sql_server:
 
 #------------------------------------
 # now test
+'''
 dict_message = {
     'time' : '2000-11-22 11:22:33',
     'plant' : 'baechu',
@@ -120,8 +117,4 @@ dict_message = {
 tempp = "plant = 'hub'"
 sql_server.select(tempp)
 print("----------4")
-
-
-
-
-
+'''
