@@ -3,13 +3,13 @@ import json
 import pandas as pd
 
 # 완-insert : dict형을 받아서 디비에 저장해준다.
-'''사용자가 직접 col을 추가한다는 상황은?'''
+'''사용자가 직접 col을 추가한다는 상황은? <== 그럼 사용자가 삽입삭제수정 다 할 수 있게 해야하긴 한데... 흠... '''
 
 # 완-select : SQLquery문의 where이후 문자열을 받아서 조회한다.
 '''인덱스로 접근하여 처리하는법'''
 
-# 미-delete : 일정 주기로 데이터베이스 관리 해야할때? (라즈베리파이 같은경우 임시 저장소니까 갯수제한)
-'''WHERE 이후 문자열을 받는다 or 특정행을 삭제 (순서대로)'''
+# 완-delete : WHERE 이후 문자열을 받아 삭제한다.
+    # 미-db_limite : 라즈베리파이 같은경우 임시 저장소니까 갯수제한을 둬서 행을 삭제 (순서대로-예전데이터)
 
 # 널-updata : 수정할때는 없는거 같음 아마..?
 
@@ -92,8 +92,6 @@ class sql_server:
                 query = "DELETE FROM mytable WHERE " + add_query + ";"
                 cur.execute(query)
 
-                print(query)
-
                 conn.commit()
         finally:
             conn.close()
@@ -105,6 +103,40 @@ class sql_server:
 
         try:
             with conn.cursor() as cur:
+
+                conn.commit()
+        finally:
+            conn.close()
+
+    @staticmethod
+    def db_limite():
+        conn = pymysql.connect(host='localhost', port=3306, user='auint', password='pwpw', 
+        db = 'mysql', charset='utf8')
+
+        try:
+            with conn.cursor() as cur:
+
+                quear = "select count(*) as cnt from mytable;"
+                cur.execute(query)
+                conn.commit()
+
+                result = int(cur.fetchall())
+                 
+
+                print(type(result))
+                print(result)
+
+                '''
+                limite_count = 10
+
+                for i in range(0, limite_count):
+                    query = "DELETE FROM mytable WHERE time in(SELECT min(time) FROM mytable);"
+                    cur.execute(query)
+                    conn.commit()
+                '''
+
+
+
 
                 conn.commit()
         finally:
@@ -135,10 +167,22 @@ tempp = "plant = 'hub'"
 sql_server.select(tempp)
 print("----------4")
 '''
+#INSERT INTO mytable(time, plant, temperature, humidity, illuminance) VALUES('2000-01-22 11:22:01', 'plan?', 1, 2, 3.45);
+#INSERT INTO mytable(time, plant, temperature, humidity, illuminance) VALUES('2000-01-22 11:22:02', 'plan?', 1, 2, 3.45);
+#INSERT INTO mytable(time, plant, temperature, humidity, illuminance) VALUES('2000-01-22 11:22:03', 'plan?', 1, 2, 3.45);
+#INSERT INTO mytable(time, plant, temperature, humidity, illuminance) VALUES('2000-01-22 11:22:04', 'plan?', 1, 2, 3.45);
+#INSERT INTO mytable(time, plant, temperature, humidity, illuminance) VALUES('2000-01-22 11:22:05', 'plan?', 1, 2, 3.45);
+#INSERT INTO mytable(time, plant, temperature, humidity, illuminance) VALUES('2000-01-22 11:22:06', 'plan?', 1, 2, 3.45);
+#INSERT INTO mytable(time, plant, temperature, humidity, illuminance) VALUES('2000-01-22 11:22:07', 'plan?', 1, 2, 3.45);
+#INSERT INTO mytable(time, plant, temperature, humidity, illuminance) VALUES('2000-01-22 11:22:08', 'plan?', 1, 2, 3.45);
+#INSERT INTO mytable(time, plant, temperature, humidity, illuminance) VALUES('2000-01-22 11:22:09', 'plan?', 1, 2, 3.45);
+#INSERT INTO mytable(time, plant, temperature, humidity, illuminance) VALUES('2000-01-22 11:22:10', 'plan?', 1, 2, 3.45);
 
 #time in(select min(time) from mytable);
 #select min(time) from mytable;
+
+#DELETE FROM mytable WHERE time in(SELECT min(time) FROM mytable);
+
 #select count(*) as cnt from mytable; 카운트 
 
-a = "time in(SELECT min(time)+1 FROM mytable)"
-sql_server.delete(a)
+sql_server.db_limite()
