@@ -2,6 +2,17 @@ import pymysql
 import json
 import pandas as pd
 
+# 완-insert : dict형을 받아서 디비에 저장해준다.
+'''사용자가 직접 col을 추가한다는 상황은?'''
+
+# 완-select : SQLquery문의 where이후 문자열을 받아서 조회한다.
+'''인덱스로 접근하여 처리하는법'''
+
+# 미-delete : 일정 주기로 데이터베이스 관리 해야할때? (라즈베리파이 같은경우 임시 저장소니까 갯수제한)
+'''WHERE 이후 문자열을 받는다 or 특정행을 삭제 (순서대로)'''
+
+# 널-updata : 수정할때는 없는거 같음 아마..?
+
 class sql_server:
 
     @staticmethod
@@ -77,6 +88,11 @@ class sql_server:
         try:
             with conn.cursor() as cur:
 
+                add_query = delete_data
+                query = "DELETE FROM mytable WHERE " + add_query + ";"
+                cur.execute(query)
+
+
                 conn.commit()
         finally:
             conn.close()
@@ -118,3 +134,10 @@ tempp = "plant = 'hub'"
 sql_server.select(tempp)
 print("----------4")
 '''
+
+#time in(select min(time) from mytable);
+#select min(time) from mytable;
+#select count(*) as cnt from mytable; 카운트 
+
+a = "time in(SELECT min(time)+1 FROM mytable);"
+sql_server.delete(a)
