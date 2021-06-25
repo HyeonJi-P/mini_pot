@@ -64,14 +64,31 @@ data = {
 }
 
 
-col = ', '.join(data.keys())
-#val = list(data.values())
-#val = ', '.join(val)
+col_list = list(data.keys())
+col = ', '.join(col_list)
 
-#val = ', '.join(data.values())
-val = ', '.join(map(str, data.values()))
+#str은 ''로 감싸져야 하는데 없음
+#val = ', '.join(map(str, data.values()))
+
+#data[col[1]]
+
+
+val = ""
+for i in col_list:
+    col_data = data[i]
+    if str(type(col_data)) == "<class 'str'>":
+        val += "'"
+    val += str(col_data)
+    if str(type(col_data)) == "<class 'str'>":
+        val += "'"
+    val += ", "
+
+print(val)
+
+val = val[0:-2]
+print(val)
+
 query = "INSERT INTO mytable(%s) VALUSE(%s);" %(col, val)
-
 
 print(col)
 print(val)

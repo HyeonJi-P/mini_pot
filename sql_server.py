@@ -14,8 +14,21 @@ class sql_server:
             with conn.cursor() as cur:
 
                 # DB에 쿼리로 데이터 추가
-                col = ','.join(insert_data.keys())
-                val = ','.join(map(str, insert_data.values()))
+                col_list = list(insert_data.keys())
+                col = ', '.join(col_list)
+
+                #val = ','.join(map(str, insert_data.values())) <== 이렇게하면 문자열이 ''로 안둘려서 나옴
+                val = ""
+                for i in col_list:
+                    col_data = insert_data[i]
+                    if str(type(col_data)) == "<class 'str'>":  # str이면 '추가
+                        val += "'"
+                    val += str(col_data)
+                    if str(type(col_data)) == "<class 'str'>":
+                        val += "'"
+                    val += ", "
+                val = val[0:-2]
+
                 query = "INSERT INTO mytable(%s) VALUSE(%s);" %(col, val)
                 cur.execute(query)  # cur.execute(query, insert_data.values())
 
