@@ -13,6 +13,7 @@ import pandas as pd
 
 # 널-updata : 수정할때는 없는거 같음 아마..?
 
+
 class sql_server:
 
     @staticmethod
@@ -186,3 +187,4 @@ print("----------4")
 #select count(*) as cnt from mytable; 카운트 
 
 sql_server.db_limite()
+ 
