@@ -120,9 +120,8 @@ class sql_server:
                 cur.execute(query)
                 conn.commit()
 
-		print(list(cur.fetchall()))
-                #result = int(str(list(cur.fetchall())))
-                 
+                temp = list(cur.fetchall())
+                print(temp)
 
                 print(type(result))
                 print(result)

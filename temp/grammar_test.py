@@ -52,8 +52,8 @@ print(type(a[0]))
 print(a[0])
 '''
 
-# sql 쿼리 문자열 처리하기
-''''''
+# None 처리
+'''
 class sql_server:
 
     @staticmethod
@@ -63,9 +63,6 @@ class sql_server:
 
         if (where_data == None) or (where_data == "all"):
             print("is None if all")
-
-
-
 
 data = {
     'time' : '1111-22-33 44:55:66',
@@ -84,8 +81,12 @@ print("----------2")
 tempp = "plant = 'hub'"
 sql_server.select(tempp)
 print("----------3")
+'''
 
 
+# ㅇ
+''''''
+a = 1
 
 
 
