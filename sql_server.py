@@ -46,7 +46,7 @@ sql_server.delete(temp)
     # 3-2. db_limite : 라즈베리파이 같은경우 임시 저장소니까 갯수제한을 둬서 행을 삭제 (순서대로-예전데이터)
     '''
     sql_server.db_limite()
-
+    
     + 추후 디비쪽도 어느정도 데이터의 가공이 필요하다고 생각됨 그때 조금 수정할 가능성 있음
     '''
     
@@ -166,7 +166,7 @@ class sql_server:
                 temp = list(cur.fetchall())
                 temp = .join(temp)
                 temp = int(temp)
-                
+
 
                 print(type(temp))
                 print(temp)
