@@ -162,19 +162,20 @@ class sql_server:
                 cur.execute(query)
                 conn.commit()
 
-                temp = list(cur.fetchall())
-                temp = list(temp[0])
-                temp = int(temp[0])
+                row_count = list(cur.fetchall())
+                row_count = list(row_count[0])
+                row_count = int(row_count[0])
 
-                print(type(temp))
-                print(temp)
+                max_count = 10  # == limite count
+                delete_count = 0
+                if row_count > max_count:
+                    delete_count = row_count - max_count
 
-                temp = int(temp)
+                print(delete_count)
 
-
-                print(type(temp))
-                print(temp)
-
+                for i in range(0, delete_count):
+                    print(i)
+                    
                 '''
                 limite_count = 10
 
