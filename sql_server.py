@@ -27,6 +27,12 @@ dict_message = {
 sql_server.insert(dict_message)
 '''
 
+# 1-2. insert_test : int형을 받아서 그 수만큼 자동 삽입
+'''
+
+sql_server.insert_test(10)
+'''
+
 # 2. select : SQL-query문의 where이후 문자열을 받아서 조회한다.
 '''
 
@@ -60,8 +66,7 @@ class sql_server:
     @staticmethod
     def insert(insert_data):
         conn = pymysql.connect(host='localhost', port=3306, user='auint', password='pwpw', 
-        db = 'mysql', charset='utf8')  # *6CC6A1C22CFFA93B23769CAE343636557E024D12
-
+        db = 'mysql', charset='utf8')  # 예전 비번 : *6CC6A1C22CFFA93B23769CAE343636557E024D12
         try:
             # cur = conn.cursor()랑 같은 의미
             with conn.cursor() as cur:
@@ -93,7 +98,6 @@ class sql_server:
     def select(where_data):
         conn = pymysql.connect(host='localhost', port=3306, user='auint', password='pwpw', 
         db = 'mysql', charset='utf8')
-
         try:
             with conn.cursor() as cur:
 
@@ -126,7 +130,6 @@ class sql_server:
     def delete(delete_data):
         conn = pymysql.connect(host='localhost', port=3306, user='auint', password='pwpw', 
         db = 'mysql', charset='utf8')
-
         try:
             with conn.cursor() as cur:
 
@@ -142,7 +145,6 @@ class sql_server:
     def update(update_data):
         conn = pymysql.connect(host='localhost', port=3306, user='auint', password='pwpw', 
         db = 'mysql', charset='utf8')
-
         try:
             with conn.cursor() as cur:
 
@@ -154,7 +156,6 @@ class sql_server:
     def db_limite():
         conn = pymysql.connect(host='localhost', port=3306, user='auint', password='pwpw', 
         db = 'mysql', charset='utf8')
-
         try:
             with conn.cursor() as cur:
 
@@ -166,7 +167,7 @@ class sql_server:
                 row_count = list(row_count[0])
                 row_count = int(row_count[0])
 
-                max_count = 10  # == limite count
+                max_count = 6  # == limite count
                 delete_count = 0
                 if row_count > max_count:
                     delete_count = row_count - max_count
@@ -183,50 +184,23 @@ class sql_server:
         finally:
             conn.close()
 
+    @staticmethod
+    def insert_test(test_n):
+        conn = pymysql.connect(host='localhost', port=3306, user='auint', password='pwpw', 
+        db = 'mysql', charset='utf8')
+        try:
+            with conn.cursor() as cur:
 
-#------------------------------------
-# now test
-'''
-dict_message = {
-    'time' : '2000-11-22 11:22:33',
-    'plant' : 'baechu',
-    'temperature': 21,
-    'humidity': 6,
-    'illuminance': 24.13
-}
+                for i in range(0, test_n):
+                    query = "INSERT INTO mytable(time, plant, temperature, humidity, illuminance) VALUES('2000-01-22 11:22:" + i + "', 'test_plan', 12, 34, 56.78);"
+                    cur.execute(query)
+                    conn.commit()
 
-#sql_server.insert(dict_message)
-#print("----------1")
+                conn.commit()
+        finally:
+            conn.close()
 
-#sql_server.select(None)
-#print("----------2")
-
-#sql_server.select("all")
-#print("----------3")
-
-tempp = "plant = 'hub'"
-sql_server.select(tempp)
-print("----------4")
-'''
-#INSERT INTO mytable(time, plant, temperature, humidity, illuminance) VALUES('2000-01-22 11:22:01', 'plan?', 1, 2, 3.45);
-#INSERT INTO mytable(time, plant, temperature, humidity, illuminance) VALUES('2000-01-22 11:22:02', 'plan?', 1, 2, 3.45);
-#INSERT INTO mytable(time, plant, temperature, humidity, illuminance) VALUES('2000-01-22 11:22:03', 'plan?', 1, 2, 3.45);
-#INSERT INTO mytable(time, plant, temperature, humidity, illuminance) VALUES('2000-01-22 11:22:04', 'plan?', 1, 2, 3.45);
-#INSERT INTO mytable(time, plant, temperature, humidity, illuminance) VALUES('2000-01-22 11:22:05', 'plan?', 1, 2, 3.45);
-#INSERT INTO mytable(time, plant, temperature, humidity, illuminance) VALUES('2000-01-22 11:22:06', 'plan?', 1, 2, 3.45);
-#INSERT INTO mytable(time, plant, temperature, humidity, illuminance) VALUES('2000-01-22 11:22:07', 'plan?', 1, 2, 3.45);
-#INSERT INTO mytable(time, plant, temperature, humidity, illuminance) VALUES('2000-01-22 11:22:08', 'plan?', 1, 2, 3.45);
-#INSERT INTO mytable(time, plant, temperature, humidity, illuminance) VALUES('2000-01-22 11:22:09', 'plan?', 1, 2, 3.45);
-#INSERT INTO mytable(time, plant, temperature, humidity, illuminance) VALUES('2000-01-22 11:22:10', 'plan?', 1, 2, 3.45);
-
-#time in(select min(time) from mytable);
-#select min(time) from mytable;
-
-#DELETE FROM mytable WHERE time in(SELECT min(time) FROM mytable);
-
-#select count(*) as cnt from mytable; 카운트 
-
-
-
+# test space
+''''''
 sql_server.db_limite()
- 
+sql_server.insert_test(12)
