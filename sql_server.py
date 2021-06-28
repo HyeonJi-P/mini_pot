@@ -174,16 +174,10 @@ class sql_server:
                 print(delete_count)
 
                 for i in range(0, delete_count):
-                    print(i)
-                    
-                '''
-                limite_count = 10
-
-                for i in range(0, limite_count):
+                    print(i+1)
                     query = "DELETE FROM mytable WHERE time in(SELECT min(time) FROM mytable);"
                     cur.execute(query)
                     conn.commit()
-                '''
 
                 conn.commit()
         finally:
