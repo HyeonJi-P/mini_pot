@@ -172,7 +172,8 @@ class sql_server:
                 t1= list(temp[0])
                 print(t1)
 
-                t2= int(t1)
+                t2= int(t1[0])
+                print(type(t2))
                 print(t2)
 
                 t3= int(temp[0])
