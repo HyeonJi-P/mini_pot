@@ -163,7 +163,11 @@ class sql_server:
                 conn.commit()
 
                 temp = list(cur.fetchall())
-                temp = .join(temp)
+                temp = "".join(temp)
+                
+                print(type(temp))
+                print(temp)
+
                 temp = int(temp)
 
 
