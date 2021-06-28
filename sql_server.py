@@ -192,7 +192,7 @@ class sql_server:
             with conn.cursor() as cur:
 
                 for i in range(0, test_n):
-                    query = "INSERT INTO mytable(time, plant, temperature, humidity, illuminance) VALUES('2000-01-22 11:22:" + i + "', 'test_plan', 12, 34, 56.78);"
+                    query = "INSERT INTO mytable(time, plant, temperature, humidity, illuminance) VALUES('2000-01-22 11:22:", i, "', 'test_plan', 12, 34, 56.78);"
                     cur.execute(query)
                     conn.commit()
 
@@ -202,5 +202,4 @@ class sql_server:
 
 # test space
 ''''''
-sql_server.db_limite()
 sql_server.insert_test(12)
