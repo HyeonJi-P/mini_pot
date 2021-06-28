@@ -4,37 +4,36 @@ U4-ER_project (smart green house)
 ## 팀원
 phj, kjs
 
-## 설정
->라즈베리파이
->> ver ...
+## 구성
+> temp 폴더 : 테스트 or 추후 사용가능 코드
+>> .idea : 파이참 설정 폴더 (사용 X)
+>> log_* : 예전 기록 + 추후 참고가능
+>> python_test.py : 파이썬 구동 테스트 (단순 print)
+> blueprint 폴더 : 설계도면 모음
+> log 폴더 : 기록 모음
+> module_code 폴더 : 일부분 완성되어 추후 통합할 코드 모음  
 
-## 마크다운 테스트
-abcde
-**abcde**
-~~abcde~~
-```c++
-<stdio.h>
-int a= 1
-```
+> sql_server.py : 현제 작업중
+
+
+## todo 
+> 1. sql_server 완성 (예시 까지)
+> 2. 예전 ppt, word 참고해서 소스 설계
+> > 2-2. 여러 사용자가 사용 가능하게 (keep)
+> > 2-3. 실행 프로세스간 정보전달 (Question)
+> > 2-4. 디비 테이블 분리 or 통합 (개인마다 데이터 분리할껀지 Q)
+> 3. 아마존 RDS연결부분 숙지해놓기
+> 4. 젝슨 나노 사용 (keep)
 
 ## git 
+* 업로드
 cd C:\Users\dhkzh\Desktop\EndingProject\Git\mini_pot  
 git add .  
 git commit -m "주석"  
 git push -u origin main  
   
+* 다운로드 
 git pull  
   
-
-if: LF or CRLF  
+* LF or CRLF 에러 발생시 
 git config core.autocrlf true  
-
-## 앞으로 해야 할 일 
-1. db_limite 완성하고
-2. 예전 ppt, word 참고하여 제작 가능하게 설계도를 만들기
-> (2-2)제작 가능하게란 여러 사용자가 사용할 수 있도록(프로세스) => 킵 
-> (2-3)실행 프로세스간 정보전달 가능하게 => 메인 중심으로 (물어보기)
-> (2-4)그리고 디비 저장구간에서는 현제 테이블 하나로 통일하고 가져올때 나눠서 처리할껀지, 아니면 테이블을 사용자별로 나눌껀지 (물어보기)
-3. 아마존 RDS연결 지금 소스랑 비교해서 차이점 파악 해놓기
-4. 젝슨 나노는 일단 킵하는 방향으로 
-

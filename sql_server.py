@@ -2,17 +2,50 @@ import pymysql
 import json
 import pandas as pd
 
-# 완-insert : dict형을 받아서 디비에 저장해준다.
-'''사용자가 직접 col을 추가한다는 상황은? <== 그럼 사용자가 삽입삭제수정 다 할 수 있게 해야하긴 한데... 흠... '''
+# 1. insert : dict형을 받아서 디비에 저장해준다.
+'''
+들어가는 자료형 예시
+dict_message = {
+    'time' : '2000-11-22 11:22:33',
+    'plant' : 'baechu',
+    'temperature': 21,
+    'humidity': 6,
+    'illuminance': 24.13
+}
 
-# 완-select : SQLquery문의 where이후 문자열을 받아서 조회한다.
-'''인덱스로 접근하여 처리하는법'''
+호출시 예시
+from sql_server import *
+sql_server.insert(dict_message)
+'''
 
-# 완-delete : WHERE 이후 문자열을 받아 삭제한다.
-    # 미-db_limite : 라즈베리파이 같은경우 임시 저장소니까 갯수제한을 둬서 행을 삭제 (순서대로-예전데이터)
+# 2. select : SQL-query문의 where이후 문자열을 받아서 조회한다.
+'''
 
-# 널-updata : 수정할때는 없는거 같음 아마..?
+++ 인덱스로 접근하여 처리하는법 (최근 1시간, 하루, 일주일, 한달, 1년)
 
+temp = None
+temp = "all" // temp가 None이거나 "all"일 경우 모든자료 검색
+temp = "plant = 'hub'" // plant가 hub인 것만 검색
+sql_server.select(temp)
+'''
+
+# 3. delete : SQL-query문의 where이후 문자열을 받아서 삭제한다.
+'''
+temp = "time in(SELECT min(time) FROM mytable)" // 시간이 가장 작은(오래된) 행 삭제
+sql_server.delete(temp)
+'''
+    # 3-2. db_limite : 라즈베리파이 같은경우 임시 저장소니까 갯수제한을 둬서 행을 삭제 (순서대로-예전데이터)
+    '''
+    sql_server.db_limite()
+
+    + 추후 디비쪽도 어느정도 데이터의 가공이 필요하다고 생각됨 그때 조금 수정할 가능성 있음
+    '''
+    
+
+# 4. updata : null
+'''
+아직은 필요 없다고 생각됨
+'''
 
 class sql_server:
 
@@ -185,6 +218,13 @@ print("----------4")
 #DELETE FROM mytable WHERE time in(SELECT min(time) FROM mytable);
 
 #select count(*) as cnt from mytable; 카운트 
+
+'''
+# dict를 json형으로 변환
+        json_insert_data = json.dumps(insert_data)
+        # json을 dict형으로 변환
+        json_updata_data = json.loads(updata_data)
+'''
 
 sql_server.db_limite()
  
