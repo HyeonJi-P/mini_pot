@@ -8,6 +8,9 @@ print("!! process start")
 try:
     while 1:
 
+        # 시간 체크
+        # 12시가 되며는 문을 닫는당 + 생장조건 송신
+
         # 데이터 수신
         
 
