@@ -163,23 +163,8 @@ class sql_server:
                 conn.commit()
 
                 temp = list(cur.fetchall())
-
-                print(type(temp))
-                print(temp)
-                print(type(temp[0]))
-                print(temp[0])
-
-                t1= list(temp[0])
-                print(t1)
-
-                t2= int(t1[0])
-                print(type(t2))
-                print(t2)
-
-                t3= int(temp[0])
-                print(t3)
-
-                temp = ''.join(temp)
+                temp = list(temp[0])
+                temp = int(temp[0])
 
                 print(type(temp))
                 print(temp)
