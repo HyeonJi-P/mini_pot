@@ -169,7 +169,14 @@ class sql_server:
                 print(type(temp[0]))
                 print(temp[0])
 
+                t1= list(temp[0])
+                print(t1)
 
+                t2= int(t1)
+                print(t2)
+
+                t3= int(temp[0])
+                print(t3)
 
                 temp = ''.join(temp)
 
