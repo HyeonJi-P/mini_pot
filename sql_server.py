@@ -2,6 +2,16 @@ import pymysql
 import json
 import pandas as pd
 
+# 0. 초기 
+'''
+# 호출시 임포트
+from sql_server import *
+# dict를 json형으로 변환
+json_insert_data = json.dumps(data)
+# json을 dict형으로 변환
+json_updata_data = json.loads(data)
+'''
+
 # 1. insert : dict형을 받아서 디비에 저장해준다.
 '''
 들어가는 자료형 예시
@@ -14,7 +24,6 @@ dict_message = {
 }
 
 호출시 예시
-from sql_server import *
 sql_server.insert(dict_message)
 '''
 
@@ -155,10 +164,12 @@ class sql_server:
                 conn.commit()
 
                 temp = list(cur.fetchall())
-                print(temp)
+                temp = .join(temp)
+                temp = int(temp)
+                
 
-                print(type(result))
-                print(result)
+                print(type(temp))
+                print(temp)
 
                 '''
                 limite_count = 10
@@ -168,9 +179,6 @@ class sql_server:
                     cur.execute(query)
                     conn.commit()
                 '''
-
-
-
 
                 conn.commit()
         finally:
@@ -219,12 +227,7 @@ print("----------4")
 
 #select count(*) as cnt from mytable; 카운트 
 
-'''
-# dict를 json형으로 변환
-        json_insert_data = json.dumps(insert_data)
-        # json을 dict형으로 변환
-        json_updata_data = json.loads(updata_data)
-'''
+
 
 sql_server.db_limite()
  
