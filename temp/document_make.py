@@ -30,6 +30,8 @@ class document_make:
         print("START")
         doc = docx.Document()
 
+        # ++ 다하고 변수로 다 해서 데이터 전달만 되면 바로 생성되게 만들기
+
         para = doc.add_paragraph()
         run = para.add_run('mini pot - title') # +본문
         run.font.size = docx.shared.Pt(30) # 폰트크기 
@@ -50,7 +52,8 @@ class document_make:
         doc.add_paragraph('첫번째 순서 단락', style='List Number')
 
         # https://python-docx.readthedocs.io/en/latest/
-        ## 참고 후 추가 
+        ## 참고 후 추가
+        ## ++ 헤드, 나누는선 꾸미기
 
         # ++ 사실상 여기에서 표를 만들면 쌩고생이기 때문에
         # 정보 가공부분에서 이미지로 가공해서 넘겨주면 여기서 그걸 사용하는게 제일 좋아보임
