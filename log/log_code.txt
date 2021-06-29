@@ -1,10 +1,12 @@
+< document_make.py >
+1. 베이스
+06/29 시작
+
+
 < server_main.py >
 1. 전체 설계도 재설정
 06/28 시작
-
-2. 처음 프레임 제작
-06/xx 시작
-
+06/29 킵
 
 < sql_server.py >
 1. server - sql의 콘솔 자체에서는 작동이 잘 되나

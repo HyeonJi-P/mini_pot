@@ -69,19 +69,19 @@ sql_server.db_limite(10)
 
 class sql_server:
     # 함수종류
-    ## insert
-    ## select
-    ## delete
-    ## db_limite
-    ## insert_test
-    ## update
+    ### insert
+    ### select
+    ### delete
+    ### db_limite
+    ### insert_test
+    ### update
 
     # 전체적인 구조
-    # 1. conn으로 디비에 연결하고
-    # 2. cur = conn.cursor() 으로 커서 사용
-    # 3. cur.execute(Q)으로 Q를 디비에 전달하고 실행
-    # 4. conn.commit()으로 실행내역 적용
-    # 5. conn.close()으로 디비연결 종료
+    ### 1. conn으로 디비에 연결하고
+    ### 2. cur = conn.cursor() 으로 커서 사용
+    ### 3. cur.execute(Q)으로 Q를 디비에 전달하고 실행
+    ### 4. conn.commit()으로 실행내역 적용
+    ### 5. conn.close()으로 디비연결 종료
 
     @staticmethod
     def insert(insert_data):
