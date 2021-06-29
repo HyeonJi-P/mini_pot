@@ -14,6 +14,7 @@ phj, kjs
 * module_code 폴더 : 일부분 완성되어 추후 통합할 코드 모음  
 
 - server_main.py : 현제 진행중 이름 그대로 서버실행의 메인
+- document_make : pdf, docx 생성기 - 다음 진행
   
 ## 약어 (나중에 볼때 편하시라구 ㅇㅅㅇ ctr+f)  
 !! : 주의사항  
