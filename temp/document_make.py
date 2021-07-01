@@ -40,7 +40,7 @@ document_make.word(1) # 1 == anything
 ++ a
 
 * 실행 예시 
-document_make.word_form(1)
+document_make.word_form(++a)
 '''
 
 # 3. convert_pdf
@@ -69,6 +69,7 @@ class document_make:
 
         para = doc.add_paragraph() 
         run = para.add_run('mini pot - title') # +본문
+
         run.font.size = docx.shared.Pt(30) # 폰트크기 
         run.bold = True # 볼트체 
         run.italic = True # 이텔릭체
@@ -92,9 +93,8 @@ class document_make:
 
     @staticmethod
     def word_form(insert_data):
-        print("START")
-
         # report_form을 가져와서 새로운 docx를 만들고 저장할 꺼임!
+        ## ++ 리눅스에서 폰트 같은 문제가 발생할 수 있기때문에 리눅스에서 테스트 해야함
         doc = docx.Document("report_form.docx")
 
         # 변수에 전달 받은 값을 넣어서 자동화
@@ -102,37 +102,94 @@ class document_make:
         title = "mini pot"
         user = "ZIMyMeMine"
         plant = "T-hub"
-
-        # 제목 부분(para[0])에 title 변수를 대입 
-        ## doc.paragraphs[0].text = title // 한줄로
-        ###doc.add_heading("mini-pot", 0) // 단순 생성
+        start_time = "nnnn/mm/dd.hh"
+        end_time = "nnnn/mm/dd.hh"
+        
+        # 제목 부분(para[0] : 0번째 행)에 title 변수를 대입 
+        ## doc.paragraphs[0].text = title // 한줄로 하면 이런코드 
+        ### doc.add_heading("mini-pot", 0) // 단순 생성코드 
         para = doc.paragraphs
         para[0].text = title
+
+        # 1행부터 4행까지 기입
+        para[1].text = user + " - " + plant
+        para[2].text = "조회 구간 : " + start_time + " ~ " + end_time
+        para[3].text = ""
+        para[4].text = "# " + plant + " 상태"
+        para[4].style = "contents_1"
+
+        # 테이블 정보 가져오기 
+        tables = doc.tables
+
+        # 0번째 테이블의 0행, 0열의 0칸에 기입, 중앙정렬
+        para = tables[0].rows[0].cells[0].paragraphs[0]
+        para.text = "< 처음 : " + start_time + ">"
+        para.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        # 번째 테이블의 0행, 0열의 0칸에 이미지 추가 삽입
+        para = tables[0].rows[0].cells[0].paragraphs[0]
+        run = para.add_run()
+        run.add_picture("test_image.png", width = Cm(7), height = Cm(5)) # !! 사진 비율 조정해줘야함
+
+        # 위와 동일
+        para = tables[0].rows[0].cells[1].paragraphs[0]
+        para.text = "< 마지막 : " + end_time + ">"
+        para.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        # 위와 동일
+        para = tables[0].rows[0].cells[1].paragraphs[0]
+        run = para.add_run()
+        run.add_picture("test_image.png", width = Cm(7), height = Cm(5)) # !! 사진 비율 조정해줘야함
         
-        
-        #doc.add_paragraph("ttap", style = 'a') // 스타일이 a인 내용 ttap를 생성
-
-        #para = doc.add_paragraph() // 해당 라인의 뒤에 추가로 생성
-        #run = para.add_run('mini pot - title')
-
-        # ++ 보여주는 타입을 2개로 나누어서 일반:그래프, 고급:표
+        # ++ 그래프 그리는거 가져와서 추가해야함 
+        para = doc.paragraphs
+        para[6].text = "# " + plant + " 변동 사항"
+        para[6].style = "contents_1"
 
 
+
+
+        # ++ 윗 내용 추가자리 
+
+
+
+
+        # ++ 값에 따른 반응 만들어야함...
+        para = doc.paragraphs
+        para[9].text = "# " + plant + " 특이 사항"
+        para[9].style = "contents_1"
+
+
+
+
+        # ++ 윗 내용 추가자리 
+
+
+
+
+        # 마지막 문서쓰기 (문서 생성 시간)
+        ## now_time = time.strftime('%Y%m%d-%H%M%S', time.localtime(time.time())) // 보기 안좋아서 바꿈
+        time_Y = time.strftime('%Y', time.localtime(time.time()))
+        time_m = time.strftime('%m', time.localtime(time.time()))
+        time_d = time.strftime('%d', time.localtime(time.time()))
+        time_H = time.strftime('%H', time.localtime(time.time()))
+        time_M = time.strftime('%M', time.localtime(time.time()))
+        time_S = time.strftime('%S', time.localtime(time.time()))
+        now_time = time_Y + "/" + time_m + "/" + time_d + "-" + time_H + ":" + time_M + "." + time_S
+        para = doc.add_paragraph("++ 발행 시간 " + now_time, style = "last_text")
 
         # 디버깅 : word 문서를 번호 : 내용으로 확인
-        for x, paragraph in enumerate(doc.paragraphs):
-            print(str(x) + " : " + paragraph.text)
+        #for x, paragraph in enumerate(doc.paragraphs):
+        #    print(str(x) + " : " + paragraph.text)
 
         # 생성 날짜와 유저,식물 정보로 사진을 저장
         ## ex) ZIMyMeMine_20210701-091731_T-hub
         ## ++ 지금은 하위 폴더(report_result)에 docx저장하고 pdf 변환 추후 경로 수정 필요
-        time_file = time.strftime('%Y%m%d-%H%M%S', time.localtime(time.time()))
+        now_time = time_Y + time_m + time_d + "-" + time_H + time_M + time_S
         file_path = ".\\report_result\\"
-        file_name = user + "_" + time_file + "_" + plant
+        file_name = user + "_" + now_time + "_" + plant
         doc.save(file_path + file_name + ".docx")
 
-        # 생성된 파일이름을 pdf로 변환하기 위해 전달
-        #document_make.convert_pdf(file_name) ++
+        # ++ 생성된 파일이름을 pdf로 변환하기 위해 전달
+        document_make.convert_pdf(file_name)
 
     @staticmethod
     def convert_pdf(convert_file_name):
@@ -153,4 +210,4 @@ class document_make:
         
 # test space ----------------------------------------
 ''''''
-document_make.word_form(1)
+#document_make.word_form(1)
