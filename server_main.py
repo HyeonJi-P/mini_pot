@@ -2,19 +2,9 @@ import time
 import json
 import pandas as pd
 
-from sql_server import *
+from server_recv import *
+from server_sql import *
 
-# todo (thinking + algorithme)
-### ++ 에러사항 대처 필요함 (정시에 작동하는 코드 송-수신 오류시 재전송, 식물 불일치...)
-### ++ 송수신 데이터에 분류타입 추가
-### ++ 정시 작동과 반복 작동의 분할 실행법
-### ++ a
-
-# todo (code file)
-### S-recv, save, S-send main에 맞게 설정 + 추가 계발 (사실 에내도 위에 todo 보면 거의 0.. 아니다 1부터 시작하는...)
-### manufacture, report: 0부터 시작하는 이세계 여행
-
-'''main 코드 설명'''
 # 정시 작동 함수 실행
 ''''''
 # 데이터 수신 [S-recv] 

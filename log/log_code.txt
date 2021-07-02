@@ -1,6 +1,6 @@
-<>
-1. 
-07/0
+<server_recv>
+1. 베이스
+07/02 시작
 
 
 < document_make.py >

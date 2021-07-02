@@ -5,7 +5,7 @@ import pandas as pd
 # 0. base
 '''
 * 호출시 임포트
-from sql_server import *
+from server_sql import *
 
 * dict를 json형으로 변환
 json_insert_data = json.dumps(data)
@@ -26,7 +26,7 @@ dict_message = {
 }
 
 * 호출시 예시
-sql_server.insert(dict_message)
+server_sql.insert(dict_message)
 '''
 # 1-2. insert_test : int형을 받아서 그 수만큼 자동 삽입 (~100)
 '''
@@ -35,7 +35,7 @@ sql_server.insert(dict_message)
 !! 2000-01-22 11:22:xx - xx부분만 바뀌는거라 max는 100
 
 * 호출 예시
-sql_server.insert_test(10)
+server_sql.insert_test(10)
 '''
 
 # 2. select : SQL-query문의 where이후 문자열을 받아서 조회한다.
@@ -44,20 +44,20 @@ sql_server.insert_test(10)
 temp = None
 temp = "all" // !! temp가 None이거나 "all"일 경우 모든자료 검색
 temp = "plant = 'hub'" // plant가 hub인 것만 검색
-sql_server.select(temp)
+server_sql.select(temp)
 '''
 
 # 3. delete : SQL-query문의 where이후 문자열을 받아서 삭제한다.
 '''
 * 호출 예시
 temp = "time in(SELECT min(time) FROM mytable)" // 시간이 가장 작은(오래된) 행 삭제
-sql_server.delete(temp)
+server_sql.delete(temp)
 '''
 # 3-2. db_limite : 라즈베리파이 같은경우 임시 저장소니까 갯수제한을 둬서 행을 삭제 (순서대로-예전데이터) 
 '''
 * 호출 예시
 ++ 들어가는 수 부분(10)을 라즈베리파이 메인 소스에서 변수로 지정해 둬서 고정
-sql_server.db_limite(10)
+server_sql.db_limite(10)
 
 ++ 추후 디비쪽도 어느정도 데이터의 가공이 필요하다고 생각됨 그때 조금 수정할 가능성 있음
 '''
@@ -67,7 +67,7 @@ sql_server.db_limite(10)
 * 아직은 필요 없다고 생각됨
 '''
 
-class sql_server:
+class server_sql:
     # 함수종류
     ### insert
     ### select
