@@ -34,6 +34,18 @@ from server_sql import *
 print("!! process start")
 try:
     while 1:
+        dict_message = {
+            'time' : '2000-11-22 11:22:33',
+            'plant' : 'baechu',
+            'temperature': 21,
+            'humidity': 6,
+            'illuminance': 24.13
+        }
+        dict_message = json.dumps(dict_message)
+
+        rec = server_recv.recv(dict_message)
+        
+        print(rec)
         
 
 
@@ -42,3 +54,5 @@ try:
 
 except KeyboardInterrupt:
     print("!! process down (KeyboardInterrupt)")
+
+print("!! process end")

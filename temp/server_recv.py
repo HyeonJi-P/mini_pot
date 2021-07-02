@@ -1,7 +1,7 @@
 import socket
 import json
 
-from server_sql import *
+#from server_sql import *
 import pymysql
 
 # 0. base
@@ -15,6 +15,7 @@ json_insert_data = json.dumps(data)
 * json을 dict형으로 변환
 json_updata_data = json.loads(data)
 '''
+
 class server_recv:
     # 함수종류
     ### recv 
@@ -23,9 +24,15 @@ class server_recv:
     ### 1. 
 
     @staticmethod
-    def recv(insert_data):
+    def recv(recv_data):
 
-        print("111")
+        print(recv_data)
+
+        json_recv_data = json.loads(recv_data)
+
+
+        return json_recv_data
+
 
         '''
         # 소켓 통신을 위한 소켓 생성
@@ -102,7 +109,7 @@ class server_recv:
 
 
 # test space ----------------------------------------
-''''''
+'''
 dict_message = {
     'time' : '2000-11-22 11:22:33',
     'plant' : 'baechu',
@@ -111,5 +118,5 @@ dict_message = {
     'illuminance': 24.13
 }
 
-* 호출시 예시
 server_recv.recv(dict_message)
+'''
