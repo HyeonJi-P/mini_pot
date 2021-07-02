@@ -1,9 +1,6 @@
 import socket
 import json
 
-#from server_sql import *
-import pymysql
-
 # 0. base
 '''
 * 호출시 임포트
@@ -21,102 +18,64 @@ class server_recv:
     ### recv 
 
     # 전체적인 구조
-    ### 1. 
+    ### 1. 소켓을 생성
+    ### 2. 데이터를 수신 (json)
+    ### 3. json데이터를 dict로 변환
+    ### 4. dict중 명령 데이터를 분리
+    ### 5. 수신 데이터의 확인차 수신 데이터 재 전송
+    ### 6. 연결 끊고 반환
 
     @staticmethod
-    def recv(recv_data):
+    def recv():
 
-        print(recv_data)
+        # ++ 혹시 안될경우 재시도하는 횟수 << keep
+        #retry_times = 10
 
-        json_recv_data = json.loads(recv_data)
+        # 통신을 위한 소켓 생성
+        ## ipv4, tcp 형식 사용
+        server_recv = socket.socket(socket.AF_INET, sockest.SOCK_STREAM)
 
-
-        return json_recv_data
-
-
-        '''
-        # 소켓 통신을 위한 소켓 생성
-        try:
-            server_s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  # ipv4, tcp 형식 사용
-            print("소켓 생성")
-        except socket.error as e :
-            print("***** 서버 소켓 생성 에러발생 *****")
-            print("원인 : " + e)
-
-        HOST = 'ec2-3-35-233-185.ap-northeast-2.compute.amazonaws.com'
-        #'ec2-52-79-233-24.ap-northeast-2.compute.amazonaws.com' -p
-        #'ec2-15-165-203-96.ap-northeast-2.compute.amazonaws.com' -k
+        # 소켓을 호스트, 포트를 사용하여 연결
+        ## !! 포트는 8282로 설정 (AWS에 포트포워딩 추가해야함)
+        ## !! host는 AWS인스턴스 끌때마다 바뀌니까 참고
+        HOST = 'ec2-15-165-203-96.ap-northeast-2.compute.amazonaws.com'
         PORT = 8282
-        server_s.bind((HOST,PORT))  # 소켓을 호스트와 포트에 연결
-        server_s.listen(2)  # 클라이언트에게 들을 준비 완료 (동시접속 2허용)
+        server_recv.bind((HOST,PORT))
 
-        # accept에서 대기하다 client 나타나면 새로운 소켓 리턴
-        client_s, address = server_s.accept()
+        # 클라이언트에게 들을 준비 완료
+        ## 동시접속 5허용
+        server_recv.listen(5)
 
-        print("연결 완료 : ", address)
+        # accept에서 대기하다 raspberrypi 나타나면 새로운 소켓 리턴
+        raspberrypi_send, address = server_recv.accept()
 
-        while 1:
+        # 데이터 수신
+        raspberrypi_message = raspberrypi_send.recv(1024)  # !! 1024byte 데이터 수신 (데이터량 증가시 변경 필요)
 
-            # 데이터 수신
-            client_message = client_s.recv(1024)  # 1024byte 데이터 수신
-            decode_message = client_message.decode('utf-8')  # 수신 데이터 decode
-            dict_message = json.loads(decode_message)  # 받은 json데이터를 dict형으로 변환
-            
-            # db에 저장
-            #server_sql.insert(dict_message)
+        # 수신 데이터 decode 
+        decode_message = raspberrypi_message.decode('utf-8')
 
-            # 일련의 과정 테스트를 위한 데이터 가공 # 임kbvgvgvgvgvgvgvgvgvg시용 원래는 다른 실행 파일 호출해야함 ------------
-            LED_R = dict_message['LED_R']
-            LED_G = dict_message['LED_G']
-            LED_B = dict_message['LED_B']
-            
-            if LED_R == 1:
-                LED_R = 0
-            else: 
-                LED_R = 1
+        # 수신 데이터 형 변환 (json -> dict)
+        dict_message = json.loads(decode_message)
 
-            if LED_G == 1:
-                LED_G = 0
-            else: 
-                LED_G = 1
-                
-            if LED_B == 1:
-                LED_B = 0
-            else: 
-                LED_B = 1
+        # 수신 데이터에서 명령 데이터와 내부데이터로 분리
+        ## pop로 하면 바로 삭제하고 반환이긴한데 이게 좀 더 가시적인거 같음 아마?
+        ### ++ 구분 : sensing, sensing update, change plant, report
+        order = dict_message['ORDER']
+        del dict_message['ORDER']
+        #return order, dict_message
 
-            dict_message['LED_R'] = LED_R
-            dict_message['LED_G'] = LED_G
-            dict_message['LED_B'] = LED_B
+        # TCP니까 확인을 위해서 받은내용 재전송
+        ### ++ 받은쪽에서 만약 데이터가 틀리다면 서버에 재전송 하고 서버는 그걸 처리해야함
+        raspberrypi_send.sendall(raspberrypi_message)
 
-            server_message_json = json.dumps(dict_message)  # dict를 다시 json으로 변환
-            server_message = server_message_json.encode('utf-8')
-            # -------------------------------------------------------------------------------------
+        # 연결 끊음
+        server_recv.close()
+        raspberrypi_send.close()
 
-            # 데이터 수신 확인을 위한 재전송 # 지금은 조금 변형해서 주는 1회성 UDP 방식으로 
-            print("데이터 수신완료 : ", address, client_message)
-            #client_s.sendall(client_message)
-            client_s.sendall(server_message)  # <<-
-
-
-
-            # 지금은 한번만 실행
-            break
-        
-        server_s.close()
-        client_s.close()
-        '''
+        # 반환해주고 끝~
+        return order, dict_message
 
 
 # test space ----------------------------------------
-'''
-dict_message = {
-    'time' : '2000-11-22 11:22:33',
-    'plant' : 'baechu',
-    'temperature': 21,
-    'humidity': 6,
-    'illuminance': 24.13
-}
-
-server_recv.recv(dict_message)
-'''
+''''''

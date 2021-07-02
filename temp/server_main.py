@@ -31,22 +31,16 @@ from server_sql import *
 ### 보고서용 갱신요청 송신 (from S-recv >> to R-recv)
 ### 보고서 송신 (from report >> to User)
 
-print("!! process start")
+print("!! process start \n")
 try:
     while 1:
-        dict_message = {
-            'time' : '2000-11-22 11:22:33',
-            'plant' : 'baechu',
-            'temperature': 21,
-            'humidity': 6,
-            'illuminance': 24.13
-        }
-        dict_message = json.dumps(dict_message)
 
-        rec = server_recv.recv(dict_message)
-        
-        print(rec)
-        
+        # raspberrypi_message를 수신
+        # 데이터 가공 (dict, ORDER...)
+        order, recv_data = server_recv.recv()
+
+        if order == "":
+            print(1)
 
 
         # 지금은 1회 테스트 
@@ -55,4 +49,4 @@ try:
 except KeyboardInterrupt:
     print("!! process down (KeyboardInterrupt)")
 
-print("!! process end")
+print("\n !! process end")
