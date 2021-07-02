@@ -37,10 +37,15 @@ try:
 
         # raspberrypi_message를 수신
         # 데이터 가공 (dict, ORDER...)
+        ## ++ ORDER : sensing, sensing update, change plant, report
         order, recv_data = server_recv.recv()
 
-        if order == "":
-            print(1)
+        # 수신 데이터가 센싱, 센싱+보고서일 경우 server_save로
+        if (order == "sensing") or (order == "sensing update"):
+            server_save.insert_data()
+
+        elif order == "report":
+            server_send.send()
 
 
         # 지금은 1회 테스트 
@@ -48,5 +53,7 @@ try:
 
 except KeyboardInterrupt:
     print("!! process down (KeyboardInterrupt)")
-
 print("\n !! process end")
+
+# test space ----------------------------------------
+''''''

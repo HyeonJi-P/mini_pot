@@ -1,17 +1,10 @@
 import pymysql
-import json  # ++ 지금은 안쓰이냄... 이따 연결때 바뀔지 봐야됨
 import pandas as pd
 
 # 0. base
 '''
 * 호출시 임포트
 from server_sql import *
-
-* dict를 json형으로 변환
-json_insert_data = json.dumps(data)
-
-* json을 dict형으로 변환
-json_updata_data = json.loads(data)
 '''
 
 # 1. insert : dict형을 받아서 디비에 저장해준다.

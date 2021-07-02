@@ -63,7 +63,6 @@ class server_recv:
         ### ++ 구분 : sensing, sensing update, change plant, report
         order = dict_message['ORDER']
         del dict_message['ORDER']
-        #return order, dict_message
 
         # TCP니까 확인을 위해서 받은내용 재전송
         ### ++ 받은쪽에서 만약 데이터가 틀리다면 서버에 재전송 하고 서버는 그걸 처리해야함
