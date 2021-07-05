@@ -84,11 +84,19 @@ print("----------3")
 '''
 
 
-# ㅇ
-''''''
-a = 1
+# 현제 시간만 구하기 
+'''
+import time
+
+now = time.localtime(time.time())
+
+print(type(now.tm_hour))
+print(now.tm_hour)
 
 
+if now.tm_hour == 15:
+    print("1111")
+'''
 
 
 

@@ -60,6 +60,13 @@ server_sql.db_limite(10)
 * 아직은 필요 없다고 생각됨
 '''
 
+# 5. report_data : 보고서에서 필요한 데이터를 가져오는 작업
+'''
+* 호출 예시
+
+server_main.report_data()
+'''
+
 class server_sql:
     # 함수종류
     ### insert
@@ -68,6 +75,7 @@ class server_sql:
     ### db_limite
     ### insert_test
     ### update
+    ### report_data
 
     # 전체적인 구조
     ### 1. conn으로 디비에 연결하고
@@ -229,6 +237,22 @@ class server_sql:
         finally:
             conn.close()
         '''
+        
+    @staticmethod
+    def report_data(update_data):
+        conn = pymysql.connect(host='localhost', port=3306, user='auint', password='pwpw', 
+        db = 'mysql', charset='utf8')
+        try:
+            with conn.cursor() as cur:
+
+
+
+
+
+                conn.commit()
+        finally:
+            conn.close()
+
 
 # test space ----------------------------------------
 ''''''
