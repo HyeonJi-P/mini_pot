@@ -5,7 +5,7 @@ from docx.shared import Cm, Inches # 이미지 삽입시 길이 단위
 
 import time # 파일생성시 이름에 날짜로 정렬
 
-from docx2pdf import convert# docx를 pdf로 변환
+from docx2pdf import convert # docx를 pdf로 변환
 
 # ++ from fpdf import FPDF (keep)
 # ++ import pandas as pd (keep)
@@ -13,7 +13,7 @@ from docx2pdf import convert# docx를 pdf로 변환
 # 0. base
 '''
 * 사용시
-from document_make import *
+from server_report import *
 
 * 새로운 임포트 설치
 pip3 install python-docx
@@ -28,10 +28,10 @@ conda update --all
 python -m pip install --upgrade pip
 '''
 
-# 1. word (미사용)
+# 1. word (미사용, 단순 테스트)
 '''
 * 실행 예시 
-document_make.word(1) # 1 == anything
+server_report.word()
 '''
 
 # 2. word_form
@@ -40,23 +40,23 @@ document_make.word(1) # 1 == anything
 ++ a
 
 * 실행 예시 
-document_make.word_form(++a)
+server_report.word_form(++a)
 '''
 
 # 3. convert_pdf
 '''
 * 실행 예시 
-document_make.convert_pdf(1)
+server_report.convert_pdf(1)
 
 * 작동 원리
 word_form에서 호출하는 식으로 작동
 '''
 
 
-class document_make:
+class server_report:
     # 함수종류
-    ### word : docx 생성 - 오직 코드로만 (미사용)
-    ### word_form : 미리 정해진 양식을 사용하여 docx 생성
+    ### word : docx 생성 - 오직 코드로만 문서 생성 (미사용)
+    ### word_form : 미리 정해진 양식(문서)을 사용하여 docx 생성
     ### convert_pdf : docx를 pdf로 변환
 
     # 전체적인 구조
@@ -64,11 +64,11 @@ class document_make:
     ### docx를 pdf로 변환
 
     @staticmethod
-    def word(insert_data):
+    def word():
         doc = docx.Document() # docx 생성
 
         para = doc.add_paragraph() 
-        run = para.add_run('mini pot - title') # +본문
+        run = para.add_run("mini pot - title") # +본문
 
         run.font.size = docx.shared.Pt(30) # 폰트크기 
         run.bold = True # 볼트체 
@@ -81,7 +81,7 @@ class document_make:
         # 이미지 삽입
         ### ++ 이미지의 원래 비율에 맞개 줄이는 방법을 생각해야함
         ### ++ 아니면 규격을 정해놔서 거기에 맞춰야함
-        doc.add_picture("test_image.png", width = Cm(13), height = Cm(8))
+        doc.add_picture(".\\report_template\\test_image.png", width = Cm(13), height = Cm(8))
 
         # 단락 생성
         doc.add_paragraph('첫번째 단락', style='List Bullet')
@@ -89,16 +89,17 @@ class document_make:
 
         # 공문서 : https://python-docx.readthedocs.io/en/latest/
 
-        doc.save("time_plant.docx")
+        # "test.docx" << 현제 위치에 생성
+        doc.save(".\\report_result\\test.docx")
 
     @staticmethod
     def word_form(insert_data):
         # report_form을 가져와서 새로운 docx를 만들고 저장할 꺼임!
         ## ++ 리눅스에서 폰트 같은 문제가 발생할 수 있기때문에 리눅스에서 테스트 해야함
-        doc = docx.Document("report_form.docx")
+        doc = docx.Document(".\\report_template\\report_form.docx")
 
         # 변수에 전달 받은 값을 넣어서 자동화
-        # ++ 변수 추가 설정 (받은 데이터, 내부 설계)
+        # ++ insert_data의 값들을 매칭해 줘야함 지금은 임시로 그냥 준거임
         title = "mini pot"
         user = "ZIMyMeMine"
         plant = "T-hub"
@@ -128,7 +129,7 @@ class document_make:
         # 번째 테이블의 0행, 0열의 0칸에 이미지 추가 삽입
         para = tables[0].rows[0].cells[0].paragraphs[0]
         run = para.add_run()
-        run.add_picture("test_image.png", width = Cm(7), height = Cm(5)) # !! 사진 비율 조정해줘야함
+        run.add_picture(".\\report_template\\test_image.png", width = Cm(7), height = Cm(5)) # !! 사진 비율 조정해줘야함
 
         # 위와 동일
         para = tables[0].rows[0].cells[1].paragraphs[0]
@@ -137,7 +138,7 @@ class document_make:
         # 위와 동일
         para = tables[0].rows[0].cells[1].paragraphs[0]
         run = para.add_run()
-        run.add_picture("test_image.png", width = Cm(7), height = Cm(5)) # !! 사진 비율 조정해줘야함
+        run.add_picture(".\\report_template\\test_image.png", width = Cm(7), height = Cm(5)) # !! 사진 비율 조정해줘야함
         
         # ++ 그래프 그리는거 가져와서 추가해야함 
         para = doc.paragraphs
@@ -189,7 +190,7 @@ class document_make:
         doc.save(file_path + file_name + ".docx")
 
         # ++ 생성된 파일이름을 pdf로 변환하기 위해 전달
-        document_make.convert_pdf(file_name)
+        server_report.convert_pdf(file_name)
 
     @staticmethod
     def convert_pdf(convert_file_name):
@@ -210,4 +211,6 @@ class document_make:
         
 # test space ----------------------------------------
 ''''''
-#document_make.word_form(1)
+#server_report.word() # 단순 문서생성 테스트
+
+server_report.word_form(1) #

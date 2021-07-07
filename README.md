@@ -5,39 +5,30 @@ U4-ER_project (smart green house)
 phj, kjs  
   
 ## 구성  
-* temp 폴더 : 테스트 or 추후 사용가능 코드  
+* temp 폴더 : 테스트 or 개발중 or 추후 사용가능 코드  
     + .idea : 파이참 설정 폴더 (사용 X)  
     + log_* : 예전 기록 + 추후 참고가능  
     + python_test.py : 파이썬 구동 테스트 (단순 print)  
 * blueprint 폴더 : 설계도면 모음  
 * log 폴더 : 기록 모음  
 * module_code 폴더 : 일부분 완성되어 추후 통합할 코드 모음  
-
-- 모듈 완성후 server_main.py에 들어감 
-- server_main.py : 현제 진행중 이름 그대로 서버실행의 메인  
+* report_result 폴더 : 보고서가 작성되서 저장되는 장소
+* report_template 폴더 : 보고서 작성시 사용되는 탬플릿, 사진 저장구간
   
-  
-## 약어 (나중에 볼때 편하시라구 ㅇㅅㅇ ctr+f)  
+## 약어 (ctr+f로 보기 편하게)  
 !! : 주의사항  
 ++ : 추후 수정사항, 개선사항  
   
-#, ''', : 큰 목차  
-*, +, - : 작은 목차  
-#, ##, ### : 설명시 목차  
-// : ''''''내부 설명 구분하기 위해서  
-  
 ## todo (now)  
-1. 실행 프로세스간 정보전달 (Question)  
-2. 디비 테이블 분리 or 통합 (개인마다 데이터 분리할껀지 Q)  
-3. ++ a
-### todo (thinking + algorithme)  
+1. table 구조 설계 (회원가입 추가해서...)  
+2. 보고서 작성 양식과 전달 데이터 확정  ==>  전달 데이터 확정시 파이썬에서 가공작업  
+3. 송신(server_send) 제작  
+4. 식물변경 함수 추가 (server_sql) << 1하고 할 수 있을꺼 같음  
+#### todo (thinking + algorithme)  
 ++ 정시 작동과 반복 작동의 분할 실행법  
-++ 보고서 작성 양식과 전달 데이터 확정  ==>  전달 데이터 확정시 파이썬에서 가공작업  
-++ a  
-### todo (code file)  
-++ S-recv, save, S-send main에 맞게 설정 + 추가 계발 (사실 에내도 위에 todo 보면 거의 0.. 아니다 1부터 시작하는...)  
-++ manufacture, report: 0부터 시작하는 이세계 여행  
-## todo (keep)  
+++ 실행 프로세스간 정보전달 (Question)  
+++ 디비 테이블 분리 or 통합 (개인마다 데이터 분리할껀지 Q) 
+#### todo (keep)  
 1. 여러 사용자가 사용 가능하게 (keep)  
 2. 젝슨 나노 사용 (keep)  
 3. 보안문제 생각해보기 (keep)  

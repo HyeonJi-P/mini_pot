@@ -253,6 +253,28 @@ class server_sql:
         finally:
             conn.close()
 
+    @staticmethod
+    def plant_guide(update_data):
+        conn = pymysql.connect(host='localhost', port=3306, user='auint', password='pwpw', 
+        db = 'mysql', charset='utf8')
+        try:
+            with conn.cursor() as cur:
+
+                conn.commit()
+        finally:
+            conn.close()
+
+    @staticmethod
+    def plant_change(update_data):
+        conn = pymysql.connect(host='localhost', port=3306, user='auint', password='pwpw', 
+        db = 'mysql', charset='utf8')
+        try:
+            with conn.cursor() as cur:
+
+                conn.commit()
+        finally:
+            conn.close()
+
 
 # test space ----------------------------------------
 ''''''
