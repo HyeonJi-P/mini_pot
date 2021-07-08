@@ -4,7 +4,8 @@ import pandas as pd
 
 from server_recv import *
 from server_sql import *
-from document_make import *
+from server_report import *
+from server_send import *
 
 # 정시 작동 함수 실행
 ''''''
@@ -35,23 +36,23 @@ from document_make import *
 print("!! process start \n")
 try:
     while 1:
-
-        # ++ 송신때 order을 추가로 더해서 보내줘야함
-        ## ++ ORDER : plant guide, sensing update, report
-        ## ++ order안 겹치게? 
-        # ++ DBtable설계가 필요함
-
         # 전체적인 구조
         ### 1. 정시에 작동되는 프로세스 실행
-        ##### 1. 생장조건 갱신 << ++ 회원 테이블 생성 해야함, ++ 회원과 연결, ++ 다중 배포
-        ##### 2. 보고서 작성 << ++ 보고서용 데이터 추출, ++ 그에 맞게 이미지 생성, ++ docx에 붙이기
+        ##### 1. 생장조건 갱신 << ++ table 설계 이후 << ++ 회원과 연결, ++ 다중 배포
+        
+        ##### 2. 보고서 작성 << ++ 보고서용 데이터 추출(형식필요)이후 << 그에 맞게 이미지 생성, docx에 붙이기, file 전송
         ### 2. RPi로 부터 메시지 수신
         ##### 1. 메시지 수신, 변환, 가공 << ++ 정시 작동을 위해 특정 시간에는 빠져 나오도록? 하거나 추가 설정이 필요함
         ##### 2. 수신 데이터 분기점 시작 [ 정시보고(센싱), 사용자 요청 갱신(센싱+보고서), 식물변경, 보고서요청 ]
         ####### 1. 정시보고(센싱)
         ####### 2. 수시보고(센싱+보고서) << ++ 보고서 마무리, ++ 송신 마무리
         ####### 3. 식물변경 << ++ sql에서 새로운 함수 만들어서 전송하기
-        ####### 4. 보고서 요청 << ++ 송신 완성하기
+        ####### 4. 보고서 요청 << ++ RPi의 송수신, main만들어서 해봐야함
+
+
+
+        # ++ 전체 함수에 인자값 추가해서 돌아가는 식으로 생성
+        # ++++ 송신 부분에 order 추가
 
 
 
@@ -61,21 +62,21 @@ try:
         now_time = time.localtime(time.time())
         if now_time.tm_hour == 17:
             # 생장조건 갱신 (5시)
-            ## ++ 생장 조건 table에서 사용자에 맞는 식물을 보내줘야함 
-            ## ++++ 생장 조건 table이 변경 되었을때 하는게 좋음
+            # ++ 모든 회원의 식물을 조회하여 변경점이 생긴 식물을 가지고 있는 기기에 송신
             server_sql.plant_guide() # 생장조건이 변경된 모든 식물 조회, 그 식물을 소지한 모든 회원에게 보낼 데이터 만들기
             server_send.send() # 생장 조건을 모든 회원의 RPi로 송신
         if now_time.tm_hour == 18:
             # 보고서 정시 작성 (6시)
-            server_sql.report_data() # 보고서용 데이터를 가져와서
-            document_make.word_form() # 보고서를 만들고
-            server_send.send() # 송신
+            server_sql.report_data() # 보고서용 데이터를 가져와서 (++ dict???)
+            document_make.word_form() # 보고서를 만들고 (++ 경로반환???)
+            server_send.send() # 송신 (++ file socket 사용?, ++ 안드로이드 부분 정립후 다시 해야함)
         
 
         
         # raspberrypi_message를 수신 - - - - - - - - - -
         ## 데이터 가공 : json을 dict로 변환, ORDER부분은 따로 추출
         ## ++ ORDER : sensing, sensing update, change plant, report
+        ## ++ ORDER : plant guide, sensing update, report
         order, recv_data = server_recv.recv()
 
         # ++ recv중에서 받아오는 시간의 제한을 두고 받은 데이터가 없다면 order을 pass로 줘서
