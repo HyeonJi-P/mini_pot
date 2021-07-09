@@ -39,7 +39,6 @@ try:
         # 전체적인 구조
         ### 1. 정시에 작동되는 프로세스 실행
         ##### 1. 생장조건 갱신 << ++ table 설계 이후 << ++ 회원과 연결, ++ 다중 배포
-        
         ##### 2. 보고서 작성 << ++ 보고서용 데이터 추출(형식필요)이후 << 그에 맞게 이미지 생성, docx에 붙이기, file 전송
         ### 2. RPi로 부터 메시지 수신
         ##### 1. 메시지 수신, 변환, 가공 << ++ 정시 작동을 위해 특정 시간에는 빠져 나오도록? 하거나 추가 설정이 필요함
@@ -50,7 +49,7 @@ try:
         ####### 4. 보고서 요청 << ++ RPi의 송수신, main만들어서 해봐야함
 
 
-
+        # 1-1, 2-1, 2-2-2,3,4
         # ++ 전체 함수에 인자값 추가해서 돌아가는 식으로 생성
         # ++++ 송신 부분에 order 추가
 
@@ -89,7 +88,7 @@ try:
         # 수신 데이터 : 센싱데이터 수신, 센싱+보고서
         if (order == "sensing") or (order == "sensing update"):
             # 일반 센싱 데이터 수신이면 저장만 하고 끝
-            server_sql.insert_data()
+            server_sql.insert(recv_data)
 
             # 센싱 + 보고서일 경우 바로 보고서 제작 
             if order == "sensing update":
@@ -111,7 +110,7 @@ try:
         # 수신 데이터 : 보고서 요청
         elif order == "report":
             # RPi에 갱신요청
-            server_send.send() # ++ server_send:소스코드 생성
+            server_send.send("report", recv_data) # !! recv에서 order만 있는 경우 빈 dict가 생성됨 진행 가능?
 
 
 

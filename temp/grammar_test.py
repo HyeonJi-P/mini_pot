@@ -98,9 +98,39 @@ if now.tm_hour == 15:
     print("1111")
 '''
 
+# 빈 dict 자료형 테스트
+''''''
+
+def test(tt):
+    print("def:")
+    print(" ", type(tt))
+    print(" ", tt)
+    return tt
+
+data = {
+    'time' : '1111-22-33 44:55:66',
+    'plant' : 'baechu',
+    'temperature': 21,
+    'humidity': 6,
+    'illuminance': 24.13
+}
+print(type(data))
+print(data)
 
 
+del data['time']
+del data['plant']
+del data['temperature']
+del data['humidity']
+del data['illuminance']
+print(type(data))
+print(data)
 
+data = test(data)
+
+data['rr'] = "asdf"
+print(type(data))
+print(data)
 
 
 
