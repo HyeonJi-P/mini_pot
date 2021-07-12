@@ -100,40 +100,42 @@ class server_report:
 
         # 변수에 전달 받은 값을 넣어서 자동화
         # ++ insert_data의 값들을 매칭해 줘야함 지금은 임시로 그냥 준거임
-        title = "mini pot"
+        title = "mini pot" 
         user = "ZIMyMeMine"
         plant = "T-hub"
-        start_time = "nnnn/mm/dd.hh"
-        end_time = "nnnn/mm/dd.hh"
+        start_time = "nnnn/mm/dd.hh" # ++ 사용X?
+        end_time = "nnnn/mm/dd.hh" # ++ 사용X?
+        search_time = "nnnn/mm/dd" # ++ 하루, 일주일, 달 마다 다르게 처리해 줘야함...
         
         # 제목 부분(para[0] : 0번째 행)에 title 변수를 대입 
         ## doc.paragraphs[0].text = title // 한줄로 하면 이런코드 
         ### doc.add_heading("mini-pot", 0) // 단순 생성코드 
         para = doc.paragraphs
-        para[0].text = title
+        para[0].text = user + "님의 " + plant + "성장보고서"
 
-        # 1행부터 4행까지 기입
-        para[1].text = user + " - " + plant
-        para[2].text = "조회 구간 : " + start_time + " ~ " + end_time
-        para[3].text = ""
-        para[4].text = "# " + plant + " 상태"
-        para[4].style = "contents_1"
+        # 1행부터 3행까지 기입
+        para[1].text = "조회 구간 : " + search_time
+        para[2].text = ""
+
+        para[3].text = "# " + plant + " 상태"
+        para[3].style = "contents_1"
 
         # 테이블 정보 가져오기 
         tables = doc.tables
 
         # 0번째 테이블의 0행, 0열의 0칸에 기입, 중앙정렬
         para = tables[0].rows[0].cells[0].paragraphs[0]
-        para.text = "< 처음 : " + start_time + ">"
+        para.text = "< 시작 상태 >"
         para.alignment = WD_ALIGN_PARAGRAPH.CENTER
         # 번째 테이블의 0행, 0열의 0칸에 이미지 추가 삽입
         para = tables[0].rows[0].cells[0].paragraphs[0]
         run = para.add_run()
         run.add_picture(".\\report_template\\test_image.png", width = Cm(7), height = Cm(5)) # !! 사진 비율 조정해줘야함
+        # ++ 사진의 위치 전달받기 or 디비에서 가져와서 전달받기 
 
         # 위와 동일
         para = tables[0].rows[0].cells[1].paragraphs[0]
-        para.text = "< 마지막 : " + end_time + ">"
+        para.text = "< 마지막 상태 >"
         para.alignment = WD_ALIGN_PARAGRAPH.CENTER
         # 위와 동일
         para = tables[0].rows[0].cells[1].paragraphs[0]
@@ -142,8 +144,8 @@ class server_report:
         
         # ++ 그래프 그리는거 가져와서 추가해야함 
         para = doc.paragraphs
-        para[6].text = "# " + plant + " 변동 사항"
-        para[6].style = "contents_1"
+        para[5].text = "# " + plant + " 변동 사항"
+        para[5].style = "contents_1"
 
 
 
@@ -155,13 +157,25 @@ class server_report:
 
         # ++ 값에 따른 반응 만들어야함...
         para = doc.paragraphs
-        para[9].text = "# " + plant + " 특이 사항"
-        para[9].style = "contents_1"
+        para[8].text = "# " + plant + " 특이 사항"
+        para[8].style = "contents_1"
 
 
 
 
         # ++ 윗 내용 추가자리 
+
+
+        # 모든 라인을 돌아볼꺼임 
+        for p in doc.paragraphs:
+
+            # 어떤 라인에 "adcdefg"가 있다면 변수testA를 뒤에 추가
+            if "adcdefg" in p.text: 
+                p.add_run(testA)
+
+            # 어떤 라인에 "{test}"가 있다면 변수testR로 변경
+            elif "{test}" in p.text: 
+                p.text = p.text.replace("{test}",testR)
 
 
 
