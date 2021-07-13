@@ -58,6 +58,8 @@ class server_report:
     ### word : docx 생성 - 오직 코드로만 문서 생성 (미사용)
     ### word_form : 미리 정해진 양식(문서)을 사용하여 docx 생성
     ### convert_pdf : docx를 pdf로 변환
+    ### ++ 타임랩스 만들기 
+    ### ++ 아이콘사용해서 가시화 하기
 
     # 전체적인 구조
     ### docx형식 파일을 불러와서 받은 데이터를 대입시킴
@@ -106,6 +108,7 @@ class server_report:
         start_time = "nnnn/mm/dd.hh" # ++ 사용X?
         end_time = "nnnn/mm/dd.hh" # ++ 사용X?
         search_time = "nnnn/mm/dd" # ++ 하루, 일주일, 달 마다 다르게 처리해 줘야함...
+        # NNNN년 MM월 DD일, NNNN년 MM월 4주, NNNN년 MM월
         
         # 제목 부분(para[0] : 0번째 행)에 title 변수를 대입 
         ## doc.paragraphs[0].text = title // 한줄로 하면 이런코드 
@@ -113,25 +116,26 @@ class server_report:
         para = doc.paragraphs
         para[0].text = user + "님의 " + plant + "성장보고서"
 
-        # 1행부터 3행까지 기입
+        # 1행부터 4행까지 기입 (이때는 p[]를 써서 절대 좌표같은 느낌으로 접근 )
         para[1].text = "조회 구간 : " + search_time
         para[2].text = ""
 
         para[3].text = "# " + plant + " 상태"
-        para[3].style = "contents_1"
+        para[3].style = "contents_1" # 없어도 되게 해놓긴 했는대 오류 방지용으로...
+        para[4].text = ""
 
-        # 테이블 정보 가져오기 
+        # 문서에서 테이블 정보 가져오기 
         tables = doc.tables
-
         # 0번째 테이블의 0행, 0열의 0칸에 기입, 중앙정렬
         para = tables[0].rows[0].cells[0].paragraphs[0]
         para.text = "< 시작 상태 >"
         para.alignment = WD_ALIGN_PARAGRAPH.CENTER
-        # 번째 테이블의 0행, 0열의 0칸에 이미지 추가 삽입
+        # 번째 테이블의 0행, 0열의 0칸에 이미지 추가 삽입 
         para = tables[0].rows[0].cells[0].paragraphs[0]
         run = para.add_run()
         run.add_picture(".\\report_template\\test_image.png", width = Cm(7), height = Cm(5)) # !! 사진 비율 조정해줘야함
-        # ++ 사진의 위치 전달받기 or 디비에서 가져와서 전달받기 
+        # ++ 사진의 위치 전달받기 or 디비에서 가져와서 전달받기
+        # ++ 하루일경우 이미지는 하나만 처리 할 수 있게끔  
 
         # 위와 동일
         para = tables[0].rows[0].cells[1].paragraphs[0]
@@ -142,40 +146,22 @@ class server_report:
         run = para.add_run()
         run.add_picture(".\\report_template\\test_image.png", width = Cm(7), height = Cm(5)) # !! 사진 비율 조정해줘야함
         
-        # ++ 그래프 그리는거 가져와서 추가해야함 
-        para = doc.paragraphs
-        para[5].text = "# " + plant + " 변동 사항"
-        para[5].style = "contents_1"
-
-
-
-
-        # ++ 윗 내용 추가자리 
-
-
-
-
-        # ++ 값에 따른 반응 만들어야함...
-        para = doc.paragraphs
-        para[8].text = "# " + plant + " 특이 사항"
-        para[8].style = "contents_1"
-
-
-
-
-        # ++ 윗 내용 추가자리 
-
-
+        # {}로 문자를 구별해서 접근 (고정식으로 접근하면 오류가 생길까봐
         # 모든 라인을 돌아볼꺼임 
+        '''
         for p in doc.paragraphs:
 
             # 어떤 라인에 "adcdefg"가 있다면 변수testA를 뒤에 추가
-            if "adcdefg" in p.text: 
+            if "{특이사항}" in p.text: 
                 p.add_run(testA)
 
             # 어떤 라인에 "{test}"가 있다면 변수testR로 변경
-            elif "{test}" in p.text: 
+            elif "{평가}" in p.text: 
                 p.text = p.text.replace("{test}",testR)
+        '''
+
+
+
 
 
 
@@ -189,7 +175,7 @@ class server_report:
         time_M = time.strftime('%M', time.localtime(time.time()))
         time_S = time.strftime('%S', time.localtime(time.time()))
         now_time = time_Y + "/" + time_m + "/" + time_d + "-" + time_H + ":" + time_M + "." + time_S
-        para = doc.add_paragraph("++ 발행 시간 " + now_time, style = "last_text")
+        para = doc.add_paragraph("@ 발행 시간 : " + now_time, style = "last_text")
 
         # 디버깅 : word 문서를 번호 : 내용으로 확인
         #for x, paragraph in enumerate(doc.paragraphs):
@@ -204,7 +190,7 @@ class server_report:
         doc.save(file_path + file_name + ".docx")
 
         # ++ 생성된 파일이름을 pdf로 변환하기 위해 전달
-        server_report.convert_pdf(file_name)
+        #!!++server_report.convert_pdf(file_name)
 
     @staticmethod
     def convert_pdf(convert_file_name):
