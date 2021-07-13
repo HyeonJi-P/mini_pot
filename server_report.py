@@ -211,6 +211,6 @@ class server_report:
         
 # test space ----------------------------------------
 ''''''
-#server_report.word() # 단순 문서생성 테스트
+server_report.word() # 단순 문서생성 테스트
 
-server_report.word_form(1) #
+#server_report.word_form(1) #
