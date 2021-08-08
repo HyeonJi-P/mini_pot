@@ -33,6 +33,8 @@ print(temp_del)
 plt.figure(figsize=(10,5)) #표 사이즈
 sns.set(style="darkgrid") #스타일 설정
 ax = sns.lineplot(x='day',y='mean', data=temp_del) #평균기온
-ax = sns.lineplot(x='day',y='lowest', data=temp_del) #최저기온
-ax = sns.lineplot(x='day',y='highest', data=temp_del) #최고기온
+ax = sns.lineplot(x='day',y='lowest', data=temp_del ) #최저기온
+ax = sns.lineplot(x='day',y='highest', data=temp_del ) #최고기온
+plt.title('July Temperature') #타이틀 표시. 있어도 되고 없어도 되고
+plt.legend(labels =['mean', 'lowest', 'highest']) #범례 자동으로 추가가 안되서 명시적으로 설정!
 plt.show()
