@@ -6,8 +6,16 @@ import matplotlib.font_manager as fm
 
 ######설치안된것들은 'pip install 설치할것' 으로 커멘드
 
-#csv파일 읽기
-temp_all = pd.read_csv("./mini_pot/temperature.csv", encoding='cp949')
+#def mk_graph(file_name, x_col, y_col, title):
+    #파일 읽기
+    #데이터 정제?
+    #표 사이즈설정 및 그리기
+    #타이틀 표시
+    #범례?
+    #show
+
+#파일 읽기
+temp_all = pd.read_csv("./temperature.csv", encoding='cp949')
 
 #필요없는 컬럼 제거(지점)
 temp_del=temp_all.drop(columns={'지점'})
