@@ -107,8 +107,8 @@ class server_report:
         search_time = "nnnn/mm/dd" # ++ 하루, 일주일, 달 마다 다르게 처리해 줘야함...
         ## ++ NNNN년 MM월 DD일, NNNN년 MM월 4주, NNNN년 MM월
         # 식물사진2개, 온도-습도-영양액농도 그래프 사진 각각 1개
-        plant_image_1 = ".\\report_template\\test_image.png"
-        plant_image_2 = ".\\report_template\\test_image.png"
+        plant_image_1 = ".\\report_template\\plant_image.jpg"
+        plant_image_2 = ".\\report_template\\plant_image.jpg"
         temperature_image = ".\\report_template\\test_image.png"
         humidity_image = ".\\report_template\\test_image.png"
         nutrient_water_image = ".\\report_template\\test_image.png"
@@ -241,11 +241,16 @@ class server_report:
 
         
 # test space ----------------------------------------
-''''''
+'''
 server_report.word() # 단순 문서생성 테스트
 
 <<<<<<< HEAD
-#server_report.word_form(1) #
+#server_report.word_form(1) # 
 =======
 server_report.word_form(1)
 >>>>>>> 8e7d4524058bf033716ea1c00715e6573f2fb84f
+
+++이거 뭔 오류더라.... 있다가 todo에 등록하기...
+'''
+
+server_report.word_form(1)
