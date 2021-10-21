@@ -4,6 +4,9 @@ U4-ER_project (smart green house)
 ## 팀원  
 phj, kjs  
   
+## 재구성
+깃을 다시 파서 정리하기?
+  
 ## 구성  
 * temp 폴더 : 테스트 or 개발중 or 추후 사용가능 코드  
     + .idea : 파이참 설정 폴더 (사용 X)  
