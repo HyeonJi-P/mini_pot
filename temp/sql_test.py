@@ -3,7 +3,7 @@ import json
 import pandas as pd
 
 def test():
-    conn = pymysql.connect(host='localhost', port=3306, user='auint', password='pwpw',
+    conn = pymysql.connect(host='localhost', port=3306, user='auint', password='password',
     db = 'mysql', charset='utf8')
     cur = conn.cursor()
 

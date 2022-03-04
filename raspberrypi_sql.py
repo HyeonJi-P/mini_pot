@@ -27,8 +27,8 @@ class respberrypi_sql:
 
     @staticmethod
     def insert(insert_data):
-        conn = pymysql.connect(host='localhost', port=3306, user='auint', password='pwpw', 
-        db = 'mysql', charset='utf8') # 예전 비번 : *6CC6A1C22CFFA93B23769CAE343636557E024D12
+        conn = pymysql.connect(host='localhost', port=3306, user='auint', password='password', 
+        db = 'mysql', charset='utf8') # 예전 비번 : -
         try:
             # cur = conn.cursor()랑 같은 의미
             with conn.cursor() as cur:

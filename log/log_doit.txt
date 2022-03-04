@@ -221,7 +221,7 @@ sudo mysql -u root -p로 접속
 service mysqld start 
 UPDATE user SET password='' WHERE user='root';
 
-UPDATE mysql.user SET password='*6CC6A1C22CFFA93B23769CAE343636557E024D12' WHERE user='auint';
+UPDATE mysql.user SET password='password' WHERE user='auint';
 
 7. 테이블 생성
 CREATE TABLE mytable(

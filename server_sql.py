@@ -86,8 +86,8 @@ class server_sql:
 
     @staticmethod
     def insert(insert_data):
-        conn = pymysql.connect(host='localhost', port=3306, user='auint', password='pwpw', 
-        db = 'mysql', charset='utf8') # 예전 비번 : *6CC6A1C22CFFA93B23769CAE343636557E024D12
+        conn = pymysql.connect(host='localhost', port=3306, user='auint', password='password', 
+        db = 'mysql', charset='utf8') # 예전 비번 : -
         try:
             # cur = conn.cursor()랑 같은 의미
             with conn.cursor() as cur:
@@ -124,7 +124,7 @@ class server_sql:
 
     @staticmethod
     def select(where_data):
-        conn = pymysql.connect(host='localhost', port=3306, user='auint', password='pwpw', 
+        conn = pymysql.connect(host='localhost', port=3306, user='auint', password='password', 
         db = 'mysql', charset='utf8')
         try:
             with conn.cursor() as cur:
@@ -158,7 +158,7 @@ class server_sql:
 
     @staticmethod
     def delete(delete_data):
-        conn = pymysql.connect(host='localhost', port=3306, user='auint', password='pwpw', 
+        conn = pymysql.connect(host='localhost', port=3306, user='auint', password='password', 
         db = 'mysql', charset='utf8')
         try:
             with conn.cursor() as cur:
@@ -174,7 +174,7 @@ class server_sql:
 
     @staticmethod
     def db_limite(limite_count):
-        conn = pymysql.connect(host='localhost', port=3306, user='auint', password='pwpw', 
+        conn = pymysql.connect(host='localhost', port=3306, user='auint', password='password', 
         db = 'mysql', charset='utf8')
         try:
             with conn.cursor() as cur:
@@ -208,7 +208,7 @@ class server_sql:
 
     @staticmethod
     def insert_test(test_n):
-        conn = pymysql.connect(host='localhost', port=3306, user='auint', password='pwpw', 
+        conn = pymysql.connect(host='localhost', port=3306, user='auint', password='password', 
         db = 'mysql', charset='utf8')
         try:
             with conn.cursor() as cur:
@@ -228,7 +228,7 @@ class server_sql:
     @staticmethod
     def update(update_data):
         '''
-        conn = pymysql.connect(host='localhost', port=3306, user='auint', password='pwpw', 
+        conn = pymysql.connect(host='localhost', port=3306, user='auint', password='password', 
         db = 'mysql', charset='utf8')
         try:
             with conn.cursor() as cur:
@@ -240,7 +240,7 @@ class server_sql:
         
     @staticmethod
     def report_data(update_data):
-        conn = pymysql.connect(host='localhost', port=3306, user='auint', password='pwpw', 
+        conn = pymysql.connect(host='localhost', port=3306, user='auint', password='password', 
         db = 'mysql', charset='utf8')
         try:
             with conn.cursor() as cur:
@@ -255,7 +255,7 @@ class server_sql:
 
     @staticmethod
     def plant_guide(update_data):
-        conn = pymysql.connect(host='localhost', port=3306, user='auint', password='pwpw', 
+        conn = pymysql.connect(host='localhost', port=3306, user='auint', password='password', 
         db = 'mysql', charset='utf8')
         try:
             with conn.cursor() as cur:
@@ -266,7 +266,7 @@ class server_sql:
 
     @staticmethod
     def plant_change(update_data):
-        conn = pymysql.connect(host='localhost', port=3306, user='auint', password='pwpw', 
+        conn = pymysql.connect(host='localhost', port=3306, user='auint', password='password', 
         db = 'mysql', charset='utf8')
         try:
             with conn.cursor() as cur:

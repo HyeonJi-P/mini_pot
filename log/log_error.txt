@@ -263,7 +263,7 @@ Successfully installed pymysql-1.0.2
 
 #16. 서버디비 인설트 오류?
 pymysql.err.OperationalError: (1045, "Access denied for user 'root'@'localhost' (using password: YES)")
-==> UPDATE mysql.user SET password='*6CC6A1C22CFFA93B23769CAE343636557E024D12' WHERE user='root';
+==> UPDATE mysql.user SET password='password' WHERE user='root';
 
 #17. 이제는 로그인도 안되?
 ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
