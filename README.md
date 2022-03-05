@@ -52,7 +52,7 @@ HyeonJi-P(박현지), Jeongsu Kim(김정수)
   
 ## git command help  
 * 업로드  
-cd C:\Users\dhkzh\Desktop\EndingProject\Git\mini_pot  
+cd 폴더위치
 git add .  
 git commit -m "주석"  
 git push -u origin main  
